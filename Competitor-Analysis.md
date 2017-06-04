@@ -15,7 +15,7 @@ https://www.opensensors.io
 * IoT device management
 * Real-time and historical APIs
 * Analytics
-* Ability to run infrastructure in user's own dedicated cloud network
+* Ability to run infrastructure in user's own dedicated cloud network
 * Integration with user's backend systems
 * Secure data sent to the cloud using TLS
 * Set policies on who can sees the data by users or groups of engineers
