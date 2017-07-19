@@ -2,7 +2,8 @@
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
-|    | 2017-06-03 | Andres Ardila | Working draft|
+|  0.1  | 2017-06-03 | Andres Ardila | Working draft |
+|  0.2  | 2017-07-07 | Andres Ardila | Added secion on Talend |
 
 # OpenSensors.io
 
@@ -35,3 +36,27 @@ Provide support for open protocols, use existing SDKs to quickly get up and runn
 ## Analysis
 * Not really open. There is no sign-up with which one can get access to the allegedly "open" data. As a result, one can conclude that their focus is the OEM sector as opposed to "data scientists looking to create interesting mash-ups of data."
 * ...
+
+
+# Talend
+
+https://www.talend.com/resource/sensor-data/
+
+## Features
+## Segments
+## Customers
+## Analysis
+
+
+# PubNub
+
+https://www.pubnub.com/
+
+## Features
+### Scalability
+15 globally replicated points of presence transacting over 1.5 trillion messages for 300 million unique devices per month.
+### Storage
+15 globally replicated points of presence transacting over 1.5 trillion messages for 300 million unique devices per month.
+## Segments
+## Customers
+## Analysis

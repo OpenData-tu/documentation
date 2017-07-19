@@ -64,6 +64,7 @@ Total working days (minus holidays)
 ### Team
 
 Highly diverse team of 7 master's students. Diversity and heterogeneity on many factors: nationality (and by extension native languages), amount of previous professional experience,
+* English was the lingua franca for team communication
 
 ### Development processes
 * stripped-down Scrum approach
