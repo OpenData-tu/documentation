@@ -1,3 +1,8 @@
+|Version|Date|Modified by|Summary of changes|
+|-------|----|-----------|------------------|
+|  0.1  | 2017-07-20 | Rohullah, Jawid | Working draft |
+
+
 # Extensible Data Import Framework
 ## Framework Description
 The data import framework which is required for our Open Data Platform shall be in way that covers several use cases such as:
