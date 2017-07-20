@@ -3,6 +3,7 @@
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
 |  0.1  | 2017-07-19 | Oliver, Amer, Andres | Working draft |
+|  0.11  | 2017-07-20 | Paul | Motivation |
 
 # Introduction
 
@@ -15,10 +16,24 @@
 * Accessible through a uniform interface
 
 ## Motivation
-Why is this necessary
-  - Interfaces, data formats vary greatly, making it prohibitively expensive for new projects to tackle
+In times of a completely connected world, the internet and public access to much information there is also an increasing number of open source projects and open data sources, available to the world. Besides the big amount of available open data, in the same time knowledge-sharing has increased. Many groups of technically interested people gathered together to exchange their ideas and knowledge to produce data themselves decentralized and share that information with the world. 
 
-  - Just a prototype
+While there is lots and lots data available of all different types and sources, from official authorities to independent enthusiasts, there is a lack of a standardization to define a certain way, how data should be measured, processed, represented, saved and made available for the public. While there are efforts by authorities to achieve such things, e.g. by the EU with different approaches, none of them has yet become an actual used standard. Often it is only with very much effort achievable to find open data that is there, although it shall be accesible. In addition most of the time the data you can find is scoped to e.g. the area/region/state/country where it was raised, it's research area/subject it is part of etc. 
+
+We therefore wanted to build a prototype, that tries to implement these issues. 
+
+* Providing a platform, that saves and manages all type of open (sensor-)data.
+* Providing a framework alongside with it, that offers an easy extensible way, to unlock new datasources and import them to the system
+* Providing an interface to insert new data, if not using our framework, aswell
+* Offer easy to access interfaces for accessing the data in all possible ways
+
+All of this with the prerequisite that all of this can be also deployed on a private cloud by everyone. Therefore the system shall not rely on proprietary systems e.g. of cloud providers, nor make use of arbitrary systems 
+
+
+(initial notes:
+
+  - Interfaces, data formats vary greatly, making it prohibitively expensive for new projects to tackle
+  - Just a prototype)
 
 ## Requirements
 * Backend (DB + APIs)
@@ -27,7 +42,6 @@ Why is this necessary
   - Portability: Deployable on public and private clouds
 * Scalability + Performance
   - Cloud means no monolith
-  -
   - Ability to handle extremely high demands on the database (cross-index queries)
     * Imagine the app will become so successful that everyone in the world will be on it
     * Create your own Applications against our REST API
