@@ -57,7 +57,7 @@ To Implement our data import framework we compared a couple of exiting framework
         - JsonItemWriter
         - KafkaRecordProducer
 
-![image-title-here](https://github.com/OpenData-tu/documentation/blob/master/class-diagram-fields.png)
+![image-title-here](images/class-diagram-fields.png)
 
 ## Framework features  
   - Modules with pre-provide utility classes
