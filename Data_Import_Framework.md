@@ -1,6 +1,6 @@
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
-|  0.1  | 2017-07-20 | Rohullah, Jawid | Working draft |
+|  0.1  | 2017-07-20 | Rohullah, Jawid | initial version |
 
 # Extensible Data Import Framework
 ## Framework Description
