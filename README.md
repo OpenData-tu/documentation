@@ -47,6 +47,10 @@ See top of document!
     1. Data model
     1. Query optimization
     1. Limitations
+1. Relational Management System
+    1. Reasons For being
+    1. Offered functionality
+    1. Possible/reuqired extensions if it would be integrated as planned
 1. Data Sourcing
     1. Research of existing/similar work
     1. EU initiatives that failed
