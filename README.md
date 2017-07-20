@@ -36,6 +36,7 @@ See top of document!
 1. Infrastructure/ physical architecture
     1. Logging
     1. Deployment
+    1. Scheduling (requirements and actual solution)
     1. ...
 1. Import Framework
     1. Description of requirements/value
