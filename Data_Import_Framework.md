@@ -28,7 +28,7 @@ To Implement our data import framework we compared a couple of exiting framework
   - Ready to use batch processing framework
   - popular with large community of users
   - with popular language (Java)
-  - familiarity of most project members  
+  - familiarity of project members  
 
 ### Spring Batch Features
 1. Reusable architecture framework
