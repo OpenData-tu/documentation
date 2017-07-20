@@ -41,6 +41,12 @@ See top of document!
     1. Description of requirements/value
     1. Offered modules/libraries
     1. Short tutorial/howto ???
+1. Validation
+    1. Reasons for and thoughs about validation
+    1. Role of consumer
+    1. Architecture
+        1. Go COnsumer
+        2. Logstash
 1. Database
     1. Intro to Elasticsearch, what is special about it
     1. Decision process and evaluation !!!
