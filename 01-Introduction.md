@@ -2,68 +2,80 @@
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
-|  0.1  | 2017-07-19 | Oliver, Amer, Andres | Working draft |
-|  0.11  | 2017-07-20 | Paul | Motivation |
+|  0.1  | 2017-07-19 | Oliver, Andres | Outline & working draft |
+|  0.1.1  | 2017-07-20 | Paul | Motivation |
+|  0.2 | 2017-07-22 | Oliver, Andres | Motivation rewrite & flesh out Requirements section
 
 # Introduction
 
 ## Summary/Overview/Abstract
 
-## What was the purpose of the project
-
-* Economic & social value "through creative and innovative combination, analytics, visualization,"
-* "Just drop your data"
-* Accessible through a uniform interface
-
-## Motivation
-In times of a completely connected world, the internet and public access to much information there is also an increasing number of open source projects and open data sources, available to the world. Besides the big amount of available open data, in the same time knowledge-sharing has increased. Many groups of technically interested people gathered together to exchange their ideas and knowledge to produce data themselves decentralized and share that information with the world. 
-
-While there is lots and lots data available of all different types and sources, from official authorities to independent enthusiasts, there is a lack of a standardization to define a certain way, how data should be measured, processed, represented, saved and made available for the public. While there are efforts by authorities to achieve such things, e.g. by the EU with different approaches, none of them has yet become an actual used standard. Often it is only with very much effort achievable to find open data that is there, although it shall be accesible. In addition most of the time the data you can find is scoped to e.g. the area/region/state/country where it was raised, it's research area/subject it is part of etc. 
-
-We therefore wanted to build a prototype, that tries to implement these issues. 
-
-* Providing a platform, that saves and manages all type of open (sensor-)data.
-* Providing a framework alongside with it, that offers an easy extensible way, to unlock new datasources and import them to the system
-* Providing an interface to insert new data, if not using our framework, aswell
-* Offer easy to access interfaces for accessing the data in all possible ways
-
-All of this with the prerequisite that all of this can be also deployed on a private cloud by everyone. Therefore the system shall not rely on proprietary systems e.g. of cloud providers, nor make use of arbitrary systems 
-
-
-(initial notes:
-
-  - Interfaces, data formats vary greatly, making it prohibitively expensive for new projects to tackle
-  - Just a prototype)
-
-## Requirements
-* Backend (DB + APIs)
-* Extensible framework for importing data from multiple sources, following multiple approaches (connectors, repeated import, ad-hoc upload) platform
-* Infra
-  - Portability: Deployable on public and private clouds
-* Scalability + Performance
-  - Cloud means no monolith
-  - Ability to handle extremely high demands on the database (cross-index queries)
-    * Imagine the app will become so successful that everyone in the world will be on it
-    * Create your own Applications against our REST API
-  - In sort, THINK BIG
-
 ## What is Open Data
-
-> “Open means anyone can freely access, use, modify, and share for any purpose (subject, at most, to requirements that preserve provenance and openness).”
-
-> “Open data and content can be freely used, modified, and shared by anyone for any purpose”
+So what do we mean when we talk about "open data"?
+> Open means anyone can freely access, use, modify, and share for any purpose (subject, at most, to requirements that preserve provenance and openness).
 http://opendefinition.org/
 
-> * Availability and Access: the data must be available as a whole and at no more than a reasonable reproduction cost, preferably by downloading over the internet. The data must also be available in a convenient and modifiable form.
-* Re-use and Redistribution: the data must be provided under terms that permit re-use and redistribution including the intermixing with other datasets.
-* Universal Participation: everyone must be able to use, re-use and redistribute - there should be no discrimination against fields of endeavour or against persons or groups. For example, ‘non-commercial’ restrictions that would prevent ‘commercial’ use, or restrictions of use for certain purposes (e.g. only in education), are not allowed.
+Furher, the definition encompasses the following aspects:
+> * **Availability and Access**: the data must be available as a whole and at no more than a reasonable reproduction cost, preferably by downloading over the Internet. The data must also be available in a convenient and modifiable form.
+* **Re-use and Redistribution**: the data must be provided under terms that permit re-use and redistribution including the intermixing with other datasets.
+* **Universal Participation**: everyone must be able to use, re-use and redistribute - there should be no discrimination against fields of endeavour or against persons or groups. For example, ‘non-commercial’ restrictions that would prevent ‘commercial’ use, or restrictions of use for certain purposes (e.g. only in education), are not allowed.
 http://opendatahandbook.org/guide/en/what-is-open-data/
 
-### Non-static environmental data
-- The large majority of open data out there is static.
-Lots of environmental data on discrete datasets, but there is no connection between data "snapshots" from different time periods, which nonetheless belong to the same dataset or are semantically equivalent.
+### Time series data & non-static sensor environmental data
+So how does this "open data" differ from the data we're interested in? The simple answer is the lack of the time dimension in existing data. The large majority of open data out there today is static. Environmental data are usually represented on discrete "datasets", but there is no connection between data of the same source or type which was collected at different times. For example, one might find a dataset about a particular environmental measurement such as average and maximum water pollution on a given set of geographical areas or points. However, the same data for the following month or year are published separately, with no connection to the first, and at times having different formats or semantics.
 
-> Living data are data that are in use of that are (re-) usable for human beings and machines. In other words, living data are information with a distinct semantics in a considered context, that are valid within a distinct period, that are available and accessible, and hence, that are (re-) usable {{ref}}"Living Data is the Future" Dankwort, Werner; Hoschek, Josef
+We therefore distinguish between static data of the type described above (of which there is an abundance) to the data which are in scope for the project, namely time series data of environmental measurements coming from a device (i.e. a sensor or sensor network) with some form of geo information. For example, an array of air pollution sensors in a given city may collect data every at 15-minute intervals; this would be represented as individual records containing the timestamp, the sensor's geolocation and the air pollution measurement.
+
+
+## Motivation
+*Open data* efforts in the past have focused on providing a centralized platform onto which data producers can upload their data along with some metadata but without much (if any) concern for the schema or the format in which the data is offered. This has resulted in very large independent and heterogeneous catalogs of data which are difficult to discover and integrate without significant manual effort.
+
+The advent of the Internet of Things (IoT) has also meant that unprecedented amounts of data are generated by millions of devices every second of every day. However, devices generates data in their own (often closed-source proprietary) format, thanks to a lack of a common or widely established data model for environmental data. This results in lots of data from which it's difficult to gain insights due to the inherent difficulty in querying data in disparate representations.
+
+Also, as the price of devices declines, more and more enthusiasts are willing to share their data to open communities so that it can be used and queried by anyone. To tackle these challenges our project centers around building a prototype which provides:
+
+* a platform on which data owners can share their sensor-generated environmental data,
+* a unified schema to support queries across different data from heterogeneous sources
+* a simple and extensible framework to facilitate the data import process,
+* and a flexible querying interface for accessing the data.
+
+With this we aim to create a tool that generates economic and social value through new and creative "layering" of data.
+
+`//TODO` there is very little background to talk about specific stuff in the req's (like units & measurements if those concepts haven't been introduced. Move the decomposition & req's further down & pull up the open-data & other introductory text about our domain here)
+
+### Decomposition
+The problem domain can be decomposed into the following components:
+1. Data Import Framework
+1. Database
+1. Public API
+1. Cloud Infrastructure
+
+## Requirements
+
+The above objectives translate into the following requirements:
+
+### General
+1. Software used shall be open source
+1.  Infrastructure
+    1. ***Cloud architectural style***: Guiding architectural principle shall be to avoid monolith-style applications, but rather include cloud concerns from early on (i.e. design phase).
+    1. ***Scalability***: Components shall be inherently scalable
+    1. ***Fault tolerance***: Components shall provide fault tolerance capabilities
+    1. ***Performance***: The system (and its constituent components) shall have the ability to handle extremely high demand.
+    1. ***Portability***: The system shall be deployable both on public and private clouds.
+
+### Data Import Framework
+1. Provide facilities for common access patterns of data sources (e.g. FTP, HTTP)
+1. Provide facilities to read data in common formats (e.g. JSON, CSV, XML)
+1. Provide facilities to map the user schema to the platforms common schema
+1. Provide reusable community-based unit converters
+
+### Database
+1. Ability to perform time series and geolocation range queries
+
+### Public API
+`TODO` prob just the Scalability & fault tolerance concerns already mentioned under General, so not sure what reqs we had for the API individually (if any)...
+
+
 
 ## Time, Team, Technologies
 
@@ -73,23 +85,24 @@ Lots of environmental data on discrete datasets, but there is no connection betw
 * /2 feedback sessions
 * Final presentation: Jul 13
 
-Total working days (minus holidays)
+`TODO` Total working days (minus holidays)
 
 ### Team
 
-Highly diverse team of 7 master's students. Diversity and heterogeneity on many factors: nationality (and by extension native languages), amount of previous professional experience,
-* English was the lingua franca for team communication
+Highly diverse team of 7 master's students. Diversity and heterogeneity on many factors: nationality (and by extension native languages), amount of previous professional experience.
+
+English was the lingua franca for team communication.
 
 ### Development processes
-* stripped-down Scrum approach
-* Sprint on every Thursday
+* Stripped-down Scrum approach
+* Sprint culminating on every Thursday
 * Interim meetings on Mondays
 * Everyone holds the role of a product owner
 * Populate backlog on the fly
 
 ### Tools
-* Source Control
-* Issue tracking
-* Communication
-* Calendar
-* Document Sharing
+* Source Control: Git, GitHub
+* Issue tracking: Trello
+* Communication: Slack
+* Calendar: Google Calendar
+* Document Sharing: Google Drive

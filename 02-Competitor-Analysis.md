@@ -5,6 +5,12 @@
 |  0.1  | 2017-06-03 | Andres Ardila | Working draft |
 |  0.2  | 2017-07-07 | Andres Ardila | Added secion on Talend |
 
+
+```
+//TODO diagram illustrating the pipeline to better describe where each company is positioned
+1.
+```
+
 # OpenSensors.io
 
 https://www.opensensors.io
@@ -23,7 +29,7 @@ https://www.opensensors.io
 * Triggers when data hits certain thresholds and alert engineers when device is down
 
 ### Hardware agnostic
-Provide support for open protocols, use existing SDKs to quickly get up and running using MQTT or HTTPS protocols. Our partnership program includes hardware providers and manufacturing firms.
+Provides support for open protocols, use existing SDKs to quickly get up and running using MQTT or HTTPS protocols. Their partnership program includes hardware providers and manufacturing firms.
 
 ## Segments
 * **Workspace planning**:  "Use sensors and our data platform to understand if you are using it efficiently and forecast your future needs."
@@ -38,16 +44,6 @@ Provide support for open protocols, use existing SDKs to quickly get up and runn
 * ...
 
 
-# Talend
-
-https://www.talend.com/resource/sensor-data/
-
-## Features
-## Segments
-## Customers
-## Analysis
-
-
 # PubNub
 
 https://www.pubnub.com/
@@ -57,6 +53,18 @@ https://www.pubnub.com/
 15 globally replicated points of presence transacting over 1.5 trillion messages for 300 million unique devices per month.
 ### Storage
 15 globally replicated points of presence transacting over 1.5 trillion messages for 300 million unique devices per month.
+## Segments
+## Customers
+## Analysis
+
+
+# Talend
+
+https://www.talend.com/resource/sensor-data/
+
+Talend 
+
+## Features
 ## Segments
 ## Customers
 ## Analysis

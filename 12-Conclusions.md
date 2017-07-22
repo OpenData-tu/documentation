@@ -13,6 +13,7 @@
  - Different data formats (CSV, XLS, HTML)
  - Different measurands (Temperature, air pollution, etc)
 
+//`TODO` look into https://www.wired.com/1994/11/agre-if-2/ as a possible reference
 
 ## Lessons learned
 
