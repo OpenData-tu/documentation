@@ -28,6 +28,10 @@ See top of document!
 1. Introduction
     1. Project description and goal
     1. Short part about the Open Data movement
+1. Competitor Analysis
+    * Data Sources
+    * EU initiatives
+    * Data catalogues like govdata.de
 1. Architecture
     1. Description of components
     1. Evaluation of components and decision process
@@ -43,10 +47,10 @@ See top of document!
     1. Offered modules/libraries
     1. Short tutorial/howto ???
 1. Validation
-    1. Reasons for and thoughs about validation
+    1. Reasons for and thoughts about validation
     1. Role of consumer
     1. Architecture
-        1. Go COnsumer
+        1. Go Consumer
         2. Logstash
 1. Database
     1. Intro to Elasticsearch, what is special about it
@@ -57,13 +61,11 @@ See top of document!
 1. Relational Management System
     1. Reasons For being
     1. Offered functionality
-    1. Possible/reuqired extensions if it would be integrated as planned
+    1. Possible/required extensions if it would be integrated as planned
+1. Public-facing API
 1. Data Sourcing
-    1. Research of existing/similar work
-    1. EU initiatives that failed
-      * Data catalogues like govdata.de
-      * How many and what sources did we unlock
-      * What data did we collect (temp, pollution...)
+    * How many and what sources did we unlock
+    * What data did we collect (temp, pollution...)
 1. Benchmarking/Performance tests
     1. How did we benchmark and on what hardware + HW utilization during test
 1. Conclusions
@@ -71,4 +73,3 @@ See top of document!
 1. Appendices
     1. How to write a data importer
     1. How to deploy
-
