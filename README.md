@@ -1,9 +1,3 @@
-|Version|Date|Modified by|Summary of changes
-|-------|----|-----------|------------------
-|0.1    | 2017-05-16 |Nico Tasche | initial Version
-|0.2    | 2017-05-22 |Caffeinated User|Corrected spelling, revised intro paragraph for clarity, added examples, illustrations, and improved layout
-|0.3    | 2017-07-17 |Oliver Bruski | Added the toc of the documentation
-
 # documentation
 
 This repo is inteded for documenting project-wide topics that do not belong to a specific repo. The final project documentation deliverable will be generated from the contents of this repo.
@@ -20,10 +14,15 @@ Every document must begin with a version summary, which states **who** added **w
 
 The following template is proposed:
 
-**Created by:**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;John Smith  
-**Date created:**&nbsp;&nbsp;2017-05-01
+**Authoriship**
 
-See top of document!
+|Version|Date|Modified by|Summary of changes|
+|-------|----|-----------|------------------|
+|0.1    | 2017-05-16 |Nico Tasche | initial Version
+|0.2    | 2017-05-22 |Caffeinated User|Corrected spelling, revised intro paragraph for clarity, added examples, illustrations, and improved layout
+
+
+# Documentation Outline
 
 1. Introduction
     1. Project description and goal
