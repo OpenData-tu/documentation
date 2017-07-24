@@ -137,8 +137,22 @@ The second option seems more granular and more conform to our general microservi
 #### Caching
 There is currently no caching-solution, as the workloads during the developement phase were quite manageable Also including a distributed caching system in our production pipeline seemed to be too high effort and would take up many resources, that would actually not be needed. Therefore we wanted to use the limeted and expensive resources we had for actual importing. Extending the System itself to use caching with Redis would be very easy achievable though.
 
-## Unit System
+## Unit
+When it comes to gather and manage sensor data one topic that directly comes to mind is that of units. Uncountable units exist and while there are international systems like the *International System of Units (SI)* or the *metric system* it is hard to find one system, that fits all possible measurements in our case. Some of the reasons for that are:
 
+* Not for all measurements there exists an standardized unit in unit systems (e.g. parts per million)
+* While standardized systems have the advantage of offering *one* standard unit for a category, those do not have to be intuitive (e.g. using Kelvin for outside temperature probably will not be intuitive for many people)
+
+Because of that we had to think of an own way, how units would be chosen, managed and how users would get information about them. 
+
+Diagramm, Model, unit categories
+
+### Further requirements
+
+* Convertible/Localizable
+
+### Approach
+curated list
 
 ### Units 
 
