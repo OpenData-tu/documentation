@@ -2,9 +2,9 @@
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
-|  0.1  | 2017-07-19 | Oliver, Andres | Outline & working draft |
-|  0.1.1  | 2017-07-20 | Paul | Motivation |
-|  0.2 | 2017-07-22 | Oliver, Andres | Motivation rewrite & flesh out Requirements section
+|  0.1.0  | 2017-07-19 | Oliver, Andres | Outline & working draft |
+|  0.1.1 | 2017-07-20 | Paul | Motivation section first draft |
+|  0.2.0 | 2017-07-22 | Oliver, Andres | Motivation rewrite & flesh out Requirements section
 
 # Introduction
 
@@ -55,13 +55,12 @@ The problem domain can be decomposed into the following components:
 The above objectives translate into the following requirements:
 
 ### General
-1. Software used shall be open source
-1.  Infrastructure
-    1. ***Cloud architectural style***: Guiding architectural principle shall be to avoid monolith-style applications, but rather include cloud concerns from early on (i.e. design phase).
-    1. ***Scalability***: Components shall be inherently scalable
-    1. ***Fault tolerance***: Components shall provide fault tolerance capabilities
-    1. ***Performance***: The system (and its constituent components) shall have the ability to handle extremely high demand.
-    1. ***Portability***: The system shall be deployable both on public and private clouds.
+1. **Open Source Software**: Libraries & components used shall be open source software.
+1. **Cloud architectural style**: Guiding architectural principle shall be to avoid monolith-style applications, but rather include cloud concerns from early on (i.e. design phase).
+1. **Scalability**: Components shall be inherently scalable.
+1. **Fault tolerance**: Components shall provide fault tolerance capabilities.
+1. **Performance**: The system (and its constituent components) shall have the ability to handle extremely high demand.
+1. **Portability**: The system shall be deployable both on public and private clouds.
 
 ### Data Import Framework
 1. Provide facilities for common access patterns of data sources (e.g. FTP, HTTP)
@@ -74,6 +73,8 @@ The above objectives translate into the following requirements:
 
 ### Public API
 `TODO` prob just the Scalability & fault tolerance concerns already mentioned under General, so not sure what reqs we had for the API individually (if any)...
+1. RESTful
+1.
 
 
 
