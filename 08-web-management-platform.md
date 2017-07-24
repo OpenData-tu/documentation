@@ -2,7 +2,8 @@
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
-|  0.1  | 2017-07-20 | Paul | initial version|
+|  0.1  | 2017-07-20 | Paul | initial version |
+|  0.2  | 2017-07-24 | Paul | second version |
 
 # Relational Web Management Platform
 
@@ -73,7 +74,7 @@ As there where several possibilities where this information could be stored and 
 
 // TODO Screenshot of chosing measurements
 
-In order to optimize querying our data this information is provided to the API that wraps the search interface of Elasticsearch via an API itself. The information is stored in an indexed join table that holds this n-to-n mapping between measurements and datasources. As you can see in the class diagram of the relational system, queries in both directions are provided: getting all measurements, a datasource provides and getting all datasources that contain a given measurement. The corresponding routes look like this:
+In order to optimize querying our data this information is provided to the API that wraps the search interface of Elasticsearch via an API itself. The information is stored in an indexed join table that holds this n-to-n mapping between measurements and datasources. As you can see in the class diagram (//TODO ref figure) of the relational system, queries in both directions are provided: getting all measurements, a datasource provides and getting all datasources that contain a given measurement. The corresponding rout	es look like this:
 
 ```
 GET /data_sources/:id/measurements
@@ -91,13 +92,53 @@ GET /measurements/:id/data_sources
 #### Provide configuration information to the importer-deployment-component
 As the registering should be at best the only step, in which the implementer has to provide information to our system besides providing the importer itself it should preferably cover all information needed to get an importer running. 
 
+## Requirements
+
+In contrast to nearly every other system component we had to build, the management platform had to meet not as many criteria that one would expect from a distributed cloud-system in general. Most of the data the system will contain is quite static data and the number of requests that we expect is also quite low. 
+
+* Availability to other system components, that require the held information 
+* Quick response time (for qury-optimization within the public search-API)
+* Ability to run asynchronous background tasks (for scheduling)
+
+While those requirements look like those of a cloud-system, taking a closer look exposed, that a good caching solution would be sufficient in our case. If the system would grow bigger it would stil require to be scaled in some way. But as the information in the managament database will change very slowly we decided, that this could be achieved by prepending a distributed caching system, like for example using *Redis* for that. By that we would achieve quick response times and availability, as *Redis* can be distributed and read accesses are very fast and possible on all nodes. Writing is quite expensive due to the replication method used by Redis but it would be sufficient to updte the cache several times a day with new information from the management-database, so we considered this a shortfall, we could take. 
+
 ## Architectural Details
 
+The system was built using *RubyOnRails* with PostgreSQL as a database. The reasons why we chose to use RubyOnRails are:
+
+* Relatively fast developement of an MVC-Web-application
+* RoR is established for over a decade, has therefore lots of resources - also for all kinds of extensions
+* Extensive community support
+* Very good integrated ORM adapters, that could easily be exchanged for e.g. ODM adapters for e.g. mongodb
+* Offers the dynamic of Ruby as programming language
+
+As mentioned before, the planning of the extent of the functionalitly offered by this system, was very vague. Besides managing metadata and providing an API for other components, further features were at least considered to be part of this system, like for example a scheduler that triggers the component that handles the deploy of importers. Therefore we chose to build this system on top of an infrastructure, that can be easily extended in many directions and has nice to use database adapters instead of a more lightweight system. 
+
+While initially we also wanted to model a data source with its sensors grouped in sensor stations, this approach would bring imense overhead for configuring datasources in our system upfront. Gathering this information would better be done by scraping the information present in Elasticsearch and translating them to geolocated information for all sensors/sensor-stations/datasources. In {//TODO ref figure} you can see the modeling for this approach greyed out. 
+
+The main metainformation about the datasources (besides metadata about the source itself) that we still needed within our system (the locality of the sensor and the grouping of sensor stations is not essential for our system to work) and had to offer to the user registering a source were then: 
+
+* Information about the measurements a datasource offers data for
+* Information what unit we use for a measurement as main unit (see section Unit system // TODO ref section)
+
+![UML Class-Diagram of the Relational Management System.](images/relational_schema.png)
 
 ### Future Improvements
 
+#### Exchange Scheduling information
+Due to not reaching every goal of our initial plan on how the architecture should look like, the scheduler had to move to the component managing the deploy on a Kubernetes cluster. While this component should be resposible for deploying importers for a datasource aswell in the future, the information about the schedule should actually be provided to the web management system by the user. This is currently not happening. There would be several ways how to manage scheduling and/or deliver the scheduling information from this system to the component handling the scheduling.
+
+* Having a background-processing component that acts as a scheduler withing the web management platform. This would require an API to trigger the deploy on the component responsible for that, which we were not able to achieve. 
+* Having a microservice-like component, that is only responsible for scheduling and triggering importers to be deployed. This would aswell require an API on the deploying-component.
+* Leaving the scheduling within the deploying-component. This would also require an API in it, but just for receiving the genereal schedule, not for offering a hook to trigger an import.
+
+The second option seems more granular and more conform to our general microservice-approach but would also require the most configuration and deployment effort. Including a scheduler in the web management platform would somehow violate this approach but still make sense, as this component could easily be integrated within RubyOnRails and would be a standalone component within it. 
+
+#### Caching
+There is currently no caching-solution, as the workloads during the developement phase were quite manageable Also including a distributed caching system in our production pipeline seemed to be too high effort and would take up many resources, that would actually not be needed. Therefore we wanted to use the limeted and expensive resources we had for actual importing. Extending the System itself to use caching with Redis would be very easy achievable though.
 
 ## Unit System
+
 
 ### Units 
 
@@ -105,12 +146,3 @@ As the registering should be at best the only step, in which the implementer has
 
 
 ### Managing units and measurements
-
-## Future improvements
-
-### Map view of sources
-
-### Exchange Scheduling information
-
-
-###
