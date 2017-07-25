@@ -4,6 +4,7 @@
 |-------|----|-----------|------------------|
 |  0.1  | 2017-07-20 | Paul | initial version |
 |  0.2  | 2017-07-24 | Paul | second version |
+|  0.2  | 2017-07-25 | Paul | further refinement |
 
 # Relational Web Management Platform
 
@@ -79,13 +80,31 @@ In order to optimize querying our data this information is provided to the API t
 ```
 GET /data_sources/:id/measurements
 ```
+An example request would look like following:
+
+```
+GET /data_sources/blume_messnetz/measurements
+
+[
+	{"id":1,"name":"Air Temperature","desc":"","unit_category_id":"temperature"},
+	{"id":3,"name":"Air Humidity","desc":"amount of water vapor present in the air","unit_category_id":"humidity"}
+]
+```
+
 
 ```
 GET /measurements/:id/data_sources
 ```
-// TODO: example response
+An example request would look like following
 
-// TODO: insert class diagramm
+```
+GET /measurements/1/data_sources
+
+[
+	{"id":1,"slug":"blume_messnetz","license":""},
+	{"id":5,"slug":"german_weather_service","license":""}
+]
+```
 
 
 
@@ -137,7 +156,7 @@ The second option seems more granular and more conform to our general microservi
 #### Caching
 There is currently no caching-solution, as the workloads during the developement phase were quite manageable Also including a distributed caching system in our production pipeline seemed to be too high effort and would take up many resources, that would actually not be needed. Therefore we wanted to use the limeted and expensive resources we had for actual importing. Extending the System itself to use caching with Redis would be very easy achievable though.
 
-## Unit
+## Unit System
 When it comes to gather and manage sensor data one topic that directly comes to mind is that of units. Uncountable units exist and while there are international systems like the *International System of Units (SI)* or the *metric system* it is hard to find one system, that fits all possible measurements in our case. Some of the reasons for that are:
 
 * Not for all measurements there exists an standardized unit in unit systems (e.g. parts per million)
@@ -145,18 +164,72 @@ When it comes to gather and manage sensor data one topic that directly comes to 
 
 Because of that we had to think of an own way, how units would be chosen, managed and how users would get information about them. 
 
-Diagramm, Model, unit categories
-
 ### Further requirements
+Deciding on a strategy to model units, was a quite long process and not all requirements could be fullfilled. In this section we will discuss the most important requirements to later on explain for what approach we 
 
-* Convertible/Localizable
+1. Allow convertability and ability to localize
+1. It has to be understandable, in what unit a measurement is expressed and in which it was measured
+It is absolutely avoidable that measurements exist in the database, with a not understandable unit or even worse with a unit that differs from what the system supposes the measurement is expressed in. It is therefore advisable to enfoce the user to handle units carefully
+1. Each unit should only exist once. Typos, different exprsssions etc. shall not lead to confusion
 
-### Approach
-curated list
+### Implementation
+With the requirements in mind we decided to organize units like so:
 
-### Units 
+1. We introduced **Unit Categories**. Units themselves always belong to a unit category. The unit-category desribes an entity for which measurements exist, which express their observations with one of the units of that category (See figure for Class Diagram // TODO ref figure).
+2. Each unit has a **main unit** that we decide on. By calling the api or visiting the management platform a user can see, which the main unit is. Within our datastore we only use the main unit of a unit-category for expressing measurements.
+3. Units are managed by admins repectively users with permit to do so. 
+4. We therefore have a curated list of the unit-categories and units
+5. If there are units, measurements or even categories missing, each user can propose new ones. This proposals are also managed by the group of people managing the units.
 
-### Measurements
+The API of the web management system also provides calls to a) receive the main unit of a unit category and to b) get a list of all units there are for a unit category. Both of these information are of course aswell accessible from the frontend of the system. 
 
 
-### Managing units and measurements
+```
+GET /unit_categories/:id/getMainUnit
+```
+Example request:
+
+```
+GET /unit_categories/temperature/getMainUnit
+
+{
+	"id":"temperature_celsius",
+	"name":"celsius",
+	"unit_category_id":"temperature",
+	"unit_symbol":"°C"
+}
+```
+
+```
+GET /unit_categories/:id/units
+```
+Example request:
+
+```
+GET /unit_categories/temperature/units
+
+[
+	{"attributes"
+		{"id":"temperature_celsius","name":"celsius","unit_symbol":"°C","unit_category_id":"temperature","notation":""}},
+	{"attributes":
+		{"id":"temperature_fahrenheit","name":"fahrenheit","unit_symbol":"°F","unit_category_id":"temperature","notation":""}},
+	{"attributes":
+		{"id":"temperature_kelvin","name":"kelvin","unit_symbol":"K","unit_category_id":"temperature","notation":""}}
+	[...]
+]
+```
+
+### Discussion of our approach
+This implementation has some advantages but also some disadvantages. In this section we want to take a closer look to both sides.
+
+As we force the user to use our main unit, we can be sure, that all data in the database is of the same unit for a measurent type. Of course we cannot enforce, that the user does convert his measurements or does it right, but this counts as a faulty import, which is the responsibility of the user anyways. Of course an assessment if data is legit would be nice, but this is also hard to achieve and not in the scope of our project. 
+
+Our approach of having a curated list of course means some management overhead and possible waittimes for the user, if something is not present yet. But to us this seemed like the only way in order to prevent doublings of units/measurements etc. and a chaos with the unis. 
+
+As the unit categories should be present after a short testing phase of a system, and a main unit exists with with, as the curators decide on one, the user should most of the time be able to register a source, when he wants to, as he only needs to know the main unit.
+
+A big advantage of our approach is, that we kind of crowd-source the implementation of converters by this, as it happens during the ETL phase while importing (See //TODO ref chapter unit conversion) a source. This gives us a chance to achieve the following:
+
+* Conversions can be retraced, as it is known, which converter a user used
+* Localization within our database can easily be done, as all measurements of a unit category have the same unit and converters are written the moment someone has to convert his source data to our preferred unit.
+* By corwd-sourcing the implementation of converteres they are also open sourced for reuse by other users. Having our own converters only in the system to convert measurements after they are in the database would not guarantee the reusability as importers and our database frontend depend on totally different things. 
