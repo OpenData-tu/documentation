@@ -1,12 +1,6 @@
-# Authorship
-
-|Version|Date|Modified by|Summary of changes|
-|-------|----|-----------|------------------|
-|  0.1  | 2017-07-20 | Paul | initial version |
-|  0.2  | 2017-07-24 | Paul | second version |
-|  0.2  | 2017-07-25 | Paul | further refinement |
-
 # Relational Web Management Platform
+Written by Paul Wille
+
 
 We decided to have a separate system component to manage the metadata of data-sources that shall be imported and that already have been or are ongoingly imported. This system shall fulfill several tasks that are important for organizing the importing/ETL-process. Furthermore it provides imortant information to several other system components. 
 
