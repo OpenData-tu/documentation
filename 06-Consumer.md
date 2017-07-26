@@ -21,15 +21,17 @@ While designing the ETL-importing pipeline we had the problem, that the output o
 The then logical place to do the validation was the component that first processes the data items after the importers released them.
 
 ##### Ability to scale and adjust the configuration according to Kafka's configuration
-
-
-##### Achieve high performance to not slow down the importing pipeline
-
+Kafka can be configured in many ways. This mainly is about distribution (how many brokers), partitioning and the topics (chanells) it uses. The consumer should work and be reconfigurable, if our kafka configuration chances
 
 ##### Allow parallelism for reading from Kafka
+Depending on the configuration there can be several options, how parallel reading from Kafka can be accomplished (consumer groups, many topics and consumers, etc.). The consumer should be able to work for all of them or at least the ones we decide for.
 
+##### Achieve high performance to not slow down the importing pipeline
+As our importers reached very high speeds in producing data items (> 1 million in few seconds) and many of them can be run in parallel the consumer itself shell also deliver a good performance. While of course overall we want to tackle every possible bottleneck, for the consumer itself it was at first most important that it is not the bottleneck itself.
 
 ##### Allow concurency for processing data read from Kafka
+A naive strategy of serially reading from the queue, processing the data and the pushing it to Elasticsearch will most likely be way to slow. Therefore we must go for a more sophisticated method, that uses asynchronisity and concurrency to manage a non-blocking higher performant process.
+
 
 ### Implementation of the Requirements
 Because of the named reasons we decided to build one component to validate the output and push it - if valid - to Elasticsearch. There would have been the possibility to do this in seperate steps with another queue inbetween aswell. This would have meant a lot higher configurational effort and more resources required so that it seemed good to join both tasks in one component. 
