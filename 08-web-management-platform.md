@@ -47,8 +47,7 @@ Additionally we ask the user to give additional information, that is useful for 
 * Which measurements the data source provides (which actual measurements the data-source collects)
 * The location of the docker container as URL
 
-// TODO Screenshot of registering data source
-
+![Registering a data source within the Web management platform](images/new_datasource.png)
 ### Provide information to other system-components
 
 #### Provide Validation Schema
@@ -62,18 +61,63 @@ Because of two reasons we decided that this would be a bad idea:
 Therefore we needed a place where said validation-schema can reside. The web management system seemed to be the right pace for that, as it caries metainformation about datasources anyways and the datasources are registered there. So it is easy to provide the relevant information aswell. The management system provides an api call to supply the validation schema to the validators that looks like this:
 
 ```
-GET /data_sources/:id/validation_schema
+GET /data_sources/:id/getValidationSchema
 ```
+The Response looks like this. The const `source_id` thereby will be replaced by the ID of the data source
 
+```
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Data Source",
+  "description": "A Data Source for Open Sensor Data from the CP project at TU Berlin. ",
+  "type": "object",
+  "properties": {
+    "source_id": {"const": "source_slug"},
+    "device": {"type": "string"},
+    "timestamp": { "type": "string", "format": "date-time" },
+    "timestamp_data": { "type": "string", "format": "date-time" },
+    "location": {
+      "type": "object",
+      "properties": {
+        "lat": {"type": "number",
+                "exclusiveMaximum": true,
+                "exclusiveMinimum": true,
+                "maximum": 90,
+                "minimum": -90
+               },
+        "lon": {"type": "number",
+                "exclusiveMaximum": true,
+                "exclusiveMinimum": true,
+                "maximum": 180,
+                "minimum": -180,
+               }
+      },
+    "required": ["lat", "lon"]
+    },
+    "license": {"type": "string"},
+    "sensors": {
+      "type": "object",
+      "items": [
+      {
+        "type": "object",
+        "properties": {
+          "sensor": {"type": "string"},
+          "observation_type": {"type": "string"},
+          "observation_value": {"type": "number"}
+        }
+      }]
+    }
+  },
+  "required": ["source_id", "timestamp","sensors", "location", "license"]
+}
+```
 
 
 #### Provide Information to Elastic Search API for query optimization
 
 Like desdcribed in the section about our data model and Elasticsearch as a data-storage-component our data-model is datasource-based and not measurement based. For certain types of queries that tackle measurements it will though be important to have further information on the connection between data sources and measurements.
 
-As there where several possibilities where this information could be stored and managed and how it would be provided, the easiest to start with was in our opinion, that the implementer of an importer provides this information to us, when registering his datasource. The user therefore has to mark what measurements a datasource contains upfront. 
-
-// TODO Screenshot of chosing measurements
+As there where several possibilities where this information could be stored and managed and how it would be provided, the easiest to start with was in our opinion, that the implementer of an importer provides this information to us, when registering his datasource. The user therefore has to mark what measurements a datasource contains upfront. (// TODO ref figure new data source)
 
 In order to optimize querying our data this information is provided to the API that wraps the search interface of Elasticsearch via an API itself. The information is stored in an indexed join table that holds this n-to-n mapping between measurements and datasources. As you can see in the class diagram (//TODO ref figure) of the relational system, queries in both directions are provided: getting all measurements, a datasource provides and getting all datasources that contain a given measurement. The corresponding rout	es look like this:
 
@@ -123,7 +167,7 @@ While those requirements look like those of a cloud-system, taking a closer look
 
 ## Architectural Details
 
-The system was built using *RubyOnRails* with PostgreSQL as a database. The reasons why we chose to use RubyOnRails are:
+The system was built using *RubyOnRails* with *PostgreSQL* as a database. The reasons why we chose to use RubyOnRails are:
 
 * Relatively fast developement of an MVC-Web-application
 * RoR is established for over a decade, has therefore lots of resources - also for all kinds of extensions
@@ -133,7 +177,7 @@ The system was built using *RubyOnRails* with PostgreSQL as a database. The reas
 
 As mentioned before, the planning of the extent of the functionalitly offered by this system, was very vague. Besides managing metadata and providing an API for other components, further features were at least considered to be part of this system, like for example a scheduler that triggers the component that handles the deploy of importers. Therefore we chose to build this system on top of an infrastructure, that can be easily extended in many directions and has nice to use database adapters instead of a more lightweight system. 
 
-While initially we also wanted to model a data source with its sensors grouped in sensor stations, this approach would bring imense overhead for configuring datasources in our system upfront. Gathering this information would better be done by scraping the information present in Elasticsearch and translating them to geolocated information for all sensors/sensor-stations/datasources. In {//TODO ref figure} you can see the modeling for this approach greyed out. 
+While initially we also wanted to model a data source with its sensors grouped in sensor stations, this approach would bring imense overhead for configuring datasources in our system upfront, as a user would have to very exactly model a data source with all its sensors and sensor stations first. For big services like e.g. the German Weather Servide this would be an enormous amount of work. Gathering this information would better be done by scraping the information present in Elasticsearch and translating them to geolocated information for all sensors/sensor-stations/datasources. In {//TODO ref figure} you can see the modeling for this approach greyed out. 
 
 The main metainformation about the datasources (besides metadata about the source itself) that we still needed within our system (the locality of the sensor and the grouping of sensor stations is not essential for our system to work) and had to offer to the user registering a source were then: 
 
@@ -181,8 +225,42 @@ With the requirements in mind we decided to organize units like so:
 4. We therefore have a curated list of the unit-categories and units
 5. If there are units, measurements or even categories missing, each user can propose new ones. This proposals are also managed by the group of people managing the units.
 
-The API of the web management system also provides calls to a) receive the main unit of a unit category and to b) get a list of all units there are for a unit category. Both of these information are of course aswell accessible from the frontend of the system. 
+Measurements are controlled on the platform itself to allow users to better propose new measurements, as this may happen more often. Units and the Unit categories however are managed in a *.yml* file. The syntax we used looks like following for one entry:
 
+```
+From config/constants/units.yml:
+
+pascal:
+  id: pressure_pascal
+  name: "pascal"
+  unit_symbol: "pa"
+  unit_category_id: pressure
+  notation: "1 <centerdot>
+              <mfrac>
+                <mrow>
+                  kg
+                </mrow>
+                <mrow>
+                  m 
+                  <msup>
+                          <mi>s</mi>
+                          <mn>2</mn>
+                </mrow>
+              </mfrac>"
+              
+From config/constants/unit_categories.yml:
+
+pressure:
+  id: pressure
+  name: Pressure
+
+```
+The unit categories are pretty straight forward. For a unit there are some more possibilities. Besides declaring the unit symbol, the category it belongs to, its name you are allowed to use MathML to express what the meaning of a unit is. This is especially helpful with units that can be directly converted to each other. // TODO ref picture
+
+![Screenshot of the units of a unit category on the web management platform. You can see the main unit and have a notation on what the units express.](images/unit_frontend.png)
+
+
+The API of the web management system also provides calls to a) receive the main unit of a unit category and to b) get a list of all units there are for a unit category. Both of these information are of course aswell accessible from the frontend of the system. 
 
 ```
 GET /unit_categories/:id/getMainUnit
