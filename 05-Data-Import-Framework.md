@@ -9,30 +9,29 @@
 
 The Open Data Platform which we have built for extracting, transforming and loading open sensor data is made up several significant system components to perform this huge amount of workloads.
 
-The first part of this system would require a powerful tool to do the job of importing vast amount of different kinds of data with various formats and types ~~almost in real-time~~ from several data sources in a performant manner. ~~We called it data importer.~~
+The first part of this system would require a powerful tool to do the job of importing vast amount of different kinds of data with various formats and types from several data sources in a performance manner.
 
-~~We have needed our importer~~ The importers need to apply ~~some~~a series of rules and ~~functions~~ transformations to the imported data in order to load it to the target.
+The importers need to apply a series of rules and transformations to the imported data in order to load it to the target.
 
-Therefore a framework that ~~preferably provides~~ supports the ~~whole~~ entire processes of extracting and transforming data ~~has been required~~ is desirable.
+Therefore a framework that supports the entire processes of extracting and transforming data is desirable.
 
 Beside these main importing functionalities, there were some requirements and criteria which we went through to apply them all in our framework.
 
-This chapter ~~will walk you through all~~ describes the requirements, selection criteria, design decisions, evaluations, technical implementation details, further possible improvements and the value of having such a framework.
+This chapter describes the requirements, selection criteria, design decisions, evaluations, technical implementation details, further possible improvements and the value of having such a framework.
 
 ## Framework Requirements
-To cover ~~all~~ the main processes of importing data by our framework, we needed to add additional functions and features in order to serve for our own purposes. The followings are scenarios and use-cases which our framework should cover~~ them~~:
-  * user can add new data source ~~to import data~~ with minimal effort ~~for~~ with respect to coding and configurations.
-  * provide various functionalities to the user ~~like~~ such as processing data into customized format/schema
-  * ~~many~~ reusable components for reading, processing and writing data
-  * ideally the framework may be provided as a starter application which doesn't require to built every time from ~~the~~ scratch.     
-  * the framework should support ~~to~~ extracting data in ~~Well~~ known formats and types
-  * the ~~whole system~~ entire framework must ~~serves~~ be based on microservices architecture as opposed to a monolithic system.
+To cover the main processes of importing data by our framework, we needed to add additional functions and features in order to serve for our own purposes. The followings are scenarios and use-cases which our framework should cover:
+  * user can add new data source with minimal effort with respect to coding and configurations.
+  * provide various functionalities to the user such as processing data into customized format/schema
+  * reusable components for reading, processing and writing data
+  * ideally the framework may be provided as a starter application which doesn't require to built every time from scratch.     
+  * the framework should support extracting data in known formats and types
+  * the entire framework must be based on microservices architecture as opposed to a monolithic system.
   * the framework should include logging functionalities
-  * ~~reliability is a critical issue for every system, therefore~~ if the importer fails ~~in~~ at any point of processing data for importing, it should continue from the point where it lst stopped after ~~coming alive~~ restarting.
-  * ~~there may be components to convert the units of specific measurement values into different metric units.~~
+  * if the importer fails at any point of processing data for importing, it should continue from the point where it 1st stopped after restarting.
 
 ## Evaluation of different data import frameworks
-According to the criteria described above (`where? isn't below, actually?`), we needed to search and find a useful and powerful tool such as an already built framework or a technology on top of which we could ~~easily~~ build our data import framework. Therefore, it seemed to be a good idea to compare these frameworks and come up with the best decision. So we compared a couple of existing frameworks and technologies with different aspects such as:
+According to the framework requirements, we needed to search and find a useful and powerful tool such as an already built framework or a technology on top of which we could build our data import framework. Therefore, it seemed to be a good idea to compare these frameworks and come up with the best decision. So we compared a couple of existing frameworks and technologies with different aspects such as:
 
 - Functional and non-functional aspects of different frameworks are considered.
 - Popularity of its programming language
@@ -53,7 +52,7 @@ According to the criteria described above (`where? isn't below, actually?`), we 
 5. Talend ETL
 
 ## Design Decisions
-After evaluation and comparisons, it ~~has been~~ was decided to implement our extensible framework using Spring Batch considering its features and functionalities.
+After evaluation and comparisons, it was decided to implement our extensible framework using Spring Batch considering its features and functionalities.
 
 ### Why Spring Batch
   - Lightweight, ready to use framework for robust batch processing
@@ -63,8 +62,6 @@ After evaluation and comparisons, it ~~has been~~ was decided to implement our e
   - using its Cloud Task feature to build the system as micro service
   - capabilities for scheduling the jobs in data processing pipeline
   - familiarity of project members
-
-`//this isn't a comparison. The characteristincs of the other frameworks must be discussed and actually compared based on some criteria`.
 
 ### Spring Batch Features
 1. Reusable architecture framework
@@ -112,7 +109,7 @@ After evaluation and comparisons, it ~~has been~~ was decided to implement our e
     - Ability to add custom utilities
     - Easy to add new jobs
   - Portability
-    - Jobs run as microservices
+    - Jobs run as micro services
     - Every importer could be packed into JAR file and deployed into private or public cloud
 
 ## Supported Data Formats
@@ -129,8 +126,8 @@ data formats which have been processed in a way that fits our requirements for o
 
 ## Further Possible Improvements
 1. Scheduling jobs for every importer within the Framework:
-until now, the scheduling of importing jobs is done by Kubernetes ~~on the cloud~~ but we can improve and add this feature to our importing framework by using an embeddable component such as (Quartz). This feature would easily allow users to schedule the jobs ~~in a customized~~ at specific times.
-2. ~~reliability~~ Recoverability of jobs from failures:
+until now, the scheduling of importing jobs is done by Kubernetes but we can improve and add this feature to our importing framework by using an embeddable component such as (Quartz). This feature would easily allow users to schedule the jobs at specific times.
+2. Recoverability of jobs from failures:
 Currently the intermediary results of jobs execution is stored in an In-memory database (H2) inside the importer. As we containerized every importer into Docker containers this functionality will disappear when the container terminated. The solution would be to create and configure a single relational database to store all the intermediary results of the jobs executions; whenever an importer crashed and restarted it will start from the last point that has been stopped.     
 
 ## The Values of the Framework
