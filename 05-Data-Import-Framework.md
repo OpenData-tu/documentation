@@ -5,6 +5,7 @@
 |  0.1b | 2017-07-22 | Rohullah, Jawid | evaluations, features, improvements, values parts |
 | 0.2  | 2017-07-26 | Andres | Proofread: spelling, readability, etc.
 | 0.2a | 2017-07-28 | Andres | Further refinement of text
+| 0.3 | 2017-07-28 | Rohullah, Jawid | framework structure explanations + diagrams
 
 # Extensible Data Import Framework
 
@@ -45,8 +46,8 @@ According to the framework requirements, we needed to search and find a useful a
 
 ### Evaluated Existing Frameworks
 1. Spring Batch
-  - Spring Cloud Tasks
-  - Spring Cloud Data flow
+    - Spring Cloud Tasks
+    - Spring Cloud Data flow
 2. Java EE
 3. Easy Batch
 4. Summer Batch
@@ -79,29 +80,38 @@ After evaluation and comparison, it was decided to implement our extensible fram
 8. The ability to stop/start/restart jobs and maintain state between executions.
 
 ## Framework Structure/ Architecture
-   - BatchConfiguration
-      - Batch jobs
-        - Step
-          - Reader
-          - Processor: create JSON schema with processed object  
-          - Writer: write to queue
-    - `@SpringBootApplication`
-    - `@EnableBatchProcessing`
-    - `@EnableTask`
-    - Library (Module)
-      - ServiceConfiguration: all services are registered as Java Beans for re-usability
-        - ApplicationService
-        - JsonItemWriter
-        - KafkaRecordProducer
+**Figure 1.** shows an abstract overview of a simple importer application. We will look at each component individually.
 
-![image-title-here](images/class-diagram-fields.png)
+![image-title-here](images/components_diagram.png)
+
+
+
+   - **ImporterApplication:** Entry point of the importer (Java main class).
+   - **BatchConfiguration:** Includes configurations on how to read, process and write items. It also includes listeners, batch jobs and job steps.
+   - **Listeners:** Are defined for tracking jobs and steps and logging the process of importing to the console.
+   - **Jobs:** Generally there is one batch job for each importer. A batch job may have one or more steps for importing a single source.
+        - **Steps:** Each step includes a reader, processor, and a writer.
+          - **Reader:** Defines how to read items from the source.
+          - **Processor:** Processes every item - an item is basically an object that represents an record - individually and creates a JSON string for that according to our defined schema  
+          - **Writer:** Simply writes to kafka queue.
+   - `@SpringBootApplication`: Annotation to make the application a Spring Boot Application
+   - `@EnableBatchProcessing`: Annotation to add the functionality of processing batch jobs.
+   - `@EnableTask`: Enables the deployment of data importers as microservices which shutdown once importing is finished.
+   - **ServiceConfiguration:** Is the component where the services are registered as Java Beans for re-usability. It is included in module 'library' where re-usable classes across all importers are defined. The following main components are included in the 'library' module.
+        - **ServiceConfiguration**
+        - **ApplicationService:** Includes some generally used methods to bring facility to importing.
+        - **JsonItemWriter:** Asks 'KafkaRecordProducer' to write individual json objects to kafka queue
+        - **KafkaRecordProducer:** Is the class where the items are written to kafka queue
+
+![image-title-here](images/domain_model.png)
+**Figure 2.** shows a more detailed view of classes inside a simple flat file importer and how they are related together.
 
 ## Framework Features  
  - Ability to import data with various types and formats
- - Modules with pre-packaged utility classes
+ - A Module with pre-packaged utility classes
     - Just import and ready to use utility classes
  - Independent Cloud Tasks as microservices
- - Logging and tracing execution of jobs in different stages
+ - Logging and tracing execution of jobs in different steps
 
 ## Framework Strengths
   - Usability
