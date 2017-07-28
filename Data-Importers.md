@@ -2,6 +2,7 @@
 |-------|----|-----------|------------------|
 |0.1    | 2017-07-28 | Rohullah & Jawid | Initial version|
 
+
 # Data Importers
 According to the requirements for unlocking various data sources (environmental data) we have built importers to do this task. Every importer used to extract data from different kinds of sources with vary in implementation. However the data producer component of the importer will remain with the same implementation for most of the importers. There is a unified data model which every data importer write the data into the queue according to it. <br>
 The current chapter explains data importers with all their details.
@@ -17,22 +18,36 @@ Each importer composed from individual components which is stated below: <br>
 - Data Model
 - Data Producer
 
-# 1. Weather Data Importer
-[WeatherDataImporter](https://github.com/OpenData-tu/WeatherDataImporter) is part of our extensible ETL framework. In this importer, a specific data source is used to extract data from, process them and write them into the Kafka queue.
+## Data Model
+Every importer generates the required data format with the following fields: <br>
 
-</br> **Components**
+```
+sensor_id
+device
+timestamp
+location
+sensors
+extras
+[height]
+license
+```
+as already documented in: [Open Data APIs for Input Data](https://github.com/OpenData-tu/documentation/wiki/Open-Data-APIs-for-Input-Data)
+
+
+# 1. Weather Data Importer
+[WeatherDataImporter](https://github.com/OpenData-tu/WeatherDataImporter) is part of our extensible ETL framework. In this importer, a specific data source is used to extract data from, process them and write them into the Kafka queue. <br>
+
+**Components**
 Basic Components for Weather Data Importer and Producer are the followings:
 
 ## Data Source
-**Weather Data for Berlin, Germany** </br>
 The data source which is used for this importer is from [luftdaten.info](http://luftdaten.info/). This datasource is part of the **OK Lab Stuttgart** project which includes 300 fine dust sensors. </br>
 
-<i> It’s possible to filter different data such as:
- - Humidity
- - Temperature
- - Pressure
+**Measurement Values with Units:**
 
-<i> with their locations and timestamps. </br>
+ - Humidity
+ - Temperature: Celsius (°C)
+ - Pressure
 
 **Supported formates:** CSV </br>
 
@@ -54,7 +69,7 @@ a single step for a single job in Spring Batch is contained: Read, Process, Writ
 this feature of 'Spring' is used in our case to make the whole data import framework as micro services.  
 
 ## Data Model
-**Sample JSON Schema for Measurement Units:**
+**Sample JSON Schema for Measurement of Weather Data Values:**
 ```
 {
   "sourceId": "luftdaten_info",
@@ -107,24 +122,21 @@ The geographic location for data Measuring stations were not provided by the sou
 
 **Supported Data Format:** xls <br>
 
-**Measurement Units:**
-- Ozone (O₃)
-- Nitric oxide (NO)
-- Nitrogen dioxide (NO₂)
-- Fine dust (PM10)
-- Fine dust (PM2.5)
-- Sulfur dioxide (SO₂)
-- Carbon monoxide (CO)
+**Measurement Values with Units:**
+- Ozone (O₃): µg/m³
+- Nitric oxide (NO): µg/m³
+- Nitrogen dioxide (NO₂): µg/m³
+- Fine dust (PM10): µg/m³
+- Fine dust (PM2.5): µg/m³
+- Sulfur dioxide (SO₂): µg/m³
+- Carbon monoxide (CO): µg/m³
 
-**Note:**
-- all measurement units are in (µg/m³).
-- Max (8h): means 8th hour maximum value of measurement units. <br>
 **URL:** https://luftdaten.brandenburg.de/home/-/bereich/aktuell
 
 ## Batch Jobs
 This importer is Single 'Job' with a single 'Step' which is implemented in Spring Batch framework.
 
-1. Spring Batch 'Steps'
+### 1. Spring Batch 'Steps'
 
 a single step for a single job in Spring Batch is contained: Read, Process, Write
 
@@ -132,12 +144,12 @@ a single step for a single job in Spring Batch is contained: Read, Process, Writ
 **Process:** in our case we have processed to change the date into ISO format <br>
 **Write:** the importer write the data into our predefined JSON schema <br>
 
-2. Spring Cloud Task
+### 2. Spring Cloud Task
 
 this feature of 'Spring' is used in our case to make the whole data import framework as micro services.
 
 ## Data Model
-**Sample JSON Schema for Measurement Units**
+**Sample JSON Schema for all Measurement Values**
 
 ```
 {
@@ -242,24 +254,19 @@ The datasource used for this importer is about air quality data (Current Air Dat
 
 **Supported Data Format:** CSV <br>
 
-**Measurement Units:**
-- Fine Dust (PM10)
-- Sulfur Dioxide
-- Ozone
-- Nitrogen Dioxide
-- Carbon Monoxide
-
-**Note:**
-- all measurement units are in (µg/m³).
-- Max (8h): means 8th hour maximum value of measurement units. <br>
+**Measurement Values and Units:**
+- Fine Dust (PM10): µg/m³
+- Sulfur Dioxide: µg/m³
+- Ozone: µg/m³
+- Nitrogen Dioxide: µg/m³
+- Carbon Monoxide: µg/m³
 
 **URL:** https://www.umweltbundesamt.de/
-
 
 ## Batch Jobs
 This importer is Single 'Job' with five 'Steps' which is implemented in Spring Batch framework.
 
-1. Spring Batch 'Steps'
+### 1. Spring Batch 'Steps'
 
 a single step for a single job in Spring Batch is contained: Read, Process, Write <br>
 
@@ -268,12 +275,13 @@ a single step for a single job in Spring Batch is contained: Read, Process, Writ
 **Write:** the importer write the data into our predefined JSON schema <br>
 **Note:** Every measurement unit had their own schema, because of that we used five steps for the every individual five measurement units. Thus we have five steps in our Batch Job. <br>
 
-2. Spring Cloud Task
+### 2. Spring Cloud Task
 
 this feature of 'Spring' is used in our case to make the whole data import framework as micro services.
 
 ## Data Model
-**Sample Json Schema for Fine Dust (PM10) Measurement Unit**
+**Sample JSON Schema for Fine Dust (PM10) Measurement Value**
+
 ```
  {
 "source_id": "umweltbundesamt_de",
@@ -338,15 +346,15 @@ The datasource used for this importer is about raw values of *Water Level* of in
 
 **Supported Data Format:** RESTful API <br>
 
-**Measurement Units:**
-- Water Level
+**Measurement Values with Units:**
+- Water Level: "cm"
 
 **URL:** https://www.pegelonline.wsv.de/gast/start
 
 ## Batch Jobs
 This importer is Single 'Job' with a single 'Step' which is implemented in Spring Batch framework.
 
-1. Spring Batch 'Steps'
+### 1. Spring Batch 'Steps'
 
 a single step for a single job in Spring Batch is contained: Read, Process, Write
 
@@ -354,12 +362,12 @@ Read: read data from the source <br>
 Process: in our case we have processed to change the date into ISO format <br>
 Write: the importer write the data into our predefined JSON schema <br>
 
-2. Spring Cloud Task
+### 2. Spring Cloud Task
 
 this feature of 'Spring' is used in our case to make the whole data import framework as micro services.
 
 ## Data Model
-**Sample JSON Schema for Water Level Measurement Unit**
+**Sample JSON Schema for Water Level Measurement Value**
 
 ```
 {
@@ -392,26 +400,3 @@ this feature of 'Spring' is used in our case to make the whole data import frame
 }
 
 ```
-
-**Note:** the following components are common through all importers.
-
-## Data Model
-In order to write the extracted data into the queue (Kafka), this importer generates the required data format with the fields of: <br>
-```
-sensor_id
-device
-timestamp
-location
-sensors
-extras
-[height]
-license
-```
-as already documented in: [Open Data APIs for Input Data](https://github.com/OpenData-tu/documentation/wiki/Open-Data-APIs-for-Input-Data)
-
-## Data Producer
-#### Kafka Producer
-
-- produces the extracted data into Kafka queue with a specified JSON schema
-- Kafka Configuration: basic properties for Kafka producer such as 'broker', 'serializer', key and value
-- Queue Topic: setting a topic with a specific name for Kafka queue
