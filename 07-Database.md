@@ -17,7 +17,7 @@
 - immediate consistency is NOT necessary
 
 As seen in the requirements, a hugh focus was on scalability. We had some secondary reqirements as well, which were mainly regarding our possibilities to handle the project.
-### Secondary Requirements
+### Requirements
 - Open source or at the very least an open license is required.
 - must be well documented
 - must be managable regarding administration and learning afford
@@ -86,7 +86,7 @@ source2 = 17 years x 3 shars
 source2 = 51 shards
 
 source3 = 8 years x 3 shars
-source3 = 24 shards
+source3 = 8 years x 3 shars
 
 source1 + source2 + source3 = 252 shards
 ```
