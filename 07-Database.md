@@ -1,6 +1,6 @@
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
-|  0.2  | 2017-07-28 | Tasche, Nico | first working draft |
+|  0.2  | 2017-07-28 | Tasche, Nico | changed to new structure |
 |  0.1  | 2017-07-24 | Tasche, Nico | first working draft |
 
 # Database
