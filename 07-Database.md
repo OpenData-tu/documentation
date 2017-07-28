@@ -1,8 +1,39 @@
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
+|  0.2  | 2017-07-28 | Tasche, Nico | first working draft |
 |  0.1  | 2017-07-24 | Tasche, Nico | first working draft |
 
-# Intro to Elasticsearch
+# Database
+## Overview
+
+## Requirements
+### Requirements
+- scale-able in the range of petabyte in size
+- hundred of thousands of requests per minute
+- high availablility
+- partition tolerance
+- fast to handle timeseries
+- fast to handle geolocation data
+- immediate consistency is NOT necessary
+
+As seen in the requirements, a hugh focus was on scalability. We had some secondary reqirements as well, which were mainly regarding our possibilities to handle the project.
+### Secondary Requirements
+- Open source or at the very least an open license is required.
+- must be well documented
+- must be managable regarding administration and learning afford
+
+
+## Survey of Existing Solutions
+
+## Evaluation Criteria & Decision-making Process
+The process of deciding what database architecture to use we started with our requirements. 
+
+Espacialy the last point of our secondary requiremnts had to be taken into account, because we had no real database expert in our team, so we first considert database-system we allready knew.
+Our approach was to check whether those databases fulfill our requirements first.
+
+Any relational database as main datastorage has been quickly disreagarded, cause of the bad fairly scaling behavir with the amount of data we have to handly.
+## Implementation Details
+### Intro to Elasticsearch
 Elasticsearch is an opensource Lucene based search engine. It is under active development, with an extensive documentation.
 ### Architecture
 Each index can be sharded and each shard can have multiple indieces.
@@ -13,31 +44,7 @@ To better distribute search requests, the workload is divided among all shards b
 would not scale very well and would have no partition tolerance,
 each shard has a configurable number of replicas. A new search request is send to on replica of each shard.
 
-
-
-## Decision process and evaluation
-The process of deciding what database architecture to use we started with our requirements. 
-#### Requirements
-- scale-able in the range of petabyte in size
-- hundred of thousands of requests per minute
-- high availablility
-- partition tolerance
-- fast to handle timeseries
-- fast to handle geolocation data
-- immediate consistency is NOT necessary
-
-As seen in the requirements, a hugh focus was on scalability. We had some secondary reqirements as well, which were mainly regarding our possibilities to handle the project.
-#### Secondary Requirements
-- Open source or at the very least an open license is required.
-- must be well documented
-- must be managable regarding administration and learning afford
-
-Espacialy the last point of our secondary requiremnts had to be taken into account, because we had no real database expert in our team, so we first considert database-system we allready knew.
-Our approach was to check whether those databases fulfill our requirements first.
-
-Any relational database as main datastorage has been quickly disreagarded, cause of the bad fairly scaling behavir with the amount of data we have to handly.
-
-## Data model
+### Data model
 We decided to have an data model which is data-source-centric with the extra posibility to partition the data over time. 
 That means, each data source gets it own index with its own timeframe and its own adjusted datastructure. 
 All our data sources save a few basic data point with each element stored in the database, in particular are those:
@@ -60,7 +67,7 @@ That would be usefull, for example, when the average density of the smurf popula
 The index can be transferd to a less powerfull hardware with fewer CPU cores and spinning harddrives and even fewer replicas, 
 because this information is probably hardly requested.
 
-## Query optimization
+### Query optimization
 Why do we need query optimization? For that I'm going to give a small small example to consider:
 1. we import multiple sources, with multiple messurements: source1(airtemperature, watertemperatur) 1980-2017, source2(airtemperature) 1983-1990, source3(uv-index) 2009-2017
 2. each source is partitioned by year and source 1 is partitioned by month for all data after 2015.
@@ -85,7 +92,7 @@ source1 + source2 + source3 = 252 shards
 ```
 So in worst case each shard has its own node(very unlikely), the search request has to be send to 252 nodes/computers.
 
-### First optimization, Limit the time
+#### First optimization, Limit the time
 With a naive approach by checking the common time part of the request 2016-2017 and limit the indieces search with the following pattern:
 ```
 indexsearch: *-201*
@@ -121,7 +128,7 @@ source1 + source2 + source3 = 81 shards
 ```
 Now we are at 68% reduction.
 
-### Second optimization, Limit to indieces which contain the right data
+#### Second optimization, Limit to indieces which contain the right data
 If we store in a seperate database, which data source and therefore indiece actually holds the requested data we can do even much more:
 ```
 indexsearch: source3-2016, source3-2017
@@ -139,8 +146,10 @@ This was just a naive example. In reality the reduction should even be much high
 Let's say we have allready 100 data sources and we can limit a request to just two of those for example because the requested messuremnt it
 provided just by those two, the saving of network traffic and workload would be immense.
 
-## Limitations
+## Critical Analysis/Limitations
 ### Joins
 One mayor drawback of elasticsearch is the missing possibility of server side join, the way they are known by SQL based database-system. 
 This means, any kind of join operation has to be done either on a seperate server, like our api instance, or on the application side. 
 This is actually something we were not really aware of for a long time.
+
+## Future Development and Enhancements
