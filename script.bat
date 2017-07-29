@@ -1,7 +1,7 @@
-#copy images folder
+REM copy images folder
 copy images .\latex_docu\images
 
-#create subdirs
+REM create subdirs
 mkdir .\latex_docu\01
 mkdir .\latex_docu\02
 mkdir .\latex_docu\03
@@ -12,7 +12,7 @@ mkdir .\latex_docu\08
 mkdir .\latex_docu\12
 
 
-#generate latex file for each section
+REM generate latex file for each section
 pandoc .\01-Introduction.md -o .\latex_docu\01\doc.tex
 pandoc .\02-Competitor-Analysis.md -o .\latex_docu\02\doc.tex
 pandoc .\03-Architecture.md -o .\latex_docu\03\doc.tex
