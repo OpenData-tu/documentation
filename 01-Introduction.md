@@ -6,7 +6,7 @@
 | 0.1.1 | 2017-07-20 | Paul | Motivation section first draft |
 | 0.2.0 | 2017-07-22 | Oliver, Andres | Motivation rewrite & flesh out Requirements section |
 | 0.2.1 | 2017-07-29 | Oliver, Andres | Fixes for Markdown-> LaTeX conversion |
-
+| 0.2.2 | 2017-07-29 | Oliver | Removing content about Organization (moved to new document) |
 
 # Introduction
 
@@ -57,6 +57,7 @@ With this we aim to create a tool that generates economic and social value throu
 ### Decomposition
 
 The problem domain can be decomposed into the following components:
+
 1. Data Import Framework
 1. Database
 1. Public API
@@ -94,41 +95,6 @@ The above objectives translate into the following requirements:
 ### Public API
 
 `TODO` prob just the Scalability & fault tolerance concerns already mentioned under General, so not sure what reqs we had for the API individually (if any)...
+
 1. RESTful
     * Stateless
-
-
-## Time, Team, Technologies
-
-* Kickoff: Apr 27
-* /1 feedback session
-* Interim presentation: Jun 1
-* /2 feedback sessions
-* Final presentation: Jul 13
-
-`TODO` Total working days (minus holidays)
-
-
-### Team
-
-Highly diverse team of 7 master's students. Diversity and heterogeneity on many factors: nationality (and by extension native languages), amount of previous professional experience.
-
-English was the lingua franca for team communication.
-
-
-### Development processes
-
-* Stripped-down Scrum approach
-* Sprint culminating on every Thursday
-* Interim meetings on Mondays
-* Everyone holds the role of a product owner
-* Populate backlog on the fly
-
-
-### Tools
-
-* Source Control: Git, GitHub
-* Issue tracking: Trello
-* Communication: Slack
-* Calendar: Google Calendar
-* Document Sharing: Google Drive
