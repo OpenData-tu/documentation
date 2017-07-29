@@ -333,28 +333,24 @@ this feature of 'Spring' is used in our case to make the whole data import frame
 ```
 **Other measurements**
 ```
- "sensors": {
    "SO2DailyAverage": {
      "sensor": "Sulfur Dioxide",
      "observation_value": 1.0
    }
 ```
 ```
- "sensors": {
    "O3Max8hAverage": {
      "sensor": "Ozone",
      "observation_value": 72.0
    }
 ```
 ```
- "sensors": {
    "NO2Max1hAverage": {
      "sensor": "Nitrogen Dioxide",
      "observation_value": 19.0
    }
 ```
 ```
- "sensors": {
    "COMax8hAverage": {
      "sensor": "Carbon Monoxide",
      "observation_value": 300.0
@@ -411,7 +407,7 @@ this feature of 'Spring' is used in our case to make the whole data import frame
   "license": "find out",
   "sensors": {
     "waterLevel": {
-      "sensor": "",
+      "sensor": null,
       "observation_value": 283
     }
   },
