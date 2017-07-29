@@ -7,6 +7,7 @@
 | 0.2a | 2017-07-28 | Andres | Further refinement of text
 | 0.3 | 2017-07-28 | Rohullah, Jawid | framework structure explanations + diagrams
 
+
 # Extensible Data Import Framework
 
 The Open Data Platform which we have built for extracting, transforming and loading open sensor data is made up several significant components to efficiently process the large quantity of incoming data.
@@ -21,8 +22,11 @@ In addition to the main import functionality, additional requirements and criter
 
 This chapter describes the requirements, selection criteria, design decisions, evaluations, technical implementation details, further possible improvements, as well as the value of having such a framework.
 
+
 ## Framework Requirements
+
 The following are use-cases which our framework should cover:
+
   * user can add a new data source with minimal  coding and configuration effort.
   * provide various functionalities to the user such as processing data into customized format/schema
   * reusable components for reading, processing and writing data.
@@ -32,7 +36,9 @@ The following are use-cases which our framework should cover:
   * the framework should include logging functionalities.
   * if an importer were to crash while importing data, it should continue from the point where it failed after being restarted.
 
+
 ## Evaluation of different data import frameworks
+
 According to the framework requirements, we needed to search and find a useful and powerful tool such as an existing ETL framework or a technology on top of which we could build our data import framework. Therefore, it seemed to be a good idea to compare these frameworks and come up with the best decision. So we compared a couple of existing frameworks and technologies with different aspects such as:
 
 - Functional and non-functional aspects of different frameworks are considered.
@@ -44,19 +50,25 @@ According to the framework requirements, we needed to search and find a useful a
 - Processing of jobs into batches
 - Recoverability of individual jobs from failures  
 
+
 ### Evaluated Existing Frameworks
+
 1. Spring Batch
     - Spring Cloud Tasks
-    - Spring Cloud Data flow
+    - Spring Cloud Data Flow
 2. Java EE
 3. Easy Batch
 4. Summer Batch
 5. Talend ETL
 
+
 ## Design Decisions
+
 After evaluation and comparison, it was decided to implement our extensible framework using **Spring Batch** given the features and functionality it offers.
 
+
 ### Why Spring Batch
+
   - Lightweight, ready-to-use framework for robust batch processing
   - Suitable framework for data integration and processing
   - Popular with a large community of users
@@ -65,7 +77,9 @@ After evaluation and comparison, it was decided to implement our extensible fram
   - Capabilities for scheduling the jobs in data processing pipeline
   - Familiarity to some team members
 
+
 ### Spring Batch Features
+
 1. Reusable architecture framework
 2. Lightweight, enterprise and batch job processing
 3. Open Source
@@ -79,11 +93,12 @@ After evaluation and comparison, it was decided to implement our extensible fram
 7. Deployment model, with the architecture JARs, built using Maven.
 8. The ability to stop/start/restart jobs and maintain state between executions.
 
+
 ## Framework Structure/ Architecture
+
 **Figure 1.** shows an abstract overview of a simple importer application. We will look at each component individually.
 
 ![image-title-here](images/components_diagram.png)
-
 
 
    - **ImporterApplication:** Entry point of the importer (Java main class).
@@ -93,27 +108,31 @@ After evaluation and comparison, it was decided to implement our extensible fram
         - **Steps:** Each step includes a reader, processor, and a writer.
           - **Reader:** Defines how to read items from the source.
           - **Processor:** Processes every item - an item is basically an object that represents an record - individually and creates a JSON string for that according to our defined schema  
-          - **Writer:** Simply writes to kafka queue.
+          - **Writer:** Simply writes to Kafka queue.
    - `@SpringBootApplication`: Annotation to make the application a Spring Boot Application
    - `@EnableBatchProcessing`: Annotation to add the functionality of processing batch jobs.
    - `@EnableTask`: Enables the deployment of data importers as microservices which shutdown once importing is finished.
    - **ServiceConfiguration:** Is the component where the services are registered as Java Beans for re-usability. It is included in module 'library' where re-usable classes across all importers are defined. The following main components are included in the 'library' module.
         - **ServiceConfiguration**
         - **ApplicationService:** Includes some generally used methods to bring facility to importing.
-        - **JsonItemWriter:** Asks 'KafkaRecordProducer' to write individual json objects to kafka queue
-        - **KafkaRecordProducer:** Is the class where the items are written to kafka queue
+        - **JsonItemWriter:** Asks `KafkaRecordProducer` to write individual JSON objects to Kafka queue
+        - **KafkaRecordProducer:** Is the class where the items are written to Kafka queue
 
 ![image-title-here](images/domain_model.png)
 **Figure 2.** shows a more detailed view of classes inside a simple flat file importer and how they are related together.
 
-## Framework Features  
+
+## Framework Features
+
  - Ability to import data with various types and formats
  - A Module with pre-packaged utility classes
     - Just import and ready to use utility classes
  - Independent Cloud Tasks as microservices
  - Logging and tracing execution of jobs in different steps
 
+
 ## Framework Strengths
+
   - Usability
     - Reusable, ready-to-use functionalities
   - Extensibility
@@ -123,7 +142,9 @@ After evaluation and comparison, it was decided to implement our extensible fram
     - Jobs run as microservices
     - Every importer could be packed into JAR file and deployed into private or public cloud
 
+
 ## Supported Data Formats
+
 The sources which we used have come in various types and formats. Therefore different data formats and types have been implemented for importing through our framework such as:
   - REST Interface, HTTP and FTP data source types
   - Delimiter-separated value (DSV)
@@ -133,13 +154,17 @@ The sources which we used have come in various types and formats. Therefore diff
   - XLS
   - XLXS
 
+
 ## Possible Further Improvements
+
 1. Scheduling jobs for every importer within the Framework:
 until now, the scheduling of importing jobs is done by Kubernetes, but this functionality could be provided by Spring via an embeddable component such as (Quartz). This feature would easily allow the scheduling of jobs at specific times.
-2. Recoverability of jobs from failures:
+1. Recoverability of jobs from failures:
 Currently the intermediate results of job processing are stored in an in-memory database (H2) inside the importer. As we containerized every importer into Docker containers, this functionality will disappear when the container terminates. The solution would be to create and configure a single relational database to store all the intermediary results of the jobs executions; whenever an importer crashes and is restarted, it will start from the last point that it stopped.     
 
+
 ## The Values of the Framework
+
 * The application of our already built framework is mostly required for huge data integration and migration.
 * Useful functionalities are ready to use just by importing them.
 * It is very easy to extend it by adding new data sources to import and some new functions such as unit conversions.
