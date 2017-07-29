@@ -1,0 +1,146 @@
+\section{Architecutre}\label{architecutre}
+
+\textbf{Authoriship}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Version & Date & Modified by & Summary of changes\tabularnewline
+\midrule
+\endhead
+0.1 & 2017-07-19 & Oliver, Amer & Working draft\tabularnewline
+0.2 & 2017-07-28 & Oliver & Tidy up \ldots{}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  Components Overview/Description (if applicable
+  \textbf{\emph{Motivation}})
+\item
+  Requirements (specific to this component)
+\item
+  Survey of Existing Solutions (available implementations)
+\item
+  Evaluation Criteria \& Decision-making Process
+\item
+  Implementation Details
+\item
+  Evolution of Component during development (Reasons for the Changes)
+\item
+  Critical Analysis/Limitations
+\item
+  Future Development/Enhancements
+\end{itemize}
+
+\subsection{Requirements of the whole
+platform}\label{requirements-of-the-whole-platform}
+
+\begin{itemize}
+\tightlist
+\item
+  scalability
+\item
+  define scalability/ our interpretation of this requirement
+  specifically for our platform
+\item
+  extensibility
+\item
+  define it!
+\item
+  objective was to create a whole pipeline
+\item
+  Collection data from various sources
+\item
+  Process/transform the data
+\item
+  Store the data persistently
+\item
+  Provide the data through a ``single'' interface
+\item
+  no usage of cloud/provider specific solutions
+\end{itemize}
+
+\subsection{Design decisions}\label{design-decisions}
+
+To tackle all of the mentioned requirements, we decided upon the
+following architecture {[}image of architecture{]}. - We traded
+consistency for availability. (Harvest over yield \{\{ref\}\}) -
+``Decentralized system'': To be able to scale the platform horizontally,
+it has to be distributed. Thus, smaller pieces of the system have to
+work on different/separate machines. We omitted bottlenecks by picking
+components that are distributed by design.
+
+\subsubsection{Importers}\label{importers}
+
+\begin{itemize}
+\tightlist
+\item
+  Every source is different! Heterogeneous interfaces, different data
+  formats, different protocols
+\item
+  Sources have specific limitations, e.g.~number of requests per
+  specific time slot
+\item
+  Size and frequency of data points is heterogeneous
+\item
+  Availability of sources is different --\textgreater{} Every importer
+  runs as a independent service. All have specific lifecycles (run-time,
+  frequency of execution). Possibility to schedule them independently.
+  --\textgreater{} Upon finishing the importing task, the running
+  container is terminated to allow for maximal resource utilization.
+  --\textgreater{} Every importer manages its state independently from
+  the system. If the importer failed completing the importing task, it
+  continues from the last checkpoint. --\textgreater{} Every importer
+  has a unique name when scheduled to avoid repetition of the same
+  importing job.
+\end{itemize}
+
+\subsubsection{Messaging System}\label{messaging-system}
+
+\begin{itemize}
+\tightlist
+\item
+  Messaging enabled the component to decouple the services from each
+  other. We used queue systems to transport and buffer messages to
+  decouple the components even further.
+\item
+  Used a distributed messaging systems that is capable of handling
+  millions of concurrent requests and is fault-tolerant.
+\item
+  Autonomous parts can be deployed independently, such that the platform
+  keeps running without interruption in contrast to deploying a
+  monolithic application.
+\item
+  Choice of open source solutions to ease portability and make it
+  cross-platform
+\end{itemize}
+
+\subsection{Evolution of the
+architecture}\label{evolution-of-the-architecture}
+
+\begin{itemize}
+\item
+  Filebeat got obsolete
+\item
+  Scheduling handeled by Kubernetes
+\item
+  Validation and insert into one component
+\item
+\end{itemize}
+
+\subsection{Limitations}\label{limitations}
+
+\begin{itemize}
+\tightlist
+\item
+  ???
+\end{itemize}
+
+\subsection{Future}\label{future}
+
+\begin{itemize}
+\item
+  Connection from public API to relational system
+\item
+\end{itemize}

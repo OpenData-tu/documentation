@@ -1,5 +1,16 @@
-\section{Inserting into Elasticsearch}\label{inserting-into-elasticsearch}
-Written by Paul Wille \\
+\section{Inserting into
+Elasticsearch}\label{inserting-into-elasticsearch}
+
+\textbf{Authoriship}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Version & Date & Modified by & Summary of changes\tabularnewline
+\midrule
+\endhead
+0.1 & 2017-07-24 & Paul & initial version\tabularnewline
+\bottomrule
+\end{longtable}
 
 This section is about our consumer component, that takes data items from
 a queue and inserts them into the main database. Why we decided to do so
@@ -12,7 +23,8 @@ in our case \emph{Apache Kafka}. From the queue the data items still
 must be inserted into Elasticsearch. Besides simply taking data from the
 queue there are some more requirements. Those mainly are:
 
-\subsubsection{Validate input before inserting}\label{validate-input-before-inserting}
+\subsubsection{Validate input before
+inserting}\label{validate-input-before-inserting}
 
 While designing the ETL-importing pipeline we had the problem, that the
 output of data-fragments (JSON documents) that are prepared and
@@ -21,6 +33,7 @@ task is logically linked to the data storage component and not the
 importing process itself as
 
 \begin{itemize}
+\tightlist
 \item
   the ETL-framework should not validate its own outcome (as it or its
   creator are biased)
@@ -32,15 +45,17 @@ importing process itself as
 The then logical place to do the validation was the component that first
 processes the data items after the importers released them.
 
-\subsubsection{Ability to scale and adjust the configuration according to
-Kafka's configuration}\label{ability-to-scale-and-adjust-the-configuration-according-to-kafkas-configuration}
+\subsubsection{Ability to scale and adjust the configuration according
+to Kafka's
+configuration}\label{ability-to-scale-and-adjust-the-configuration-according-to-kafkas-configuration}
 
 Kafka can be configured in many ways. This mainly is about distribution
 (how many brokers), partitioning and the topics (chanells) it uses. The
 consumer should work and be reconfigurable, if our kafka configuration
 chances
 
-\subsubsection{Allow parallelism for reading from Kafka}\label{reading-from-kafka}
+\subsubsection{Allow parallelism for reading from
+Kafka}\label{allow-parallelism-for-reading-from-kafka}
 
 Depending on the configuration there can be several options, how
 parallel reading from Kafka can be accomplished (consumer groups, many
@@ -119,6 +134,7 @@ go-routines. With this we could achieve a procedure that works like
 this:
 
 \begin{itemize}
+\tightlist
 \item
   Continuously listen to the Kafka queue for new item on the topic.
 \item
@@ -129,6 +145,7 @@ this:
   aggregates the items to bulks until
 
   \begin{itemize}
+  \tightlist
   \item
     The bulk limit is reached or
   \item
@@ -157,6 +174,7 @@ a data source:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
   Using Kafka's Consumer Groups to allow several consumers reading from
   one topic

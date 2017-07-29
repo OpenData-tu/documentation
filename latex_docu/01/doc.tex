@@ -1,0 +1,261 @@
+\section{Introduction}\label{introduction}
+
+\textbf{Authorship}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+\begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+Version\strut
+\end{minipage} & \begin{minipage}[b]{0.06\columnwidth}\raggedright\strut
+Date\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
+Modified by\strut
+\end{minipage} & \begin{minipage}[b]{0.23\columnwidth}\raggedright\strut
+Summary of changes\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+0.1.0\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+2017-07-19\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+Oliver, Andres\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+Outline \& working draft\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+0.1.1\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+2017-07-20\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+Paul\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+Motivation section first draft\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+0.2.0\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+2017-07-22\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+Oliver, Andres\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+Motivation rewrite \& flesh out Requirements section\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+0.2.1\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+2017-07-29\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+Oliver, Andres\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+Fixes for Markdown-\textgreater{} LaTeX conversion\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+0.2.2\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+2017-07-29\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+Oliver\strut
+\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+Removing content about Organization (moved to new document)\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\subsection{Summary/Overview/Abstract}\label{summaryoverviewabstract}
+
+\subsection{What is Open Data}\label{what-is-open-data}
+
+So what do we mean when we talk about ``open data''?
+
+\begin{quote}
+Open means anyone can freely access, use, modify, and share for any
+purpose (subject, at most, to requirements that preserve provenance and
+openness). http://opendefinition.org/
+\end{quote}
+
+Further, the definition encompasses the following aspects:
+
+\begin{quote}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Availability and Access}: the data must be available as a
+  whole and at no more than a reasonable reproduction cost, preferably
+  by downloading over the Internet. The data must also be available in a
+  convenient and modifiable form.
+\item
+  \textbf{Re-use and Redistribution}: the data must be provided under
+  terms that permit re-use and redistribution including the intermixing
+  with other datasets.
+\item
+  \textbf{Universal Participation}: everyone must be able to use, re-use
+  and redistribute - there should be no discrimination against fields of
+  endeavour or against persons or groups. For example, `non-commercial'
+  restrictions that would prevent `commercial' use, or restrictions of
+  use for certain purposes (e.g.~only in education), are not allowed.
+  http://opendatahandbook.org/guide/en/what-is-open-data/
+\end{itemize}
+\end{quote}
+
+\subsubsection{Time series data \& non-static sensor environmental
+data}\label{time-series-data-non-static-sensor-environmental-data}
+
+So how does this ``open data'' differ from the data we're interested in?
+The simple answer is the lack of the time dimension in existing data.
+The large majority of open data out there today is static. Environmental
+data are usually represented on discrete ``datasets'', but there is no
+connection between data of the same source or type which was collected
+at different times. For example, one might find a dataset about a
+particular environmental measurement such as average and maximum water
+pollution on a given set of geographical areas or points. However, the
+same data for the following month or year are published separately, with
+no connection to the first, and at times having different formats or
+semantics.
+
+We therefore distinguish between static data of the type described above
+(of which there is an abundance) to the data which are in scope for the
+project, namely time series data of environmental measurements coming
+from a device (i.e.~a sensor or sensor network) with some form of
+geo-information. For example, an array of air pollution sensors in a
+given city may collect data every at 15-minute intervals; this would be
+represented as individual records containing the timestamp, the sensor's
+geolocation and the air pollution measurement.
+
+\subsection{Motivation}\label{motivation}
+
+\emph{Open data} efforts in the past have focused on providing a
+centralized platform onto which data producers can upload their data
+along with some metadata but without much (if any) concern for the
+schema or the format in which the data is offered. This has resulted in
+very large independent and heterogeneous catalogs of data which are
+difficult to discover and integrate without significant manual effort.
+
+The advent of the Internet of Things (IoT) has also meant that
+unprecedented amounts of data are generated by millions of devices every
+second of every day. However, devices generates data in their own (often
+closed-source proprietary) format, thanks to a lack of a common or
+widely established data model for environmental data. This results in
+lots of data from which it's difficult to gain insights due to the
+inherent difficulty in querying data in disparate representations.
+
+Also, as the price of devices declines, more and more enthusiasts are
+willing to share their data to open communities so that it can be used
+and queried by anyone. To tackle these challenges our project centers
+around building a prototype which provides:
+
+\begin{itemize}
+\tightlist
+\item
+  a platform on which data owners can share their sensor-generated
+  environmental data,
+\item
+  a unified schema to support queries across different data from
+  heterogeneous sources
+\item
+  a simple and extensible framework to facilitate the data import
+  process,
+\item
+  and a flexible querying interface for accessing the data.
+\end{itemize}
+
+With this we aim to create a tool that generates economic and social
+value through new and creative ``layering'' of data.
+
+\texttt{//TODO} there is very little background to talk about specific
+stuff in the req's (like units \& measurements if those concepts haven't
+been introduced. Move the decomposition \& req's further down \& pull up
+the open-data \& other introductory text about our domain here)
+
+\subsubsection{Decomposition}\label{decomposition}
+
+The problem domain can be decomposed into the following components:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Data Import Framework
+\item
+  Database
+\item
+  Public API
+\item
+  Cloud Infrastructure
+\end{enumerate}
+
+\subsection{Requirements}\label{requirements}
+
+The above objectives translate into the following requirements:
+
+\subsubsection{General}\label{general}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Open Source Software}: Libraries \& components used shall be
+  open source software.
+\item
+  \textbf{Cloud architectural style}: Guiding architectural principle
+  shall be to avoid monolith-style applications, but rather include
+  cloud concerns from early on (i.e.~design phase).
+\item
+  \textbf{Scalability}: Components shall be inherently scalable.
+\item
+  \textbf{Fault tolerance}: Components shall provide fault tolerance
+  capabilities.
+\item
+  \textbf{Performance}: The system (and its constituent components)
+  shall have the ability to handle extremely high demand.
+\item
+  \textbf{Portability}: The system shall be deployable both on public
+  and private clouds.
+\end{enumerate}
+
+\subsubsection{Data Import Framework}\label{data-import-framework}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Provide facilities for common access patterns of data sources
+  (e.g.~FTP, HTTP)
+\item
+  Provide facilities to read data in common formats (e.g.~JSON, CSV,
+  XML)
+\item
+  Provide facilities to map the user schema to the platforms common
+  schema
+\item
+  Provide reusable community-based unit converters
+\end{enumerate}
+
+\subsubsection{Database}\label{database}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Ability to perform time series and geolocation range queries
+\end{enumerate}
+
+\subsubsection{Public API}\label{public-api}
+
+\texttt{TODO} prob just the Scalability \& fault tolerance concerns
+already mentioned under General, so not sure what reqs we had for the
+API individually (if any)\ldots{}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  RESTful
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Stateless
+  \end{itemize}
+\end{enumerate}
