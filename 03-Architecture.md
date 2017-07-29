@@ -3,14 +3,18 @@
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
 |  0.1  | 2017-07-19 | Oliver, Amer | Working draft |
+|  0.2  | 2017-07-28 | Oliver | Tidy up ... |
 
 # Architecutre
 
-* requirements
-* limitations
-* decision-making
-* microservices vs monolith
-* domain-model
+* Components Overview/Description (if applicable ___Motivation___)
+* Requirements (specific to this component)
+* Survey of Existing Solutions (available implementations)
+* Evaluation Criteria & Decision-making Process
+* Implementation Details
+* Evolution of Component during development (Reasons for the Changes)
+* Critical Analysis/Limitations
+* Future Development/Enhancements
 
 ## Requirements of the whole platform
 
@@ -41,19 +45,25 @@ To tackle all of the mentioned requirements, we decided upon the following archi
 --> Every importer manages its state independently from the system. If the importer failed completing the importing task, it continues from the last checkpoint.
 --> Every importer has a unique name when scheduled to avoid repetition of the same importing job.
 
-### abc
+### Messaging System
 
 - Messaging enabled the component to decouple the services from each other. We used queue systems to transport and buffer messages to decouple the components even further.
 - Used a distributed messaging systems that is capable of handling millions of concurrent requests and is fault-tolerant.
 - Autonomous parts can be deployed independently, such that the platform keeps running without interruption in contrast to deploying a monolithic application.
 - Choice of open source solutions to ease portability and make it cross-platform
 
+## Evolution of the architecture
+
+- Filebeat got obsolete
+- Scheduling handeled by Kubernetes
+- Validation and insert into one component
+- 
+
 ## Limitations
 
-- TODO
+- ???
 
+## Future
 
-### microservices vs. monolith
-
-- "nature of project is already distributed" - diverse sources/platform
-- [do we really need it?]
+- Connection from public API to relational system
+- 
