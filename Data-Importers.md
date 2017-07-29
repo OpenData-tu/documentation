@@ -1,9 +1,11 @@
+# Data Importers
+
+**Authoriship**
+
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
 |0.1    | 2017-07-28 | Rohullah & Jawid | Initial version|
-
-
-# Data Importers
+|0.2    | 2017-07-29 | Rohullah & Jawid | Removing data production part + adding units|
 
 According to the requirements for unlocking various data sources (environmental data) we have built importers to do this task. Every importer used to extract data from different kinds of sources with vary in implementation. However the data producer component of the importer will remain with the same implementation for most of the importers. There is a unified data model which every data importer write the data into the queue according to it. <br>
 The current chapter explains data importers with all their details.
