@@ -109,16 +109,17 @@ After evaluation and comparison, it was decided to implement our extensible fram
    - **Jobs:** Generally there is one batch job for each importer. A batch job may have one or more steps for importing a single source.
         - **Steps:** Each step includes a reader, processor, and a writer.
           - **Reader:** Defines how to read items from the source.
-          - **Processor:** Processes every item - an item is basically an object that represents an record - individually and creates a JSON string for that according to our defined schema  
+          - **Processor:** Processes every item - an item is basically an object that represents an record - individually and creates a JSON string for that according to our defined schema.  
           - **Writer:** Simply writes to Kafka queue.
-   - `@SpringBootApplication`: Annotation to make the application a Spring Boot Application
+   - `@SpringBootApplication`: Annotation to make the application a Spring Boot Application.
    - `@EnableBatchProcessing`: Annotation to add the functionality of processing batch jobs.
    - `@EnableTask`: Enables the deployment of data importers as microservices which shutdown once importing is finished.
-   - **ServiceConfiguration:** Is the component where the services are registered as Java Beans for re-usability. It is included in module 'library' where re-usable classes across all importers are defined. The following main components are included in the 'library' module.
-        - **ServiceConfiguration**
-        - **ApplicationService:** Includes some generally used methods to bring facility to importing.
-        - **JsonItemWriter:** Asks `KafkaRecordProducer` to write individual JSON objects to Kafka queue
-        - **KafkaRecordProducer:** Is the class where the items are written to Kafka queue
+   - **ServiceConfiguration:** Is the component where the services are registered as Java Beans for re-usability. It is included in module 'library' where re-usable classes across all importers are defined. The following other components are included in the 'library' module.
+        - **ApplicationService:** Includes some generally used methods to bring facility for importing.
+        - **JsonItemWriter:** Asks `KafkaRecordProducer` to write individual JSON objects to Kafka queue.
+        - **KafkaRecordProducer:** Is the class where the items are written to Kafka queue.
+        - **Schema:** Each importer should have at least one model class which has all the necessary fields for reading records from a source; all these classes are extended from Schema.
+        - **JsonStringBuilder**: The class which contains functions for creating a json string according to our defined schema.
 
 ![image-title-here](images/domain_model.png)
 **Figure 2.** shows a more detailed view of classes inside a simple flat file importer and how they are related together.
