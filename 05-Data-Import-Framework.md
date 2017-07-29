@@ -1,3 +1,7 @@
+# Extensible Data Import Framework
+
+**Authoriship**
+
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
 |  0.1  | 2017-07-20 | Rohullah, Jawid | initial version |
@@ -7,8 +11,6 @@
 | 0.2a | 2017-07-28 | Andres | Further refinement of text
 | 0.3 | 2017-07-28 | Rohullah, Jawid | framework structure explanations + diagrams
 
-
-# Extensible Data Import Framework
 
 The Open Data Platform which we have built for extracting, transforming and loading open sensor data is made up several significant components to efficiently process the large quantity of incoming data.
 

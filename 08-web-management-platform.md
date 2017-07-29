@@ -1,6 +1,7 @@
 # Data Source Metadata Management System
 
-**Written by Paul Wille**<br/>
+**Authoriship**
+Written by Paul Wille<br/>
 *Proofread & edited by Andres*
 
 We decided to have a separate component to manage the metadata about data sources which are imported to the system. This component shall fulfill several tasks that are important for organizing the ETL process. Furthermore, it provides important information to several other system components.

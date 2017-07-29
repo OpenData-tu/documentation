@@ -1,3 +1,5 @@
+# Introduction
+
 **Authorship**
 
 |Version|Date|Modified by|Summary of changes|
@@ -7,8 +9,6 @@
 | 0.2.0 | 2017-07-22 | Oliver, Andres | Motivation rewrite & flesh out Requirements section |
 | 0.2.1 | 2017-07-29 | Oliver, Andres | Fixes for Markdown-> LaTeX conversion |
 | 0.2.2 | 2017-07-29 | Oliver | Removing content about Organization (moved to new document) |
-
-# Introduction
 
 
 ## Summary/Overview/Abstract

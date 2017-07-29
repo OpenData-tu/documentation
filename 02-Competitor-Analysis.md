@@ -1,4 +1,6 @@
-# Authorship
+# Competitor Analysis
+
+**Authorship**
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
@@ -62,7 +64,7 @@ https://www.pubnub.com/
 
 https://www.talend.com/resource/sensor-data/
 
-Talend 
+Talend
 
 ## Features
 ## Segments

@@ -1,10 +1,11 @@
-# Authorship
+# Conclusions
+
+**Authoriship**
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
 |  0.1  | 2017-07-19 | Oliver, Andres | Working draft |
 
-# Conclusions
 
 ## Is Open Data really open?
 

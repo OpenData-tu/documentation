@@ -1,9 +1,13 @@
+# Database
+
+**Authoriship**
+
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
 |  0.2  | 2017-07-28 | Tasche, Nico | changed to new structure |
 |  0.1  | 2017-07-24 | Tasche, Nico | first working draft |
 
-# Database
+
 ## Overview
 
 ## Requirements
@@ -26,7 +30,7 @@ As seen in the requirements, a hugh focus was on scalability. We had some second
 ## Survey of Existing Solutions
 
 ## Evaluation Criteria & Decision-making Process
-The process of deciding what database architecture to use we started with our requirements. 
+The process of deciding what database architecture to use we started with our requirements.
 
 Espacialy the last point of our secondary requiremnts had to be taken into account, because we had no real database expert in our team, so we first considert database-system we allready knew.
 Our approach was to check whether those databases fulfill our requirements first.
@@ -45,13 +49,13 @@ would not scale very well and would have no partition tolerance,
 each shard has a configurable number of replicas. A new search request is send to on replica of each shard.
 
 ### Data model
-We decided to have an data model which is data-source-centric with the extra posibility to partition the data over time. 
-That means, each data source gets it own index with its own timeframe and its own adjusted datastructure. 
+We decided to have an data model which is data-source-centric with the extra posibility to partition the data over time.
+That means, each data source gets it own index with its own timeframe and its own adjusted datastructure.
 All our data sources save a few basic data point with each element stored in the database, in particular are those:
 - timestamp: when has the datapoint been recorded
 - location: where has the datapoint been recorded
 
-Those are acutally the only information we need to store, besides the individual measurements. We do acutally store some more information, 
+Those are acutally the only information we need to store, besides the individual measurements. We do acutally store some more information,
 but regarding the common usecases for searches those two datapoints are enough for environemental data. Please refer to the full data-model in the appedix for more information.
 
 This data-model has multiple advantages:
@@ -63,8 +67,8 @@ This data-model has multiple advantages:
 So why does it scale so good? When importing data from one source, I process and store the data points in one index. This index is not just limited to the data source,
 it is also limited to the time, e.g. 2016. That means, when 2016 is finished with importing data, the index is done and can be closed up, no one needs to care about it anymore.
 After the index is done, it might even be transfered to another Elasticsearch node with different hardware.
-That would be usefull, for example, when the average density of the smurf population is beeing stored. 
-The index can be transferd to a less powerfull hardware with fewer CPU cores and spinning harddrives and even fewer replicas, 
+That would be usefull, for example, when the average density of the smurf population is beeing stored.
+The index can be transferd to a less powerfull hardware with fewer CPU cores and spinning harddrives and even fewer replicas,
 because this information is probably hardly requested.
 
 ### Query optimization
@@ -148,8 +152,8 @@ provided just by those two, the saving of network traffic and workload would be 
 
 ## Critical Analysis/Limitations
 ### Joins
-One mayor drawback of elasticsearch is the missing possibility of server side join, the way they are known by SQL based database-system. 
-This means, any kind of join operation has to be done either on a seperate server, like our api instance, or on the application side. 
+One mayor drawback of elasticsearch is the missing possibility of server side join, the way they are known by SQL based database-system.
+This means, any kind of join operation has to be done either on a seperate server, like our api instance, or on the application side.
 This is actually something we were not really aware of for a long time.
 
 ## Future Development and Enhancements

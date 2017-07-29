@@ -1,11 +1,12 @@
-# Authorship
+# Architecutre
+
+**Authoriship**
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
 |  0.1  | 2017-07-19 | Oliver, Amer | Working draft |
 |  0.2  | 2017-07-28 | Oliver | Tidy up ... |
 
-# Architecutre
 
 * Components Overview/Description (if applicable ___Motivation___)
 * Requirements (specific to this component)
@@ -57,7 +58,7 @@ To tackle all of the mentioned requirements, we decided upon the following archi
 - Filebeat got obsolete
 - Scheduling handeled by Kubernetes
 - Validation and insert into one component
-- 
+-
 
 ## Limitations
 
@@ -66,4 +67,4 @@ To tackle all of the mentioned requirements, we decided upon the following archi
 ## Future
 
 - Connection from public API to relational system
-- 
+-
