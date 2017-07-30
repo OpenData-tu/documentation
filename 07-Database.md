@@ -4,6 +4,8 @@
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
+|  0.9 | 2017-07-30 | Tasche, Nico | more architecture and mapping |
+|  0.8 | 2017-07-30 | Tasche, Nico | elasticsearch architecture update |
 |  0.7 | 2017-07-30 | Tasche, Nico | Data model and partitioning |
 |  0.6 | 2017-07-30 | Tasche, Nico | Future work, more limitations and api |
 |  0.5 | 2017-07-30 | Tasche, Nico | API |
@@ -81,9 +83,56 @@ Elasticsearch is an opensource Lucene based search engine. It is under active de
 
 ### Architecture
 
-Each index can be sharded and each node can have multiple indieces. To better distribute search requests, the workload is divided among all shards belonging to an index. Because that
-would not scale very well and would have no partition tolerance,
-each shard has a configurable number of replicas. A new search request is send to on replica of each shard.
+Elastic Search is a document store and works with indicies, which are comparable to tables in the classic SQL world. Each index holds JSON based document which follow a mapping. The mapping is flexibel and can be extended however you want, but as soon as a field in the document has a mapping, all documents with the same field have to follow that mapping. E.g. if a document has a field called location, which is mapped to a geopoint data type. Every document with a field name location, has to have a geopoint in it.
+
+
+Each index can be sharded and each node/server-instance can have multiple indieces. To better distribute search requests, the workload is divided among all shards belonging to an index and means that each shard holds just one part of an index. Because that would not scale very well and would have no partition tolerance,
+each index has a configurable number of replicas. A new search request is send to one replica of each shard.
+
+Elastic Search automaticly handels the distribution of search requests to the primary shards or replicas. Depending on the number nodes in a Elastic Search cluster, the engine also automaticly distributes the shards and replicas to the different nodes, all acording to the configuration made for each index. To illustrate that see the following figure, which assumes that the cluster holds three indicies, on three nodes, with two replicas per index.
+
+![OpenData Database Architecture](images/07_database_architecture_elastic.png)
+
+The index configuration in our architecture follows a template, which is automatically applied to each new index we create:
+
+```JSON
+{
+
+"template": "data-*",
+"order": 1,
+"settings": {
+  "number_of_shards": 1,
+  "number_of_replicas": 3
+},
+"mappings": {
+  "_default_": {
+    "_all": {
+      "enabled": false
+    }
+  },
+  "data": {
+    "properties": {
+      "device": {
+        "type": "keyword"
+      },
+      "location": {
+        "type": "geo_point"
+      },
+      "timestamp": {
+        "type": "date"
+      },
+      "timestamp_record": {
+        "type": "date"
+      },
+      "license": {
+        "type": "text"
+      }
+    }
+  }
+}         
+```
+
+provides the number of shard, replicas and the basic mapping for our data model. If necessary this information can be overwritten before a new index is created. This is all the necessary information needed for our architecture and can not be changed after an index is created, except for the number of replicas, which can be increased.
 
 ### Data model
 
