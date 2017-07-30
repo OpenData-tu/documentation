@@ -1,17 +1,7 @@
 \section{Database}\label{database}
 
-\textbf{REFERENCES}
-
-{[}1{]}Michael McCandless. Elastic Bloc. \textbf{\emph{Multi-dimensional
-points, coming in Apache Lucene 6.0}},
-https://www.elastic.co/blog/lucene-points-6.0, 2016
-{[}2{]}\textbf{\emph{Missing documentation in Cassandra}},
-http://cassandra.apache.org/doc/latest/architecture/overview.html ,
-2016-07-30 {[}3{]}\textbf{\emph{Missing documentation in Cassandra 2}},
-http://cassandra.apache.org/doc/latest/architecture/dynamo.html ,
-2016-07-30 {[}4{]} https://www.elastic.co
-
-\textbf{Authoriship} Written by Nico Tasche
+\textbf{Authorship} Written by Nico Tasche Minor proofreading and
+editing by Andres
 
 \subsection{Overview}\label{overview}
 
@@ -462,35 +452,10 @@ based on extra parameters.
 
 \textbf{Parameters:}
 
-\begin{longtable}[]{@{}lll@{}}
-\toprule
-\begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
-Parameter\strut
-\end{minipage} & \begin{minipage}[b]{0.06\columnwidth}\raggedright\strut
-Example\strut
-\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
-Description\strut
-\end{minipage}\tabularnewline
-\midrule
-\endhead
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-\texttt{time}\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
-\texttt{2011,2017-06-22T165:37:12:100}\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-start and excluding end time which is to be provided as two comma
-separated values\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-\texttt{location}\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
-\texttt{52.5239,13.4573,53.5239,16.45731\ \textbar{}\ square\ location\ to\ consider\ with\ lat/lon\ upper\ left\ and\ lat/lon\ bottom\ right\ \textbar{}\ \textbar{}}bucket\texttt{\textbar{}}1w\texttt{\textbar{}\ defines\ bucketing\ to\ consider\ with\ timeframe\ this\ might\ be\ 2w\ for\ bucketing\ into\ two\ weeks\ buckets,\ or\ 1m\ for\ 1\ minute\ buckets\ \textbar{}\ \textbar{}}agg\texttt{\textbar{}}sum\texttt{or}avg\texttt{\textbar{}\ aggregate\ measurement\ with\ sum\ or\ average\ \textbar{}\ \textbar{}}mess\texttt{\textbar{}}airtemperature`\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-defines the measurement you want to consider for aggregation and
-bucketing(not for /api/measurements endpoint)\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1.00\textwidth]{images/07-table.png}
+\end{figure}
 
 \subsection{Discussion}\label{discussion}
 
@@ -558,3 +523,14 @@ which should be implemented:
   optimizing the data handling on the API instances, which is not very
   efficient
 \end{enumerate}
+
+\subsection{References}\label{references}
+
+{[}1{]} Michael McCandless. Elastic Bloc.
+\textbf{\emph{Multi-dimensional points, coming in Apache Lucene 6.0}},
+https://www.elastic.co/blog/lucene-points-6.0, 2016
+{[}2{]}\textbf{\emph{Missing documentation in Cassandra}},
+http://cassandra.apache.org/doc/latest/architecture/overview.html ,
+2016-07-30 {[}3{]}\textbf{\emph{Missing documentation in Cassandra 2}},
+http://cassandra.apache.org/doc/latest/architecture/dynamo.html ,
+2016-07-30 {[}4{]} https://www.elastic.co

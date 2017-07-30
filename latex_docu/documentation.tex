@@ -13,6 +13,7 @@
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{hyperref}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -28,7 +29,7 @@
 \author{Andres Ardila, Rohullah Ayobi, Oliver Bruski, Ahmad Jawid Jami, Amer Jazaerli, Nico Tasche, Paul Wille}
 
 \institute{Technische Universit\"at Berlin, Stra\ss{}e des 17. Juni 135, 10623 Berlin, Germany,\\
-\email{nico.tasche@campus.tu-berlin.de}}
+\email{firstname.lastname@campus.tu-berlin.de}}
 
 \maketitle              % typeset the title of the contribution
 
@@ -65,6 +66,9 @@
 %\input{01_introduction/bib.tex}
 %\input{07_database/bib.tex}
 
+
+\end{thebibliography}
+
 \appendix
 
 \section{Imported Data Sources}
@@ -79,8 +83,8 @@
  2 & Luftdaten Brandenburg & Air quality data from 28 data measuring stations in Brandenburg, Germany. & O₃, NO, NO₂, PM10, PM2.5, SO₂, CO & xls & luftdaten.brandenburg.de \\
  3 & Umweltbundesamt & Current air quality data from about 500 data measuring stations for 16 states and cities of Germany. & PM10, SO₂, O₃, NO₂, CO & csv &  umweltbundesamt.de \\
  4 & Pegel Online Water Level & Raw values of \textbf{Water Level} for internal and coastal levels of waterways of the Germany up to a maximum of 30 days & Water Level & REST, SOAP, HTTP & pegelonline.wsv.de \\
- 5 & BLUME &  & Stickoxide, Schwefeldioxid, Schwebstaub (PM10), Benzol, Kohlenmonoxid und Ozon & HTML & http://www.berlin.de/senuvk/umwelt/luftqualitaet/de/messnetz/aktuelle_werte.shtml \\
- 6 & BFS UV-Index &  & UV-Index & HTML & http://www.bfs.de/DE/themen/opt/uv/uv-index/aktuell/aktuell_node.html
+ 5 & BLUME &  & Stickoxide, Schwefeldioxid, Schwebstaub (PM10), Benzol, Kohlenmonoxid und Ozon & HTML & https://www.berlin.de/senuvk/umwelt/luftqualitaet/de/messnetz/aktuelle\_werte.shtml \\
+ 6 & BFS UV-Index &  & UV-Index & HTML & http://www.bfs.de/DE/themen/opt/uv/uv-index/aktuell/aktuell\_node.html
 \end{tabular}
 \end{table}
 
@@ -107,7 +111,7 @@ Instead of wrting a long manual on how to write an importer we provide
 you with starter apps (templates) that you can start to customize right
 away.
 
-\subsection{Pre-requisites}\label{pre-requisites}
+\subsection{Pre-requisites}
 
 We assume that you are:
 
@@ -125,13 +129,13 @@ We assume that you are:
 If you need a quick start guide of Spring Batch you can find it
 \href{https://projects.spring.io/spring-batch/}{here:}
 
-\subsection{How to Proceed}\label{how-to-proceed}
+\subsection{How to Proceed}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Download or copy the template that fits your needs. 
+  Download or copy the template that fits your needs.
 \end{enumerate}
 
 \textbf{Template Modules}
@@ -219,11 +223,9 @@ template:}\label{things-to-know-about-the-template}
   in main class:
 \end{itemize}
 
-\includegraphics{images/template.png}
+\includegraphics[width=1.00\textwidth]{images/template.png}
 
 You can now start to edit the template.
 
-
-\end{thebibliography}
 
 \end{document}

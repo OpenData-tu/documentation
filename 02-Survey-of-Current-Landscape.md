@@ -8,10 +8,6 @@
 |  0.2  | 2017-07-07 | Andres Ardila | Added section on Talend |
 
 
-```
-//TODO diagram illustrating the pipeline to better describe where each company is positioned
-1.
-```
 
 ## OpenSensors.io
 
@@ -38,7 +34,6 @@ Provides support for open protocols, use existing SDKs to quickly get up and run
 * **Environment sensing**: Open Data communities to contribute and use data from environmental sensors around you. You can get air quality data and traffic data for free.
 
 ### Customers
-* **Customers** (TODO)
 * **Partners** are hardware manufacturers and design firms (OEMs) looking to deliver client projects
 
 ### Analysis

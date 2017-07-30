@@ -68,10 +68,8 @@ as a database. The reasons why we chose to use Rails are:
 
 \subsubsection{Domain Model}\label{domain-model}
 
-\begin{figure}
-\includegraphics[width=1.00\textwidth]{images/relational_schema.png}
-\caption{UML Class}
-\end{figure}
+\includegraphics[width=1.00\textwidth]{images/relational_schema.png} //TODO Figure: UML Class
+Diagram of the Relational Management System
 
 \subsubsection{Data Sources Registry}\label{data-sources-registry}
 
@@ -123,10 +121,8 @@ useful for our system:
   data.
 \end{itemize}
 
-\begin{figure}
-\includegraphics[width=1.00\textwidth]{images/new_datasource.png}
-\caption{Registering a data source within the Web management platform}
-\end{figure}
+\includegraphics[width=1.00\textwidth]{images/new_datasource.png} //TODO Figure: Registering a
+data source within the Web management platform
 
 \subsubsection{Validation Schema}\label{validation-schema}
 
@@ -229,13 +225,13 @@ be stored and managed, and how it would be provided, the easiest place
 to start with in our opinion was with the implementer of an importer,
 since he or she must provide information to us when registering the data
 source. The user therefore has to mark what measurements a data source
-contains upfront.
+contains upfront. (// TODO ref figure new data source)
 
 In order to optimize querying, this information is provided to the API
 that wraps the search interface of Elasticsearch via an API itself. The
 information is stored in an indexed join table that holds the mapping
 between data source and the measurands it contains. As you can see in
-the class diagram of the relational system, queries
+the class diagram (//TODO ref figure) of the relational system, queries
 in both directions are provided: getting all measurands for a data
 source, and getting all data sources that contain a given measurand. The
 corresponding routes look like this:
@@ -288,7 +284,7 @@ With the requirements in mind, we modeled units like so:
   \textbf{Unit Categories}: Units themselves belong to a unit category.
   The unit category describes an entity for which measurements exist,
   which express their observations with one of the units of that
-  category (See figure for Class Diagram).
+  category (See figure for Class Diagram // TODO ref figure).
 \item
   Each unit has a \textbf{main unit} that we decide on. By calling the
   API or visiting the management platform a user can see, which the main
@@ -341,13 +337,11 @@ The unit categories are pretty straightforward. For a unit there are
 some more possibilities. Besides declaring the unit symbol, the category
 it belongs to, its name you are allowed to use MathML to express what
 the meaning of a unit is. This is especially helpful with units that can
-be directly converted to each other.
+be directly converted to each other. // TODO ref picture
 
-\begin{figure}
-\includegraphics[width=1.00\textwidth]{images/unit_frontend.png}
-\caption{Screenshot of the units of a unit category on the web management platform. You can see
-the main unit and have a notation on what the units express.}
-\end{figure}
+\includegraphics[width=1.00\textwidth]{images/unit_frontend.png} //TODO Figure: Screenshot of
+the units of a unit category on the web management platform. You can see
+the main unit and have a notation on what the units express.
 
 The API of the web management system also provides calls to a) receive
 the main unit of a unit category and to b) get a list of all units there
@@ -410,7 +404,7 @@ stations first. For big services like e.g.~the German Weather Service
 this would be an enormous amount of work. Gathering this information
 would better be done by scraping the information present in
 Elasticsearch and translating them to geolocated information for all
-sensors/sensor-stations/datasources. In the UML Class Diagram you can
+sensors/sensor-stations/datasources. In \{//TODO ref figure\} you can
 see the modeling for this approach greyed out.
 
 The main metainformation about the data sources (besides metadata about
@@ -425,7 +419,7 @@ were then:
   Information about the measurands offered by the data source
 \item
   Information about the main unit used for a measurand (see section Unit
-  system)
+  system // TODO ref section)
 \end{itemize}
 
 \subsubsection{Future Improvements}\label{future-improvements}
