@@ -29,6 +29,7 @@ If you need a quick start guide of Spring Batch you can find it [here:](https://
 1. Download or copy the template that fits your needs.
 
 #### Template Modules
+
 The template is a multi module application which includes two modules:
 
  - application
