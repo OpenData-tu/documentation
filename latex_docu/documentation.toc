@@ -12,7 +12,7 @@
 \contentsline {subsubsection}{Data Import Framework}{5}
 \contentsline {subsubsection}{Database}{5}
 \contentsline {subsubsection}{Public API}{5}
-\contentsline {section}{\numberline {2}Competitor Analysis}{5}
+\contentsline {section}{\numberline {2}Survey of Current Landscape}{5}
 \contentsline {subsection}{\numberline {2.1}OpenSensors.io}{5}
 \contentsline {subsubsection}{Features}{5}
 \contentsline {paragraph}{Hardware agnostic}{6}
@@ -22,7 +22,11 @@
 \contentsline {subsection}{\numberline {2.2}PubNub}{6}
 \contentsline {subsubsection}{Features}{6}
 \contentsline {paragraph}{Scalability}{6}
-\contentsline {subsection}{\numberline {2.3}Talend}{6}
+\contentsline {paragraph}{Storage}{6}
+\contentsline {subsubsection}{Segments}{6}
+\contentsline {subsubsection}{Customers}{7}
+\contentsline {subsubsection}{Analysis}{7}
+\contentsline {subsection}{\numberline {2.3}Talend}{7}
 \contentsline {subsubsection}{Features}{7}
 \contentsline {subsubsection}{Segments}{7}
 \contentsline {subsubsection}{Customers}{7}
@@ -31,13 +35,13 @@
 \contentsline {subsection}{\numberline {3.1}Motivation}{8}
 \contentsline {subsection}{\numberline {3.2}Requirements of the whole platform}{9}
 \contentsline {subsection}{\numberline {3.3}Design Decision}{10}
-\contentsline {subsubsection}{Importers}{10}
+\contentsline {subsubsection}{Importers}{11}
 \contentsline {subsubsection}{Messaging System}{11}
 \contentsline {subsubsection}{Database}{11}
 \contentsline {subsection}{\numberline {3.4}Existing solutions}{11}
 \contentsline {subsection}{\numberline {3.5}Evolution of the architecture}{12}
 \contentsline {subsection}{\numberline {3.6}Discussion}{12}
-\contentsline {subsection}{\numberline {3.7}Future}{12}
+\contentsline {subsection}{\numberline {3.7}Future}{13}
 \contentsline {section}{\numberline {4}Extensible Data Import Framework}{13}
 \contentsline {subsection}{\numberline {4.1}Framework Requirements}{14}
 \contentsline {subsection}{\numberline {4.2}Evaluation of different data import frameworks}{14}
@@ -60,59 +64,59 @@
 \contentsline {subsection}{\numberline {5.3}Implementation}{22}
 \contentsline {subsubsection}{Converters}{22}
 \contentsline {subsection}{\numberline {5.4}Discussion}{23}
-\contentsline {section}{\numberline {6}Future Improvements}{24}
-\contentsline {section}{\numberline {7}Inserting into Elasticsearch}{24}
-\contentsline {subsection}{\numberline {7.1}Requirements}{24}
-\contentsline {subsection}{\numberline {7.2}Validation}{24}
+\contentsline {subsection}{\numberline {5.5}Future Improvements}{24}
+\contentsline {section}{\numberline {6}Inserting into Elasticsearch}{24}
+\contentsline {subsection}{\numberline {6.1}Requirements}{24}
+\contentsline {subsection}{\numberline {6.2}Validation}{24}
 \contentsline {subsubsection}{Ability to scale and adjust the configuration according to Kafka's configuration}{25}
 \contentsline {subsubsection}{Allow parallelism for reading from Kafka}{25}
 \contentsline {subsubsection}{Achieve high performance to not slow down the importing pipeline}{25}
 \contentsline {subsubsection}{Allow concurency for processing data read from Kafka}{25}
-\contentsline {subsection}{\numberline {7.3}Implementation of the Requirements}{25}
+\contentsline {subsection}{\numberline {6.3}Implementation of the Requirements}{25}
 \contentsline {subsubsection}{Bulk insertion}{25}
 \contentsline {subsubsection}{Achieve high performance and allow validating}{25}
 \contentsline {subsubsection}{Allow concurrency for processing data read from Kafka}{26}
 \contentsline {subsubsection}{Allow parallelism, scaling and configuration}{26}
-\contentsline {subsection}{\numberline {7.4}Benchmarks}{27}
-\contentsline {section}{\numberline {8}Database}{27}
-\contentsline {subsection}{\numberline {8.1}Overview}{27}
-\contentsline {subsection}{\numberline {8.2}Requirements}{27}
+\contentsline {subsection}{\numberline {6.4}Benchmarks}{27}
+\contentsline {section}{\numberline {7}Database}{27}
+\contentsline {subsection}{\numberline {7.1}Overview}{27}
+\contentsline {subsection}{\numberline {7.2}Requirements}{27}
 \contentsline {subsubsection}{Primary Requirements}{27}
 \contentsline {subsubsection}{Secondary Requirements}{28}
-\contentsline {subsection}{\numberline {8.3}Survey of Existing Solutions}{28}
-\contentsline {subsection}{\numberline {8.4}Evaluation Criteria \& Decision-making Process}{28}
+\contentsline {subsection}{\numberline {7.3}Survey of Existing Solutions}{28}
+\contentsline {subsection}{\numberline {7.4}Evaluation Criteria \& Decision-making Process}{28}
 \contentsline {subsubsection}{Why Elasticsearch}{29}
 \contentsline {subsubsection}{Special look at Cassandra}{29}
-\contentsline {subsection}{\numberline {8.5}Implementation Details}{29}
+\contentsline {subsection}{\numberline {7.5}Implementation Details}{29}
 \contentsline {subsubsection}{Intro to Elasticsearch}{29}
 \contentsline {subsubsection}{Architecture}{29}
 \contentsline {subsubsection}{Data Model}{31}
 \contentsline {subsubsection}{Partitioning}{31}
 \contentsline {subsubsection}{Query Optimization}{32}
-\contentsline {subsection}{\numberline {8.6}API Implementation Details}{34}
+\contentsline {subsection}{\numberline {7.6}API Implementation Details}{34}
 \contentsline {subsubsection}{Overview}{34}
 \contentsline {subsubsection}{Architecture and Technology}{34}
 \contentsline {subsubsection}{REST APIs}{36}
-\contentsline {subsection}{\numberline {8.7}Discussion}{38}
+\contentsline {subsection}{\numberline {7.7}Discussion}{38}
 \contentsline {subsubsection}{Joins}{38}
 \contentsline {subsubsection}{Administration}{38}
 \contentsline {subsubsection}{Testing}{38}
-\contentsline {subsection}{\numberline {8.8}Future Development and Enhancements}{38}
+\contentsline {subsection}{\numberline {7.8}Future Development and Enhancements}{38}
 \contentsline {subsubsection}{Data Postprocessing}{38}
 \contentsline {subsubsection}{The API}{38}
-\contentsline {section}{\numberline {9}Data Source Metadata Management System}{39}
-\contentsline {subsection}{\numberline {9.1}Requirements}{39}
-\contentsline {subsection}{\numberline {9.2}Implementation}{39}
+\contentsline {section}{\numberline {8}Data Source Metadata Management System}{39}
+\contentsline {subsection}{\numberline {8.1}Requirements}{39}
+\contentsline {subsection}{\numberline {8.2}Implementation}{39}
 \contentsline {subsubsection}{Domain Model}{40}
 \contentsline {subsubsection}{Data Sources Registry}{40}
 \contentsline {subsubsection}{Validation Schema}{43}
 \contentsline {subsubsection}{Provide Information to the Elasticsearch API for query optimization}{44}
 \contentsline {subsubsection}{Provide configuration information to the deployment component}{45}
 \contentsline {subsubsection}{Units}{45}
-\contentsline {section}{\numberline {10}Discussion}{48}
+\contentsline {section}{\numberline {9}Discussion}{48}
 \contentsline {subsubsection}{Future Improvements}{49}
-\contentsline {section}{\numberline {11}Conclusions}{50}
-\contentsline {subsection}{\numberline {11.1}Is Open Data really open?}{50}
-\contentsline {subsection}{\numberline {11.2}Lessons learned}{50}
+\contentsline {section}{\numberline {10}Conclusions}{50}
+\contentsline {subsection}{\numberline {10.1}Is Open Data really open?}{50}
+\contentsline {subsection}{\numberline {10.2}Lessons learned}{50}
 \contentsline {subsubsection}{Team \& Process}{50}
-\contentsline {subsection}{\numberline {11.3}Future improvements}{51}
+\contentsline {subsection}{\numberline {10.3}Future improvements}{51}

@@ -1,0 +1,280 @@
+\relax 
+\@writefile{toc}{\contentsline {title}{Projectdocumentation for Open Environemental Data Cloud Prototyping Project}{1}}
+\@writefile{toc}{\authcount {1}}
+\@writefile{toc}{\contentsline {author}{Andres Ardila, Rohullah Ayobi, Oliver Bruski, Amer Jazaerli, Nico Tasche, Paul Wille}{1}}
+\gdef \LT@i {\LT@entry 
+    {1}{36.11447pt}\LT@entry 
+    {2}{23.62656pt}\LT@entry 
+    {2}{54.86641pt}\LT@entry 
+    {2}{81.23694pt}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}}
+\newlabel{introduction}{{1}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Summary/Overview/Abstract}{2}}
+\newlabel{summaryoverviewabstract}{{1.1}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}What is Open Data}{2}}
+\newlabel{what-is-open-data}{{1.2}{2}}
+\newlabel{time-series-data-non-static-sensor-environmental-data}{{1.2}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{Time series data \& non-static sensor environmental data}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Motivation}{3}}
+\newlabel{motivation}{{1.3}{3}}
+\newlabel{building-blocks}{{1.3}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{Building Blocks}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Requirements}{4}}
+\newlabel{requirements}{{1.4}{4}}
+\newlabel{general}{{1.4}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{General}{4}}
+\gdef \LT@ii {\LT@entry 
+    {1}{33.70561pt}\LT@entry 
+    {2}{49.46678pt}\LT@entry 
+    {2}{64.5779pt}\LT@entry 
+    {2}{110.34464pt}}
+\newlabel{data-import-framework}{{1.4}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{Data Import Framework}{5}}
+\newlabel{database}{{1.4}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{Database}{5}}
+\newlabel{public-api}{{1.4}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{Public API}{5}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Survey of Current Landscape}{5}}
+\newlabel{survey-of-current-landscape}{{2}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}OpenSensors.io}{5}}
+\newlabel{opensensors.io}{{2.1}{5}}
+\newlabel{features}{{2.1}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{Features}{5}}
+\newlabel{hardware-agnostic}{{2.1}{6}}
+\@writefile{toc}{\contentsline {paragraph}{Hardware agnostic}{6}}
+\newlabel{segments}{{2.1}{6}}
+\@writefile{toc}{\contentsline {subsubsection}{Segments}{6}}
+\newlabel{customers}{{2.1}{6}}
+\@writefile{toc}{\contentsline {subsubsection}{Customers}{6}}
+\newlabel{analysis}{{2.1}{6}}
+\@writefile{toc}{\contentsline {subsubsection}{Analysis}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}PubNub}{6}}
+\newlabel{pubnub}{{2.2}{6}}
+\newlabel{features-1}{{2.2}{6}}
+\@writefile{toc}{\contentsline {subsubsection}{Features}{6}}
+\newlabel{scalability}{{2.2}{6}}
+\@writefile{toc}{\contentsline {paragraph}{Scalability}{6}}
+\newlabel{storage}{{2.2}{6}}
+\@writefile{toc}{\contentsline {paragraph}{Storage}{6}}
+\newlabel{segments-1}{{2.2}{6}}
+\@writefile{toc}{\contentsline {subsubsection}{Segments}{6}}
+\gdef \LT@iii {\LT@entry 
+    {1}{33.70561pt}\LT@entry 
+    {2}{49.46678pt}\LT@entry 
+    {2}{59.80011pt}\LT@entry 
+    {2}{158.73366pt}}
+\newlabel{customers-1}{{2.2}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{Customers}{7}}
+\newlabel{analysis-1}{{2.2}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{Analysis}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Talend}{7}}
+\newlabel{talend}{{2.3}{7}}
+\newlabel{features-2}{{2.3}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{Features}{7}}
+\newlabel{segments-2}{{2.3}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{Segments}{7}}
+\newlabel{customers-2}{{2.3}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{Customers}{7}}
+\newlabel{analysis-2}{{2.3}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{Analysis}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Architecture}{7}}
+\newlabel{architecture}{{3}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Motivation}{8}}
+\newlabel{motivation}{{3.1}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Requirements of the whole platform}{9}}
+\newlabel{requirements-of-the-whole-platform}{{3.2}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Design Decision}{10}}
+\newlabel{design-decision}{{3.3}{10}}
+\newlabel{importers}{{3.3}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{Importers}{11}}
+\newlabel{messaging-system}{{3.3}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{Messaging System}{11}}
+\newlabel{database}{{3.3}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{Database}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Existing solutions}{11}}
+\newlabel{existing-solutions}{{3.4}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Evolution of the architecture}{12}}
+\newlabel{evolution-of-the-architecture}{{3.5}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Discussion}{12}}
+\newlabel{discussion}{{3.6}{12}}
+\gdef \LT@iv {\LT@entry 
+    {1}{36.11447pt}\LT@entry 
+    {1}{23.62656pt}\LT@entry 
+    {1}{54.86641pt}\LT@entry 
+    {1}{81.23694pt}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Future}{13}}
+\newlabel{future}{{3.7}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Extensible Data Import Framework}{13}}
+\newlabel{extensible-data-import-framework}{{4}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Framework Requirements}{14}}
+\newlabel{framework-requirements}{{4.1}{14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Evaluation of different data import frameworks}{14}}
+\newlabel{evaluation-of-different-data-import-frameworks}{{4.2}{14}}
+\newlabel{evaluated-existing-frameworks}{{4.2}{15}}
+\@writefile{toc}{\contentsline {subsubsection}{Evaluated Existing Frameworks}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Design Decisions}{15}}
+\newlabel{design-decisions}{{4.3}{15}}
+\newlabel{why-spring-batch}{{4.3}{15}}
+\@writefile{toc}{\contentsline {subsubsection}{Why Spring Batch}{15}}
+\newlabel{spring-batch-features}{{4.3}{15}}
+\@writefile{toc}{\contentsline {subsubsection}{Spring Batch Features}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Framework Structure/ Architecture}{16}}
+\newlabel{framework-structure-architecture}{{4.4}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces image-title-here}}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Framework Features}{19}}
+\newlabel{framework-features}{{4.5}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Framework Strengths}{19}}
+\newlabel{framework-strengths}{{4.6}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Supported Data Formats}{19}}
+\newlabel{supported-data-formats}{{4.7}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8}Possible Further Improvements}{19}}
+\newlabel{possible-further-improvements}{{4.8}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9}The Values of the Framework}{20}}
+\newlabel{the-values-of-the-framework}{{4.9}{20}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Units of Measurement}{20}}
+\newlabel{units-of-measurement}{{5}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Requirements}{20}}
+\newlabel{requirements}{{5.1}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Survey of Previous Work}{21}}
+\newlabel{survey-of-previous-work}{{5.2}{21}}
+\newlabel{standards}{{5.2}{21}}
+\@writefile{toc}{\contentsline {subsubsection}{Standards}{21}}
+\newlabel{applications}{{5.2}{22}}
+\@writefile{toc}{\contentsline {subsubsection}{Applications}{22}}
+\newlabel{conclusions-of-survey}{{5.2}{22}}
+\@writefile{toc}{\contentsline {subsubsection}{Conclusions of Survey}{22}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Implementation}{22}}
+\newlabel{implementation}{{5.3}{22}}
+\newlabel{converters}{{5.3}{22}}
+\@writefile{toc}{\contentsline {subsubsection}{Converters}{22}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Discussion}{23}}
+\newlabel{discussion}{{5.4}{23}}
+\gdef \LT@v {\LT@entry 
+    {1}{33.70561pt}\LT@entry 
+    {2}{49.46678pt}\LT@entry 
+    {1}{55.02235pt}\LT@entry 
+    {1}{91.76132pt}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Future Improvements}{24}}
+\newlabel{future-improvements}{{5.5}{24}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Inserting into Elasticsearch}{24}}
+\newlabel{inserting-into-elasticsearch}{{6}{24}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Requirements}{24}}
+\newlabel{requirements}{{6.1}{24}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Validation}{24}}
+\newlabel{validation}{{6.2}{24}}
+\newlabel{ability-to-scale-and-adjust-the-configuration-according-to-kafkas-configuration}{{6.2}{25}}
+\@writefile{toc}{\contentsline {subsubsection}{Ability to scale and adjust the configuration according to Kafka's configuration}{25}}
+\newlabel{allow-parallelism-for-reading-from-kafka}{{6.2}{25}}
+\@writefile{toc}{\contentsline {subsubsection}{Allow parallelism for reading from Kafka}{25}}
+\newlabel{achieve-high-performance-to-not-slow-down-the-importing-pipeline}{{6.2}{25}}
+\@writefile{toc}{\contentsline {subsubsection}{Achieve high performance to not slow down the importing pipeline}{25}}
+\newlabel{allow-concurency-for-processing-data-read-from-kafka}{{6.2}{25}}
+\@writefile{toc}{\contentsline {subsubsection}{Allow concurency for processing data read from Kafka}{25}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Implementation of the Requirements}{25}}
+\newlabel{implementation-of-the-requirements}{{6.3}{25}}
+\newlabel{bulk-insertion}{{6.3}{25}}
+\@writefile{toc}{\contentsline {subsubsection}{Bulk insertion}{25}}
+\newlabel{achieve-high-performance-and-allow-validating}{{6.3}{25}}
+\@writefile{toc}{\contentsline {subsubsection}{Achieve high performance and allow validating}{25}}
+\newlabel{allow-concurrency-for-processing-data-read-from-kafka}{{6.3}{26}}
+\@writefile{toc}{\contentsline {subsubsection}{Allow concurrency for processing data read from Kafka}{26}}
+\newlabel{allow-parallelism-scaling-and-configuration}{{6.3}{26}}
+\@writefile{toc}{\contentsline {subsubsection}{Allow parallelism, scaling and configuration}{26}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Benchmarks}{27}}
+\newlabel{benchmarks}{{6.4}{27}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Database}{27}}
+\newlabel{database}{{7}{27}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Overview}{27}}
+\newlabel{overview}{{7.1}{27}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Requirements}{27}}
+\newlabel{requirements}{{7.2}{27}}
+\newlabel{primary-requirements}{{7.2}{27}}
+\@writefile{toc}{\contentsline {subsubsection}{Primary Requirements}{27}}
+\newlabel{secondary-requirements}{{7.2}{28}}
+\@writefile{toc}{\contentsline {subsubsection}{Secondary Requirements}{28}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Survey of Existing Solutions}{28}}
+\newlabel{survey-of-existing-solutions}{{7.3}{28}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Evaluation Criteria \& Decision-making Process}{28}}
+\newlabel{evaluation-criteria-decision-making-process}{{7.4}{28}}
+\newlabel{why-elasticsearch}{{7.4}{29}}
+\@writefile{toc}{\contentsline {subsubsection}{Why Elasticsearch}{29}}
+\newlabel{special-look-at-cassandra}{{7.4}{29}}
+\@writefile{toc}{\contentsline {subsubsection}{Special look at Cassandra}{29}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Implementation Details}{29}}
+\newlabel{implementation-details}{{7.5}{29}}
+\newlabel{intro-to-elasticsearch}{{7.5}{29}}
+\@writefile{toc}{\contentsline {subsubsection}{Intro to Elasticsearch}{29}}
+\newlabel{architecture}{{7.5}{29}}
+\@writefile{toc}{\contentsline {subsubsection}{Architecture}{29}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces OpenData Database Architecture}}{30}}
+\newlabel{data-model}{{7.5}{31}}
+\@writefile{toc}{\contentsline {subsubsection}{Data Model}{31}}
+\newlabel{partitioning}{{7.5}{31}}
+\@writefile{toc}{\contentsline {subsubsection}{Partitioning}{31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces OpenData Database Architecture}}{32}}
+\newlabel{query-optimization}{{7.5}{32}}
+\@writefile{toc}{\contentsline {subsubsection}{Query Optimization}{32}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6}API Implementation Details}{34}}
+\newlabel{api-implementation-details}{{7.6}{34}}
+\newlabel{overview-1}{{7.6}{34}}
+\@writefile{toc}{\contentsline {subsubsection}{Overview}{34}}
+\newlabel{architecture-and-technology}{{7.6}{34}}
+\@writefile{toc}{\contentsline {subsubsection}{Architecture and Technology}{34}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces image-title-here}}{35}}
+\gdef \LT@vi {\LT@entry 
+    {1}{36.11447pt}\LT@entry 
+    {1}{23.62656pt}\LT@entry 
+    {1}{53.46642pt}}
+\newlabel{rest-apis}{{7.6}{36}}
+\@writefile{toc}{\contentsline {subsubsection}{REST APIs}{36}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.7}Discussion}{38}}
+\newlabel{discussion}{{7.7}{38}}
+\newlabel{joins}{{7.7}{38}}
+\@writefile{toc}{\contentsline {subsubsection}{Joins}{38}}
+\newlabel{administration}{{7.7}{38}}
+\@writefile{toc}{\contentsline {subsubsection}{Administration}{38}}
+\newlabel{testing}{{7.7}{38}}
+\@writefile{toc}{\contentsline {subsubsection}{Testing}{38}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.8}Future Development and Enhancements}{38}}
+\newlabel{future-development-and-enhancements}{{7.8}{38}}
+\newlabel{data-postprocessing}{{7.8}{38}}
+\@writefile{toc}{\contentsline {subsubsection}{Data Postprocessing}{38}}
+\newlabel{the-api}{{7.8}{38}}
+\@writefile{toc}{\contentsline {subsubsection}{The API}{38}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Data Source Metadata Management System}{39}}
+\newlabel{data-source-metadata-management-system}{{8}{39}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Requirements}{39}}
+\newlabel{requirements}{{8.1}{39}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Implementation}{39}}
+\newlabel{implementation}{{8.2}{39}}
+\newlabel{domain-model}{{8.2}{39}}
+\@writefile{toc}{\contentsline {subsubsection}{Domain Model}{40}}
+\newlabel{data-sources-registry}{{8.2}{40}}
+\@writefile{toc}{\contentsline {subsubsection}{Data Sources Registry}{40}}
+\newlabel{validation-schema}{{8.2}{43}}
+\@writefile{toc}{\contentsline {subsubsection}{Validation Schema}{43}}
+\newlabel{provide-information-to-the-elasticsearch-api-for-query-optimization}{{8.2}{44}}
+\@writefile{toc}{\contentsline {subsubsection}{Provide Information to the Elasticsearch API for query optimization}{44}}
+\newlabel{provide-configuration-information-to-the-deployment-component}{{8.2}{45}}
+\@writefile{toc}{\contentsline {subsubsection}{Provide configuration information to the deployment component}{45}}
+\newlabel{units}{{8.2}{45}}
+\@writefile{toc}{\contentsline {subsubsection}{Units}{45}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Discussion}{48}}
+\newlabel{discussion}{{9}{48}}
+\newlabel{future-improvements}{{9}{49}}
+\@writefile{toc}{\contentsline {subsubsection}{Future Improvements}{49}}
+\gdef \LT@vii {\LT@entry 
+    {1}{33.70561pt}\LT@entry 
+    {2}{49.46678pt}\LT@entry 
+    {2}{66.52234pt}\LT@entry 
+    {1}{91.76132pt}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Conclusions}{50}}
+\newlabel{conclusions}{{10}{50}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Is Open Data really open?}{50}}
+\newlabel{is-open-data-really-open}{{10.1}{50}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Lessons learned}{50}}
+\newlabel{lessons-learned}{{10.2}{50}}
+\newlabel{team-process}{{10.2}{50}}
+\@writefile{toc}{\contentsline {subsubsection}{Team \& Process}{50}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Future improvements}{51}}
+\newlabel{future-improvements}{{10.3}{51}}
