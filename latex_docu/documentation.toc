@@ -101,37 +101,37 @@
 \contentsline {subsubsection}{Data Model}{34}{section*.53}
 \contentsline {subsubsection}{Partitioning}{35}{section*.54}
 \contentsline {subsubsection}{Query Optimization}{35}{section*.55}
-\contentsline {subsection}{\numberline {8.6}API Implementation Details}{38}{subsection.1.8.6}
+\contentsline {subsection}{\numberline {8.6}API Implementation Details}{37}{subsection.1.8.6}
 \contentsline {subsubsection}{Overview}{38}{section*.56}
 \contentsline {subsubsection}{Architecture and Technology}{38}{section*.57}
 \contentsline {subsubsection}{REST APIs}{38}{section*.58}
-\contentsline {subsection}{\numberline {8.7}Discussion}{40}{subsection.1.8.7}
-\contentsline {subsubsection}{Joins}{40}{section*.59}
-\contentsline {subsubsection}{Administration}{40}{section*.60}
-\contentsline {subsubsection}{Testing}{40}{section*.61}
-\contentsline {subsection}{\numberline {8.8}Future Development and Enhancements}{40}{subsection.1.8.8}
-\contentsline {subsubsection}{Data Postprocessing}{41}{section*.62}
-\contentsline {subsubsection}{The API}{41}{section*.63}
-\contentsline {subsection}{\numberline {8.9}References}{41}{subsection.1.8.9}
-\contentsline {section}{\numberline {9}Data Source Metadata Management System}{41}{section.1.9}
-\contentsline {subsection}{\numberline {9.1}Requirements}{41}{subsection.1.9.1}
-\contentsline {subsection}{\numberline {9.2}Implementation}{42}{subsection.1.9.2}
-\contentsline {subsubsection}{Domain Model}{42}{figure.1.8}
-\contentsline {subsubsection}{Data Sources Registry}{42}{section*.65}
-\contentsline {subsubsection}{Validation Schema}{43}{section*.66}
-\contentsline {subsubsection}{Provide Information to the Elasticsearch API for query optimization}{46}{section*.67}
-\contentsline {subsubsection}{Provide configuration information to the deployment component}{47}{section*.68}
-\contentsline {subsubsection}{Units}{47}{section*.69}
-\contentsline {section}{\numberline {10}Discussion}{49}{section.1.10}
-\contentsline {subsubsection}{Future Improvements}{50}{section*.70}
-\contentsline {section}{\numberline {11}Conclusions}{51}{section.1.11}
-\contentsline {subsection}{\numberline {11.1}Is Open Data really open?}{51}{subsection.1.11.1}
-\contentsline {subsection}{\numberline {11.2}Lessons learned}{51}{subsection.1.11.2}
-\contentsline {subsubsection}{Team \& Process}{51}{section*.71}
-\contentsline {subsection}{\numberline {11.3}Future improvements}{52}{subsection.1.11.3}
-\contentsline {section}{\numberline {A}Imported Data Sources}{52}{section.A.1}
-\contentsline {section}{\numberline {B}How to Write a Data Importer}{52}{section.A.2}
-\contentsline {subsection}{\numberline {B.1}Template}{52}{subsection.A.2.1}
-\contentsline {subsection}{\numberline {B.2}Pre-requisites}{53}{subsection.A.2.2}
-\contentsline {subsection}{\numberline {B.3}How to Proceed}{53}{subsection.A.2.3}
-\contentsline {subsubsection}{Things to know about the template:}{54}{section*.73}
+\contentsline {subsection}{\numberline {8.7}Discussion}{39}{subsection.1.8.7}
+\contentsline {subsubsection}{Joins}{39}{section*.59}
+\contentsline {subsubsection}{Administration}{39}{section*.60}
+\contentsline {subsubsection}{Testing}{39}{section*.61}
+\contentsline {subsection}{\numberline {8.8}Future Development and Enhancements}{39}{subsection.1.8.8}
+\contentsline {subsubsection}{Data Postprocessing}{40}{section*.62}
+\contentsline {subsubsection}{The API}{40}{section*.63}
+\contentsline {subsection}{\numberline {8.9}References}{40}{subsection.1.8.9}
+\contentsline {section}{\numberline {9}Data Source Metadata Management System}{40}{section.1.9}
+\contentsline {subsection}{\numberline {9.1}Requirements}{40}{subsection.1.9.1}
+\contentsline {subsection}{\numberline {9.2}Implementation}{41}{subsection.1.9.2}
+\contentsline {subsubsection}{Domain Model}{41}{figure.1.8}
+\contentsline {subsubsection}{Data Sources Registry}{41}{section*.65}
+\contentsline {subsubsection}{Validation Schema}{42}{section*.66}
+\contentsline {subsubsection}{Provide Information to the Elasticsearch API for query optimization}{45}{section*.67}
+\contentsline {subsubsection}{Provide configuration information to the deployment component}{46}{section*.68}
+\contentsline {subsubsection}{Units}{46}{section*.69}
+\contentsline {section}{\numberline {10}Discussion}{48}{section.1.10}
+\contentsline {subsubsection}{Future Improvements}{49}{section*.70}
+\contentsline {section}{\numberline {11}Conclusions}{50}{section.1.11}
+\contentsline {subsection}{\numberline {11.1}Is Open Data really open?}{50}{subsection.1.11.1}
+\contentsline {subsection}{\numberline {11.2}Lessons learned}{50}{subsection.1.11.2}
+\contentsline {subsubsection}{Team \& Process}{50}{section*.71}
+\contentsline {subsection}{\numberline {11.3}Future improvements}{51}{subsection.1.11.3}
+\contentsline {section}{\numberline {A}Imported Data Sources}{51}{section.A.1}
+\contentsline {section}{\numberline {B}How to Write a Data Importer}{51}{section.A.2}
+\contentsline {subsection}{\numberline {B.1}Template}{51}{subsection.A.2.1}
+\contentsline {subsection}{\numberline {B.2}Pre-requisites}{52}{subsection.A.2.2}
+\contentsline {subsection}{\numberline {B.3}How to Proceed}{52}{subsection.A.2.3}
+\contentsline {subsubsection}{Things to know about the template:}{53}{section*.73}
