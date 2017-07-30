@@ -31,6 +31,7 @@ The API handles mainly the access to the database and implements some optimizati
 - immediate consistency is NOT necessary
 
 As seen in the requirements, a hugh focus was on scalability. We had some secondary reqirements as well, which were mainly regarding our possibilities to handle the project.
+
 ### Secondary Requirements
 
 - Open source or at the very least an open license is required.
@@ -77,11 +78,12 @@ After a few tests and an overview of the documentation, it was clear that cassan
 ### Intro to Elasticsearch
 
 Elasticsearch is an opensource Lucene based search engine. It is under active development, with an extensive documentation.
+
 ### Architecture
 
 Each index can be sharded and each shard can have multiple indieces.
 
-TODO: Picture of architecture
+![image-title-here](images/07_database_architecture.png)
 
 To better distribute search requests, the workload is divided among all shards belonging to an index. Because that
 would not scale very well and would have no partition tolerance,
