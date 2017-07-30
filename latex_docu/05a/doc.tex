@@ -15,7 +15,7 @@ measurements from one unit to another.
 
 \subsection{Requirements}\label{requirements}
 
-From early on in the analysis phase, it became clear that in order to
+From early on in the analysis phase, it became apparent that in order to
 deal with the heterogeneity of incoming data and to have any chance of
 providing a uniform way to query the data, a global schema would have to
 be introduced and to which all imported data would have to conform. That
@@ -31,10 +31,8 @@ report ambient temperature in using this unit.
 
 Having standard units for a given physical quantity means that we must
 also provide facilities to data importers to convert from their unit to
-that required by our system.
-
-With this in mind, we formalized our requirements with respect to units
-as follows:
+that required by our system. With this in mind, we formalized our
+requirements with respect to units as follows:
 
 \begin{itemize}
 \tightlist
@@ -200,9 +198,9 @@ this section we want to take a closer look to both sides.
 
 As we force the user to use our main unit, we can be sure, that all data
 in the database is of the same unit for a measurement type. Of course we
-cannot enforce that the user does convert measurements correctly or at
-all, but this would be considered as a faulty import, which in the end
-is the responsibility of the user. Of course an assessment of the
+cannot enforce that the user does indeed convert measurements correctly
+or at all, but this would be considered as a faulty import, which in the
+end is the responsibility of the user. Of course an assessment of the
 correctness of data would be nice, but this is also hard to achieve and
 not within the scope of our project.
 
@@ -242,6 +240,6 @@ gives us a chance to achieve the following:
   frontend depend on totally different things.
 \end{itemize}
 
-\section{Future Improvements}\label{future-improvements}
+\subsection{Future Improvements}\label{future-improvements}
 
 //TODO
