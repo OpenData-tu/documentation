@@ -88,7 +88,7 @@ Elastic Search is a document store and works with indicies, which are comparable
 Each index can be sharded and each node/server-instance can have multiple indieces. To better distribute search requests, the workload is divided among all shards belonging to an index and means that each shard holds just one part of an index. Because that would not scale very well and would have no partition tolerance,
 each index has a configurable number of replicas. A new search request is send to one replica of each shard.
 
-Elastic Search automaticly handels the distribution of search requests to the primary shards or replicas. Depending on the nodes in a Elastic Search cluster, the engine also automaticly distributes the shards and replicas to the different nodes. To illustrate that see the following figure.
+Elastic Search automaticly handels the distribution of search requests to the primary shards or replicas. Depending on the number nodes in a Elastic Search cluster, the engine also automaticly distributes the shards and replicas to the different nodes, all acording to the configuration made for each index. To illustrate that see the following figure, which assumes that the cluster holds three indicies, on three nodes, with two replicas per index.
 
 ![OpenData Database Architecture](images/07_database_architecture_elastic.png)
 
