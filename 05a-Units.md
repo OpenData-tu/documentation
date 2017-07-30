@@ -9,11 +9,9 @@ Since the same physical quantity can be represented in different units of measur
 
 ## Requirements
 
-From early on in the analysis phase, it became clear that in order to deal with the heterogeneity of incoming data and to have any chance of providing a uniform way to query the data, a global schema would have to be introduced and to which all imported data would have to conform. That is, someone who is performing a query would expect the data to be consistent, even if it came from different sources. Say our platform offers air temperature readings; this data may come from different sensors manufactured by different companies and which provide data in different formats. In order for the data to be usable for analysis, I would not expect to have to convert data from the U.S. to Celsius in order to be able to compare it with data from Europe, or from degrees Kelvin if a particular sensor manufacturer has calibrated its devices to report ambient temperature in using this unit.
+From early on in the analysis phase, it became apparent that in order to deal with the heterogeneity of incoming data and to have any chance of providing a uniform way to query the data, a global schema would have to be introduced and to which all imported data would have to conform. That is, someone who is performing a query would expect the data to be consistent, even if it came from different sources. Say our platform offers air temperature readings; this data may come from different sensors manufactured by different companies and which provide data in different formats. In order for the data to be usable for analysis, I would not expect to have to convert data from the U.S. to Celsius in order to be able to compare it with data from Europe, or from degrees Kelvin if a particular sensor manufacturer has calibrated its devices to report ambient temperature in using this unit.
 
-Having standard units for a given physical quantity means that we must also provide facilities to data importers to convert from their unit to that required by our system.
-
-With this in mind, we formalized our requirements with respect to units as follows:
+Having standard units for a given physical quantity means that we must also provide facilities to data importers to convert from their unit to that required by our system. With this in mind, we formalized our requirements with respect to units as follows:
 
 * all measurement values stored and reported by our system must be accompanied by a unit of measurement
 * provide extensible facilities to users to convert units within their importer packages to the required unit defined by the system for that physical quantity
@@ -113,7 +111,7 @@ public class CelsiusToFarenheitUnitConverter extends UnitConverter {
 
 This implementation has some advantages but also some disadvantages. In this section we want to take a closer look to both sides.
 
-As we force the user to use our main unit, we can be sure, that all data in the database is of the same unit for a measurement type. Of course we cannot enforce that the user does convert measurements correctly or at all, but this would be considered as a faulty import, which in the end is the responsibility of the user. Of course an assessment of the correctness of data would be nice, but this is also hard to achieve and not within the scope of our project.
+As we force the user to use our main unit, we can be sure, that all data in the database is of the same unit for a measurement type. Of course we cannot enforce that the user does indeed convert measurements correctly or at all, but this would be considered as a faulty import, which in the end is the responsibility of the user. Of course an assessment of the correctness of data would be nice, but this is also hard to achieve and not within the scope of our project.
 
 Our approach of having a curated list means some management overhead and possible longer implementation effort for the user if a unit conversion he or she needs is not yet available. Given the vast number of units in general and the lack of standardization in the way sensors report their data, giving a lot of latitude to the user to specify the units and the necessary conversions seems like the only reasonable way in which to approach the issue.
 

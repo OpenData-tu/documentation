@@ -69,7 +69,7 @@ This was another main reason to chose *Go* as a programming language as concurre
 * the aggregated JSON is again asynchronously sent to another Go routine, that handles the HTTP connection to Elasticsearch in the background.
 
 
-### Allow parallelism, scaling and configuration
+### Allow parallelism, scaling, and configuration
 
 Scaling and configuring the consumer would have been possible in any language: scaling is a job solved by the deployment on a Kubernetes cluster and configuring it can be done with environment variables and the same deployment component setting them accordingly. Therefore the parallelism required was also not a requirement directly to the consumer itself.
 
@@ -83,5 +83,3 @@ Both of them have been tested by us and both of them have their advantages. As E
 We could not achieve to run an even bigger configuration of Elasticsearch. The consumer therefore supplied a speed that reaches Elasticsearches limits as soon as two of them are run in parallel, which can be evaluated as a success and reduces the need of a detailed benchmark, which options would be more effective.
 
 The consumer is able to join a consumer group, which can be configured by environment variables and therefore by the deployment component. If a data source needs several consumers for one importer (e.g. having lots of data for an importing interval &mdash;which is typically a day&mdash; that is produced faster than a consumer can utilize) several of them can be spawned inside one consumer group for that topic. If one importing interval can be processed by one importer but there are several of them run in parallel we can create a topic per importing instance and run a consumer for each. So the consumer in its current state is capable for both options.
-
-## Benchmarks

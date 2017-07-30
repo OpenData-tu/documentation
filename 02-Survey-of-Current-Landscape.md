@@ -1,4 +1,4 @@
-# Survey of Current Open Data Landscape
+# Survey of Current Landscape
 
 **Authorship**
 
@@ -51,12 +51,19 @@ Provides support for open protocols, use existing SDKs to quickly get up and run
 https://www.pubnub.com/
 
 ### Features
+
 #### Scalability
+
 15 globally replicated points of presence transacting over 1.5 trillion messages for 300 million unique devices per month.
+
 #### Storage
+
 15 globally replicated points of presence transacting over 1.5 trillion messages for 300 million unique devices per month.
+
 ### Segments
+
 ### Customers
+
 ### Analysis
 
 
@@ -64,9 +71,12 @@ https://www.pubnub.com/
 
 https://www.talend.com/resource/sensor-data/
 
-Talend
+Talend is //TODO
 
 ### Features
+
 ### Segments
+
 ### Customers
+
 ### Analysis
