@@ -71,11 +71,11 @@ After a few tests and an overview of the documentation, it was clear that Cassan
 1. The documentation seems to have quite a few gabs. **[2, 3]**
 2. there is no native support for spatial geo data
 
-## Implementation Details Database
+## Implementation Details
 
-### Intro to Elasticsearch
+### Intro to Elastic Search
 
-Elasticsearch **[4]** is an opensource Lucene based search engine. It is under active development, with an extensive documentation.
+Elastic Search **[4]** is an opensource Lucene based search engine. It is under active development, with an extensive documentation.
 
 ### Architecture
 
@@ -130,7 +130,7 @@ The index configuration in our architecture follows a template, which is automat
 
 This template provides the number of shard, replicas and the basic mapping for our data model. If necessary this information can be overwritten before a new index is created. This is all the necessary information needed for our architecture and cannot be changed after an index is created, except for the number of replicas, which can be increased.
 
-### Data model
+### Data Model
 
 We decided to have a data model which is data-source-centric with the extra possibility to partition the data over time.
 That means, each data source gets its own index with its own timeframe and its own adjusted data structure.
@@ -156,7 +156,7 @@ This gives us multiple advantages:
 
 So why does it scale so good? When importing data from one source, I process and store the data points in one index. This index is not just limited to the data source,
 it is also limited to the time, e.g. 2016. That means, when 2016 is finished with importing data, the index is done and can be closed up, no one needs to care about it anymore.
-After the index is done, it might even be transferred to another Elasticsearch node with different hardware.
+After the index is done, it might even be transferred to another Elastic Search node with different hardware.
 That would be useful, for example, when the average density of the smurf population is being stored.
 The index can be transferred to a less powerful hardware with fewer CPU cores and spinning hard drives and even fewer replicas,
 because this information is probably hardly requested, except from Gargamel and maybe some surf protection groups.
@@ -165,7 +165,7 @@ As a starting point, we choose to configure each index as shown in the figure be
 
 ![OpenData Database Architecture](images/07_database_architecture.png)
 
-### Query optimization
+### Query Optimization
 
 Why do we need query optimization? For that I'm going to give a small example to consider:
 1. we import multiple sources, with multiple measurements: source1(air-temperature, water-temperature) 1980-2017, source2(air-temperature) 1983-1990, source3(uv-index) 2009-2017
@@ -251,7 +251,7 @@ This was just a naive example. The reduction should even be much higher in a pro
 Let's say we have already 100 data sources and we can limit a request to just two of those for example because the requested measurement it
 provided just by those two, the saving of network traffic and workload would be immense.
 
-## Implementation Details API
+## API Implementation Details
 
 ### Overview
 
@@ -296,7 +296,7 @@ The 2nd as well as the 3rd REST-endpoint allow a more specific search, based on 
 |  agg  | sum or avg | aggregate measurement with sum or average |
 |  mess  | airtemperature | defines the measurement you want to consider for aggregation and bucketing(not for /api/measurements Endpoint) |
 
-## Critical Analysis/Limitations
+## Discussion
 
 ### Joins
 
