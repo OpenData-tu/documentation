@@ -199,7 +199,7 @@ As for the API it was important for us to provide a solution which is easy to sc
 ### Architecture and Technology
 As base technology we use nodejs, which is is easy to use JavaScript runtime based on Chrome's V8 JavaScript engine. It allows a fast interation pace and needs just minimal preparation to develop server instances with.
 
-TODO: Picture of basic architecture
+![image-title-here](images/07_API_Architecture.png)
 
 The API implementation consists of three parts.
 1. Route: defines all routes and parses all parameters to be used in our system
