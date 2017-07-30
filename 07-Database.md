@@ -4,6 +4,7 @@
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
+|  0.4  | 2017-07-28 | Tasche, Nico | Overview and adjustments to the optic |
 |  0.3  | 2017-07-28 | Tasche, Nico | survey and evaluation |
 |  0.2  | 2017-07-28 | Tasche, Nico | changed to new structure |
 |  0.1  | 2017-07-24 | Tasche, Nico | first working draft |
@@ -11,8 +12,13 @@
 
 ## Overview
 
+The capitel is all about how the collected data is stored and the api to access the database. The main focus is going to be database, the requirement, decision making, architecture and data modell.
+The API handles mainly the access to the database and implements some optimizations mentioned in the database articel.
+
 ## Requirements
+
 ### Primary Requirements
+
 - scale-able in the range of petabyte in size
 - hundred of thousands of requests per minute
 - high availablility
@@ -23,12 +29,14 @@
 
 As seen in the requirements, a hugh focus was on scalability. We had some secondary reqirements as well, which were mainly regarding our possibilities to handle the project.
 ### Secondary Requirements
+
 - Open source or at the very least an open license is required.
 - must be well documented
 - must be manageable regarding administration and learning afford
 
 
 ## Survey of Existing Solutions
+
 Based on our knowlage, any relational database as main datastorage has been quickly disreagarded. Fairly bad scaling behavior with the amount of data we have to handly and the fixed dataschema architecture were not a good fit for our usecase. That does not mean, that a relational database might be used for some special requirements.
 
 Based on the knowlage in the group we had a closer look at Elastic Search and checked it against our requirements. This first look was very promising, but more on that in the next chapter.
@@ -38,6 +46,7 @@ Other sollutions in the realm of NoSQL databases were mainly web research. That 
 The survey of other existing NoSQL database solutions was not very extensive, regarding real tests and in deep research. Because of the feedback, which suggested we use the wrong database, we decided in the middle of the project, to have an extra look at Apache Cassandra. 
 
 ## Evaluation Criteria & Decision-making Process
+
 The process of deciding what database architecture to use we started with our requirements.
 
 Besides the previously mentioned requirements we had some soft-requirements as well:
@@ -46,6 +55,7 @@ Besides the previously mentioned requirements we had some soft-requirements as w
 3. what was already known in the group
 
 ### Why Elastic Search
+
 Checking our requirements Elastic Search fulfilled all of them. The reasons why we decided to use Elastic Search even before we went to deep into other databases were as follows:
 - native support for geo spatial searches (see https://www.elastic.co/blog/lucene-points-6.0)
 - group members allready knew Elastic Search, unlike all other NoSQL databases
@@ -55,13 +65,17 @@ Checking our requirements Elastic Search fulfilled all of them. The reasons why 
 Considering we had no real database expert in our team, the fact that group members already had practical experience with Slastic Search was a very important point for us.
 
 ### Special look at Cassandra
+
 After a few tests and an overview of the documentation, it was clear that cassandra had two shortcommings reagarding our project.
 1. The documentation seams to have quite a few gabs. (see http://cassandra.apache.org/doc/latest/architecture/overview.html and http://cassandra.apache.org/doc/latest/architecture/dynamo.html)
 2. there is no native support for spatial geo data
 ## Implementation Details
+
 ### Intro to Elasticsearch
+
 Elasticsearch is an opensource Lucene based search engine. It is under active development, with an extensive documentation.
 ### Architecture
+
 Each index can be sharded and each shard can have multiple indieces.
 
 TODO: Picture of architecture
@@ -71,6 +85,7 @@ would not scale very well and would have no partition tolerance,
 each shard has a configurable number of replicas. A new search request is send to on replica of each shard.
 
 ### Data model
+
 We decided to have an data model which is data-source-centric with the extra posibility to partition the data over time.
 That means, each data source gets it own index with its own timeframe and its own adjusted datastructure.
 All our data sources save a few basic data point with each element stored in the database, in particular are those:
@@ -94,6 +109,7 @@ The index can be transferd to a less powerfull hardware with fewer CPU cores and
 because this information is probably hardly requested.
 
 ### Query optimization
+
 Why do we need query optimization? For that I'm going to give a small small example to consider:
 1. we import multiple sources, with multiple messurements: source1(airtemperature, watertemperatur) 1980-2017, source2(airtemperature) 1983-1990, source3(uv-index) 2009-2017
 2. each source is partitioned by year and source 1 is partitioned by month for all data after 2015.
@@ -102,7 +118,8 @@ Why do we need query optimization? For that I'm going to give a small small exam
 Let's make a simple search request: give me all uv values data from 2015 till 2017 and aggregate an everage over the month.
 Because the user does not now anything about the internal database architecture (at least he should not) he requests the temperature and the timeframe.
 
-#### Worst case:
+**Worst case:**
+
 A search request in send to all indieces, that means:
 ```
 source1 = 35 years + (2years x 12 month) x 3 shards
@@ -118,7 +135,8 @@ source1 + source2 + source3 = 252 shards
 ```
 So in worst case each shard has its own node(very unlikely), the search request has to be send to 252 nodes/computers.
 
-#### First optimization, Limit the time
+** First optimization, Limit the time **
+
 With a naive approach by checking the common time part of the request 2016-2017 and limit the indieces search with the following pattern:
 ```
 indexsearch: *-201*
@@ -154,7 +172,8 @@ source1 + source2 + source3 = 81 shards
 ```
 Now we are at 68% reduction.
 
-#### Second optimization, Limit to indieces which contain the right data
+** Second optimization, Limit to indieces which contain the right data **
+
 If we store in a seperate database, which data source and therefore indiece actually holds the requested data we can do even much more:
 ```
 indexsearch: source3-2016, source3-2017
@@ -173,7 +192,9 @@ Let's say we have allready 100 data sources and we can limit a request to just t
 provided just by those two, the saving of network traffic and workload would be immense.
 
 ## Critical Analysis/Limitations
+
 ### Joins
+
 One mayor drawback of elasticsearch is the missing possibility of server side join, the way they are known by SQL based database-system.
 This means, any kind of join operation has to be done either on a seperate server, like our api instance, or on the application side.
 This is actually something we were not really aware of for a long time.
