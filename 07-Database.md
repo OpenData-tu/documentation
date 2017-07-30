@@ -7,7 +7,7 @@
 [3]___Missing documentation in Cassandra 2___, http://cassandra.apache.org/doc/latest/architecture/dynamo.html , 2016-07-30
 [4] https://www.elastic.co
 
-**Authoriship**<br/>
+**Authorship**<br/>
 Written by Nico Tasche
 
 ## Overview
