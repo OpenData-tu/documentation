@@ -2,8 +2,7 @@
 
 **Authorship**
 
-*Written by Andres<br/>
-with the exception of the Modeling section &ndash; see below*
+Written by Andres
 
 
 Since the same physical quantity can be represented in different units of measurement (both meters and miles represent lengths, for example), storing measurements of physical quantities inherently introduces the complexity of these different representations. The topic is certainly quite interesting, especially when considering how sensors process and convert signals to digital values for a measurement, but we shall limit the scope of our discussion here to how our system deals with the different ways in which the same physical quantity can be represented, and to the facilities provided to users by the system to convert their measurements from one unit to another.
@@ -110,91 +109,6 @@ public class CelsiusToFarenheitUnitConverter extends UnitConverter {
 }
 ```
 
-
-### Modeling
-
-*Written by Paul*<br/>
-*Proofread & edited by Andres*
-
-With the requirements in mind, we modeled units like so:
-
-1. **Unit Categories**: Units themselves belong to a unit category. The unit category describes an entity for which measurements exist, which express their observations with one of the units of that category (See figure for Class Diagram // TODO ref figure).
-1. Each unit has a **main unit** that we decide on. By calling the API or visiting the management platform a user can see, which the main unit is. Within our datastore we only use the main unit of a unit-category for expressing measurements.
-1. Units are managed by admins receptively users with permit to do so.
-1. We therefore have a curated list of the unit-categories and units
-1. If there are units, measurements or even categories missing, each user can propose new ones. This proposals are also managed by the group of people managing the units.
-
-Measurements are controlled on the platform itself to allow users to better propose new measurements, as this may happen more often. Units and the Unit categories however are managed in a *.yml* file. The syntax we used looks like following for one entry:
-
-```
-From config/constants/units.yml:
-
-pascal:
-  id: pressure_pascal
-  name: "pascal"
-  unit_symbol: "pa"
-  unit_category_id: pressure
-  notation: "1 <centerdot>
-              <mfrac>
-                <mrow>
-                  kg
-                </mrow>
-                <mrow>
-                  m
-                  <msup>
-                          <mi>s</mi>
-                          <mn>2</mn>
-                </mrow>
-              </mfrac>"
-
-From config/constants/unit_categories.yml:
-
-pressure:
-  id: pressure
-  name: Pressure
-
-```
-The unit categories are pretty straightforward. For a unit there are some more possibilities. Besides declaring the unit symbol, the category it belongs to, its name you are allowed to use MathML to express what the meaning of a unit is. This is especially helpful with units that can be directly converted to each other. // TODO ref picture
-
-![Screenshot of the units of a unit category on the web management platform. You can see the main unit and have a notation on what the units express.](images/unit_frontend.png)
-
-
-The API of the web management system also provides calls to a) receive the main unit of a unit category and to b) get a list of all units there are for a unit category. Both of these information are of course aswell accessible from the frontend of the system.
-
-```
-GET /unit_categories/:id/getMainUnit
-```
-Example request:
-
-```
-GET /unit_categories/temperature/getMainUnit
-
-{
-	"id":"temperature_celsius",
-	"name":"celsius",
-	"unit_category_id":"temperature",
-	"unit_symbol":"°C"
-}
-```
-
-```
-GET /unit_categories/:id/units
-```
-Example request:
-
-```
-GET /unit_categories/temperature/units
-
-[
-	{"attributes"
-		{"id":"temperature_celsius","name":"celsius","unit_symbol":"°C","unit_category_id":"temperature","notation":""}},
-	{"attributes":
-		{"id":"temperature_fahrenheit","name":"fahrenheit","unit_symbol":"°F","unit_category_id":"temperature","notation":""}},
-	{"attributes":
-		{"id":"temperature_kelvin","name":"kelvin","unit_symbol":"K","unit_category_id":"temperature","notation":""}}
-	[...]
-]
-```
 
 ## Discussion
 

@@ -7,7 +7,7 @@ Written by Paul Wille<br/>
 In this chapter we will discuss the component responsible for managing metadata about the data sources which are imported to the system. We will cover what it is and does, some thoughts around why we decided to include such a component, and how it was realized and implemented.
 
 
-## Purpose
+## Requirements
 
 The main purpose of the component is to:
 
@@ -16,6 +16,26 @@ The main purpose of the component is to:
 * provide users with information about units of measurement,
 * enable users who want to use the data to see the resources our system contains
 
+In contrast to nearly every other component we had to implement, the management platform did not have to meet as many criteria as a distributed cloud system in general. The data it contains is quite static and the number of requests that we expect is also quite low. However, the following general cloud-specific architectural style requirements were taken into consideration:
+
+* Availability to other system components, that require the held information
+* Quick response time (for query optimization within the public search API)
+* Ability to run asynchronous background tasks (for scheduling)
+
+## Implementation
+
+The system was built using *Ruby on Rails* with *PostgreSQL* as a database. The reasons why we chose to use Rails are:
+
+* Relatively fast development of an MVC web application
+* Well established (over a decade), has therefore lots of resources &mdash; also for all kinds of extensions
+* Extensive community support
+* Very good integrated ORM adapters that could easily be exchanged for ODM adapters for document databases
+* Offers the dynamic of Ruby as programming language
+
+### Domain Model
+
+![](images/relational_schema.png)
+//TODO Figure: UML Class Diagram of the Relational Management System
 
 ### Data Sources Registry
 
@@ -38,18 +58,16 @@ Additionally we ask the user to provide additional information, which is useful 
 * The measurements provided by the data source (which actual measurements the data source collects)
 * The URL location of the Docker container to be executed to import the data.
 
-![Registering a data source within the Web management platform](images/new_datasource.png)
+![](images/new_datasource.png)
+//TODO Figure: Registering a data source within the Web management platform
 
-
-### Provide information to other system components
-
-#### Validation Schema
+### Validation Schema
 
 As described in the chapter about validation and insertion into Elasticsearch, we have a separate, distinct component that is responsible for validating the output from data importers.
 
 To achieve this, a schema must be provided against which to validate. Since this schema itself is fixed, it could be hardcoded into the validator, without the need to make another HTTP request. We decided that this would be a bad idea for the following reasons:
 
-* Sanity-checks: in addition to schema-only validation, the schema provided by this component can validate data-source-specific values (such as importer IDs, etc.), which could not be validated with a generic validator.
+* Sanity checks: in addition to schema-only validation, the schema provided by this component can validate data-source-specific values (such as importer IDs, etc.), which could not be validated with a generic validator.
 * Version management: schema changes over time would require changing the information hardcoded within the validator, and completely rebuilding and redeploying the validator component itself. Updating a record inside this component is far simpler than redeploying infrastructure, which is inherently more complex in an era where no downtime is expected.
 
 Therefore we needed a place where said validation schema can reside. The web management system seemed to be the right pace for that, as it already carries metainformation about data sources and the data sources are registered there. So it is easy to provide the relevant schema information as well. The management system provides an API call to supply the validation schema to the validators which looks like this:
@@ -107,7 +125,7 @@ The response looks like as follows (note that the const `source_id` would be rep
 }
 ```
 
-#### Provide Information to the Elasticsearch API for query optimization
+### Provide Information to the Elasticsearch API for query optimization
 
 As described in the data model section, our model is data-source-based and not measurand-based. For queries spanning across measurands, it will be necessary to have further information about the relationship between data sources and measurands.
 
@@ -143,29 +161,95 @@ GET /measurements/1/data_sources
 ]
 ```
 
-#### Provide configuration information to the deployment component
+### Provide configuration information to the deployment component
 
 Since the importer registration the only step in which the implementer has to provide information to our system, it should cover all configuration information needed to get an importer running.
 
 
-## Requirements
+### Units
 
-In contrast to nearly every other component we had to implement, the management platform did not have to meet as many criteria as a distributed cloud system in general. The data it contains is quite static and the number of requests that we expect is also quite low.
+With the requirements in mind, we modeled units like so:
 
-* Availability to other system components, that require the held information
-* Quick response time (for query-optimization within the public search API)
-* Ability to run asynchronous background tasks (for scheduling)
+1. **Unit Categories**: Units themselves belong to a unit category. The unit category describes an entity for which measurements exist, which express their observations with one of the units of that category (See figure for Class Diagram // TODO ref figure).
+1. Each unit has a **main unit** that we decide on. By calling the API or visiting the management platform a user can see, which the main unit is. Within our datastore we only use the main unit of a unit category for expressing measurements.
+1. Units are managed by admins receptively users with permit to do so.
+1. We therefore have a curated list of the unit categories and units
+1. If there are units, measurements or even categories missing, each user can propose new ones. This proposals are also managed by the group of people managing the units.
+
+Measurements are controlled on the platform itself to allow users to better propose new measurements, as this may happen more often. Units and the Unit categories however are managed in a *.yml* file. The syntax we used looks like following for one entry:
+
+```
+From config/constants/units.yml:
+
+pascal:
+  id: pressure_pascal
+  name: "pascal"
+  unit_symbol: "pa"
+  unit_category_id: pressure
+  notation: "1 <centerdot>
+              <mfrac>
+                <mrow>
+                  kg
+                </mrow>
+                <mrow>
+                  m
+                  <msup>
+                          <mi>s</mi>
+                          <mn>2</mn>
+                </mrow>
+              </mfrac>"
+
+From config/constants/unit_categories.yml:
+
+pressure:
+  id: pressure
+  name: Pressure
+
+```
+The unit categories are pretty straightforward. For a unit there are some more possibilities. Besides declaring the unit symbol, the category it belongs to, its name you are allowed to use MathML to express what the meaning of a unit is. This is especially helpful with units that can be directly converted to each other. // TODO ref picture
+
+![](images/unit_frontend.png)
+//TODO Figure: Screenshot of the units of a unit category on the web management platform. You can see the main unit and have a notation on what the units express.
+
+The API of the web management system also provides calls to a) receive the main unit of a unit category and to b) get a list of all units there are for a unit category. Both of these information are of course aswell accessible from the frontend of the system.
+
+```
+GET /unit_categories/:id/getMainUnit
+```
+Example request:
+
+```
+GET /unit_categories/temperature/getMainUnit
+
+{
+	"id":"temperature_celsius",
+	"name":"celsius",
+	"unit_category_id":"temperature",
+	"unit_symbol":"°C"
+}
+```
+
+```
+GET /unit_categories/:id/units
+```
+Example request:
+
+```
+GET /unit_categories/temperature/units
+
+[
+	{"attributes"
+		{"id":"temperature_celsius","name":"celsius","unit_symbol":"°C","unit_category_id":"temperature","notation":""}},
+	{"attributes":
+		{"id":"temperature_fahrenheit","name":"fahrenheit","unit_symbol":"°F","unit_category_id":"temperature","notation":""}},
+	{"attributes":
+		{"id":"temperature_kelvin","name":"kelvin","unit_symbol":"K","unit_category_id":"temperature","notation":""}}
+	[...]
+]
+```
 
 
-## Architectural Details
-
-The system was built using *Ruby on Rails* with *PostgreSQL* as a database. The reasons why we chose to use Rails are:
-
-* Relatively fast development of an MVC web application
-* Well established (over a decade), has therefore lots of resources &mdash; also for all kinds of extensions
-* Extensive community support
-* Very good integrated ORM adapters that could easily be exchanged for ODM adapters for document databases
-* Offers the dynamic of Ruby as programming language
+# Discussion
 
 As mentioned before, the planning of the extent of the functionality offered by this system, was very vague. Besides managing metadata and providing an API for other components, further features were at least considered to be part of this system, like for example a scheduler that triggers the component that handles the deployment of importers. Therefore we chose to build this system on top of an infrastructure that can be easily extended in many directions and has nice-to-use database adapters instead of a more lightweight system.
 
@@ -176,22 +260,20 @@ The main metainformation about the data sources (besides metadata about the sour
 * Information about the measurands offered by the data source
 * Information about the main unit used for a measurand (see section Unit system // TODO ref section)
 
-![UML Class-Diagram of the Relational Management System.](images/relational_schema.png)
-
 
 ### Future Improvements
 
-#### Caching
+**Caching**
 
 There is currently no caching solution implemented since the workloads during development phase were quite manageable. Also including a distributed caching system in our production pipeline seemed to be too high of an effort and would take up significant resources that would actually not be needed during development. We wanted, therefore, to use the limited and expensive resources we had for actual importing.
 
 As the number of data importers grows in production, however, requests to the relational database would increase accordingly. Whereas scaling the database would allow us to avoid the bottleneck, adding a cache in front of the database to serve read requests would be sufficient to ensure performance without incurring the cost and added complexity of scaling. An important consideration, of course, is the frequency with which data is updated (in our case  low to none), thus making it a perfect candidate for caching. As a distributed caching system where read requests are very fast and possible on all nodes, Redis would be a good fit for this use case. Writing is quite expensive due to the replication method used by Redis, but because of the infrequent updates to our data, we are willing to accept the trade-off in exchange for very fast reads.
 
-#### Exchange Scheduling information
+**Exchange Scheduling information**
 
 Due to not quite being able to reach every goal of our initial plan as to how the architecture should look like, the scheduler had to move to the deployment component (i.e. the deployment to the Kubernetes cluster). While this component should be responsible for deploying data importers, the information about the schedule should actually be provided to the web management system by the user. This is currently not happening. There would be several ways how to manage scheduling and/or deliver the scheduling information from this system to the component handling the scheduling.
 
-* Having a background-processing component that acts as a scheduler within the web management platform. This would require an API to trigger the deploy on the component responsible for that, which we were not able to achieve.
+* Having a background processing component that acts as a scheduler within the web management platform. This would require an API to trigger the deploy on the component responsible for that, which we were not able to achieve.
 * Having a microservice-like component that is only responsible for scheduling and triggering importers to be deployed. This would as well require an API on the deployment component.
 * Leave the scheduling within the deployment component. This would also require an API, but just for receiving the general schedule, not for offering a hook to trigger an import.
 
