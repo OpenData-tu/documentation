@@ -288,8 +288,8 @@ The 2nd as well as the 3rd REST-endpoint allow a more specific search, based on 
 
 |Parameter|Example|Description|
 |-------|----|-----------|
-|  `time`  | `2011,2017-06-22T165:37:12:100` | start and excluding end time which is to be provided as two comma separated values |
-|  `location`  | `52.5239,13.4573,53.5239,16.45731 | square location to consider with lat/lon upper left and lat/lon bottom right |
+|  `time`  | 2011,2017-06-22T165:37:12:100 | start and excluding end time which is to be provided as two comma separated values |
+|  `location`  | 52.5239,13.4573,53.5239,16.45731 | square location to consider with lat/lon upper left and lat/lon bottom right |
 |  `bucket` | `1w` | defines bucketing to consider with timeframe this might be 2w for bucketing into two weeks buckets, or 1m for 1 minute buckets |
 |  `agg`  | `sum` or `avg` | aggregate measurement with sum or average |
 |  `mess`  | `airtemperature` | defines the measurement you want to consider for aggregation and bucketing(not for /api/measurements endpoint) |
