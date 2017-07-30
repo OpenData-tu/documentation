@@ -3,7 +3,7 @@
 
 **Authorship**<br/>
 Writen by Amer<br/>
-Proofread & edited by Andres
+*Proofread & edited by Andres*
 
 
 Taking into the account the requirement to be able to deploy our microservices application to a private cloud, we chose to use Kubernetes as the main platform to deploy and manage our system components. Kubernetes forms an abstraction layer over the cloud provider, so it enabled us to build a system that is truly agnostic to the underlying infrastructure. Kubernetes has extensive tools that make it relatively easy to setup a Kubernetes cluster on the major public cloud platforms such as Amazon Web Services (AWS), Google Container Engine (GKE), and Microsoft Azure. Furthermore, Kubernetes supports OpenStack, which is a free and open source software that can manage hardware resources (storage, networking, and servers) to form a cloud.
@@ -24,6 +24,6 @@ For this project, we used a modified version of Kops, which is a command line to
 ```
 
 
-# Kops prerequisite to run on AWS
+# Kops pre-requisite to run on AWS
 
 To be able to run Kops against an AWS account, a user name needs to be created and set up with a certain set of permissions (can be found in the official documentation of Kops). Additionally, AWS CLI tools should be installed and setup with the required API credentials using environment variables.

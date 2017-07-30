@@ -1,0 +1,17 @@
+01-Introduction.md
+02-Competitor-Analysis.md
+03-Architecture.md
+05-Data-Import-Framework.md
+06-Consumer.md
+07-Database.md
+08-web-management-platform.md
+12-Conclusions.md
+Data-Importers.md
+Data-Sourcing.md
+Glossary.md
+images
+latex_docu
+list.txt
+Organisation.md
+README.md
+Related-Work.md
