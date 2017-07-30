@@ -17,8 +17,8 @@
 
 ## Overview
 
-The capitel is all about how the collected data is stored and the api to access the database. The main focus is going to be database, the requirement, decision making, architecture and data modell.
-The API handles mainly the access to the database and implements some optimizations mentioned in the database articel.
+The chapter is all about how the collected data is stored and the api to access the database. The focus is going to be database, the requirement, decision making, architecture and data model.
+The API handles mainly the access to the database and implements some optimizations mentioned in the database article.
 
 ## Requirements
 
@@ -26,13 +26,13 @@ The API handles mainly the access to the database and implements some optimizati
 
 - scale-able in the range of petabyte in size
 - hundred of thousands of requests per minute
-- high availablility
+- high availability
 - partition tolerance
-- fast to handle timeseries
+- fast to handle time-series
 - fast to handle geolocation data
 - immediate consistency is NOT necessary
 
-As seen in the requirements, a hugh focus was on scalability. We had some secondary reqirements as well, which were mainly regarding our possibilities to handle the project.
+As seen in the requirements, a huge focus was on scaleability. We had some secondary requirements as well, which were mainly regarding our possibilities to handle the project.
 
 ### Secondary Requirements
 
@@ -43,13 +43,13 @@ As seen in the requirements, a hugh focus was on scalability. We had some second
 
 ## Survey of Existing Solutions
 
-Based on our knowlage, any relational database as main datastorage has been quickly disreagarded. Fairly bad scaling behavior with the amount of data we have to handly and the fixed dataschema architecture were not a good fit for our usecase. That does not mean, that a relational database might be used for some special requirements.
+Based on our knowledge, any relational database as main data storage has been quickly disregarded. Fairly bad scaling behavior with the amount of data we should be able to handle and the fixed data-schema architecture were not a good fit for our use case. That does not mean, that a relational database might be used for some special requirements.
 
-Based on the knowlage in the group we had a closer look at Elastic Search and checked it against our requirements. This first look was very promising, but more on that in the next chapter.
+Based on the preexisting experience in the group we had a closer look at Elastic Search and checked it against our requirements. This first look was very promising, but more on that in the next chapter.
 
-Other sollutions in the realm of NoSQL databases were mainly web research. That included what is out there and what is the strength and weeknesses of each solution. That included mainly the big known ones like Cassandra, MangoDB, ...
+Other solutions in the realm of NoSQL databases were mainly web research. That included what is out there and what is the strength and weaknesses of each solution. That included mainly the big known ones like Cassandra, MangoDB, ...
 
-The survey of other existing NoSQL database solutions was not very extensive, regarding real tests and in deep research. Because of the feedback, which suggested we use the wrong database, we decided in the middle of the project, to have an extra look at Apache Cassandra. 
+The survey of other existing NoSQL database solutions was not very extensive, regarding real tests and in deep research. Because of the feedback, which suggested we use the wrong database, we decided in the middle of the project, to have an extra look at Apache Cassandra.
 
 ## Evaluation Criteria & Decision-making Process
 
@@ -64,17 +64,18 @@ Besides the previously mentioned requirements we had some soft-requirements as w
 
 Checking our requirements Elastic Search fulfilled all of them. The reasons why we decided to use Elastic Search even before we went to deep into other databases were as follows:
 - native support for geo spatial searches (see https://www.elastic.co/blog/lucene-points-6.0)
-- group members allready knew Elastic Search, unlike all other NoSQL databases
+- group members already knew Elastic Search, unlike all other NoSQL databases
 - extremely well documented
 - very high development pace from the company who develops it
 
-Considering we had no real database expert in our team, the fact that group members already had practical experience with Slastic Search was a very important point for us.
+Considering we had no real database expert in our team, the fact that group members already had practical experience with Elastic Search was a very important point for us.
 
 ### Special look at Cassandra
 
-After a few tests and an overview of the documentation, it was clear that cassandra had two shortcommings reagarding our project.
-1. The documentation seams to have quite a few gabs. (see http://cassandra.apache.org/doc/latest/architecture/overview.html and http://cassandra.apache.org/doc/latest/architecture/dynamo.html)
+After a few tests and an overview of the documentation, it was clear that Cassandra had two shortcomings regarding our project.
+1. The documentation seems to have quite a few gabs. (see http://cassandra.apache.org/doc/latest/architecture/overview.html and http://cassandra.apache.org/doc/latest/architecture/dynamo.html)
 2. there is no native support for spatial geo data
+
 ## Implementation Details Database
 
 ### Intro to Elasticsearch
@@ -83,13 +84,13 @@ Elasticsearch is an opensource Lucene based search engine. It is under active de
 
 ### Architecture
 
-Elastic Search is a document store and works with indicies, which are comparable to tables in the classic SQL world. Each index holds JSON based document which follow a mapping. The mapping is flexibel and can be extended however you want, but as soon as a field in the document has a mapping, all documents with the same field have to follow that mapping. E.g. if a document has a field called location, which is mapped to a geopoint data type. Every document with a field name location, has to have a geopoint in it.
+Elastic Search is a document store and works with indices, which are comparable to tables in the classic SQL world. Each index holds JSON based document which follow a mapping. The mapping is flexible and can be extended however you want, but as soon as a field in the document has a mapping, all documents with the same field have to follow that mapping. E.g. if a document has a field called location, which is mapped to a geopoint data type. Every document with a field name location, must have a geopoint in it.
 
 
-Each index can be sharded and each node/server-instance can have multiple indieces. To better distribute search requests, the workload is divided among all shards belonging to an index and means that each shard holds just one part of an index. Because that would not scale very well and would have no partition tolerance,
+Each index can be sharded and each node/server-instance can have multiple indices. To better distribute search requests, the workload is divided among all shards belonging to an index and means that each shard holds just one part of an index. Because that would not scale very well and would have no partition tolerance,
 each index has a configurable number of replicas. A new search request is send to one replica of each shard.
 
-Elastic Search automaticly handels the distribution of search requests to the primary shards or replicas. Depending on the number nodes in a Elastic Search cluster, the engine also automaticly distributes the shards and replicas to the different nodes, all acording to the configuration made for each index. To illustrate that see the following figure, which assumes that the cluster holds three indicies, on three nodes, with two replicas per index.
+Elastic Search automatically handles the distribution of search requests to the primary shards or replicas. Depending on the number nodes in a Elastic Search cluster, the engine also automatically distributes the shards and replicas to the different nodes, all according to the configuration made for each index. To illustrate that see the following figure, which assumes that the cluster holds three indices, on three nodes, with two replicas per index.
 
 ![OpenData Database Architecture](images/07_database_architecture_elastic.png)
 
@@ -132,55 +133,57 @@ The index configuration in our architecture follows a template, which is automat
 }         
 ```
 
-provides the number of shard, replicas and the basic mapping for our data model. If necessary this information can be overwritten before a new index is created. This is all the necessary information needed for our architecture and can not be changed after an index is created, except for the number of replicas, which can be increased.
+This template provides the number of shard, replicas and the basic mapping for our data model. If necessary this information can be overwritten before a new index is created. This is all the necessary information needed for our architecture and cannot be changed after an index is created, except for the number of replicas, which can be increased.
 
 ### Data model
 
-We decided to have an data model which is data-source-centric with the extra posibility to partition the data over time.
-That means, each data source gets it own index with its own timeframe and its own adjusted datastructure.
-All our data sources save a few basic data point with each element stored in the database, in particular are those:
-- timestamp: when has the datapoint been recorded
-- location: where has the datapoint been recorded
+We decided to have a data model which is data-source-centric with the extra possibility to partition the data over time.
+That means, each data source gets its own index with its own timeframe and its own adjusted data structure.
+All our data sources save a few basic data points with each element stored in the database, in particular are those:
+- timestamp: when has the data point been recorded
+- location: where has the data point been recorded
 
-Those are acutally the only information we need to store, besides the individual measurements. We do acutally store some more information,
-but regarding the common usecases for searches those two datapoints are enough for environemental data. For each data entry then, there are one ore many messurement in that datapoint. Each measurement than has a quality indicator, a observed value and an sensor name. Please refer to the full data-model in the project wiki for more information.
+Those are the only information we need to store, besides the individual measurements. We do actually store some more information,
+but regarding the common use cases for searches those two data points are enough for environmental data. For each data entry then, there are one ore many measurements in that data point. Each measurement than has a quality indicator, a observed value and an sensor name. Please refer to the full data-model in the project wiki for more information.
 
 There were mainly two reasons to use this data model. For one it keeps the data provenance, which we quite like to keep. The second reason is that it is nice to handle in terms of partitioning.
 
+
 ### Partitioning
 
-As for the question how does the used data model scale and how to best partition the imported data we decided for an 2-dimensional approach. One dimension is already covert by the data-source centric data model, which allows us, to partitioning by by source. The second dimens is the time. Each data source is partitioned based on the time a messurement has been taken and the granularity can be adjusted as well.
+As for the question, how does the used data model scale and how to best partition the imported data we decided for a 2-dimensional approach. One dimension is already covert by the data-source centric data model, which allows us, to partitioning by source. The second dimension is the time. Each data source is partitioned based on the time a measurement has been taken and the granularity can be adjusted as well.
 
 This gives us multiple advantages:
 
-- it allows us to adjust the server infrastructe based on the data source
+- it allows us to adjust the server infrastructure based on the data source
 - it scales indefinitely
 - index size is deterministic, cause of time based partitioning
 
 So why does it scale so good? When importing data from one source, I process and store the data points in one index. This index is not just limited to the data source,
 it is also limited to the time, e.g. 2016. That means, when 2016 is finished with importing data, the index is done and can be closed up, no one needs to care about it anymore.
-After the index is done, it might even be transfered to another Elasticsearch node with different hardware.
-That would be usefull, for example, when the average density of the smurf population is beeing stored.
-The index can be transferd to a less powerfull hardware with fewer CPU cores and spinning harddrives and even fewer replicas,
+After the index is done, it might even be transferred to another Elasticsearch node with different hardware.
+That would be useful, for example, when the average density of the smurf population is being stored.
+The index can be transferred to a less powerful hardware with fewer CPU cores and spinning hard drives and even fewer replicas,
 because this information is probably hardly requested, except from Gargamel and maybe some surf protection groups.
 
-As a starting point we choose to configure each index as shown in the figure below. We decided to keep each index on one shard, which lowers the network traffic and because we are very flexibel regarding the size of the index thanks to our timebased partitioning, this should not become a problem later on. To allow thousands of request per second, we decided to start with three replicas, so each request is forwarded to a different  replica. This can be flexible in- or decreased later on.
+As a starting point, we choose to configure each index as shown in the figure below. We decided to keep each index on one shard, which lowers the network traffic and because we are very flexible regarding the size of the index thanks to our time-based partitioning, this should not become a problem later on. To allow thousands of request per second, we decided to start with three replicas, so each request is forwarded to a different replica. This can be flexible in- or decreased later on.
 
 ![OpenData Database Architecture](images/07_database_architecture.png)
 
 ### Query optimization
 
-Why do we need query optimization? For that I'm going to give a small small example to consider:
-1. we import multiple sources, with multiple messurements: source1(airtemperature, watertemperatur) 1980-2017, source2(airtemperature) 1983-1990, source3(uv-index) 2009-2017
+Why do we need query optimization? For that I'm going to give a small example to consider:
+1. we import multiple sources, with multiple measurements: source1(air-temperature, water-temperature) 1980-2017, source2(air-temperature) 1983-1990, source3(uv-index) 2009-2017
 2. each source is partitioned by year and source 1 is partitioned by month for all data after 2015.
-3. every index is naivly sharded over 3 nodes
+3. every index is naively sharded over 3 nodes (we actually use just one shard per index)
 
-Let's make a simple search request: give me all uv values data from 2015 till 2017 and aggregate an everage over the month.
-Because the user does not now anything about the internal database architecture (at least he should not) he requests the temperature and the timeframe.
+Let's make a simple search request: give me all uv values data from 2015 till 2017 and aggregate an average over the month.
+Because the user does not know anything about the internal database architecture (at least he should not) he requests the temperature and the timeframe.
 
 **Worst case:**
 
-A search request in send to all indieces, that means:
+A search request in send to all indices, that means:
+
 ```
 source1 = 35 years + (2years x 12 month) x 3 shards
 source1 = 177 shards
@@ -197,7 +200,8 @@ So in worst case each shard has its own node(very unlikely), the search request 
 
 **First optimization, Limit the time**
 
-With a naive approach by checking the common time part of the request 2016-2017 and limit the indieces search with the following pattern:
+With a naive approach by checking the common time part of the request 2016-2017 and limit the indices search with the following pattern:
+
 ```
 indexsearch: *-201*
 ```
@@ -232,9 +236,10 @@ source1 + source2 + source3 = 81 shards
 ```
 Now we are at 68% reduction.
 
-**Second optimization, Limit to indieces which contain the right data**
+**Second optimization, Limit to indices  which contain the right data**
 
-If we store in a seperate database, which data source and therefore indiece actually holds the requested data we can do even much more:
+If we store in a separate database, which data source and therefore indices actually hold the requested data we can do even much more:
+
 ```
 indexsearch: source3-2016, source3-2017
 ```
@@ -245,32 +250,32 @@ source3 = 2 years x 3 shars = 6 shards
 
 source1 + source2 + source3 = 6 shards
 ```
-By using those two optimitzations, we were able to reduce the number of requeseted shard to 6, which means a total reduction of 96.2%.
+By using those two optimizations, we could reduce the number of requested shard to 6, which means a total reduction of 96.2%.
 
-This was just a naive example. In reality the reduction should even be much higher, with a growing number of data sources.
-Let's say we have allready 100 data sources and we can limit a request to just two of those for example because the requested messuremnt it
+This was just a naive example. The reduction should even be much higher in a production environment, with a growing number of data sources.
+Let's say we have already 100 data sources and we can limit a request to just two of those for example because the requested measurement it
 provided just by those two, the saving of network traffic and workload would be immense.
 
 ## Implementation Details API
 
 ### Overview
 
-As for the API it was important for us to provide a solution which is easy to scale via a loadbalancing, for example with an nginx instace as an entry point for the user of our system. That means, those instances need to be stateless. For that and because it is basicly a standard we use a REST interface to provide access to our data-collection.
+As for the API, it was important for us to provide a solution which is easy to scale via a load balancing, for example with an nginx instance as an entry point for the user of our system. That means, those instances need to be stateless. For that and because it is basically a standard we use a REST interface to provide access to our data-collection.
 
 ### Architecture and Technology
 
-As base technology we use nodejs, which is is easy to use JavaScript runtime based on Chrome's V8 JavaScript engine. It allows a fast interation pace and needs just minimal preparation to develop server instances with.
+As base technology, we use nodejs, which is easy to use JavaScript runtime based on Chrome's V8 JavaScript engine. It allows a fast iteration pace and needs just minimal preparation to develop server instances with.
 
 ![image-title-here](images/07_API_Architecture.png)
 
 The API implementation consists of three parts.
 1. Route: defines all routes and parses all parameters to be used in our system
-2. Meta: connects to the management database and requests all necessary data (this part is prepared, but connection actually not implemented yet)
-3. elastic: does everything Elastic Search specific and could actually be replaced by an other database connection if the database would be replaced for example.
+2. Meta: connects to the management database and requests all necessary data (this part is prepared, but connection not implemented yet)
+3. elastic: does everything Elastic Search specific and could be replaced by another database connection if the database would be replaced for example.
 
 ### REST APIs
 
-The REST API currently constists of three End Points:
+The REST API currently consists of three End Points:
 
 **1. GET /api/sources/**
 
@@ -282,7 +287,7 @@ Returns data based on the sources they came from
 
 **3. GET /api/measurements/:measurements**
 
-Returns data based on the messurements you're requesting
+Returns data based on the measurements you're requesting
 
 The 2nd as well as the 3rd REST-endpoint allow a more specific search, based on extra parameters.
 
@@ -290,27 +295,27 @@ The 2nd as well as the 3rd REST-endpoint allow a more specific search, based on 
 
 |Parameter|Example|Description|
 |-------|----|-----------|
-|  time  | 2011,2017-06-22T165:37:12:100 | start and exluding endtime which is to be considert as two comma seperated values | 
-|  location  | 52.5239,13.4573,53.5239,16.4573 | squere location to consider with lat/lon upper left and lat/lon bottum right | 
+|  time  | 2011,2017-06-22T165:37:12:100 | start and excluding end time which is to be provided as two comma separated values | 
+|  location  | 52.5239,13.4573,53.5239,16.4573 | square location to consider with lat/lon upper left and lat/lon bottom right | 
 |  bucket | 1w | defines bucketing to consider with timeframe this might be 2w for bucketing into two weeks buckets, or 1m for 1 minute buckets |
-|  agg  | sum or avg | aggregate messurement with sum or average |
-|  mess  | airtemperature | defines the messurement you want to consider for aggregation and bucketing(not for /api/measurements Endpoint) |
+|  agg  | sum or avg | aggregate measurement with sum or average |
+|  mess  | airtemperature | defines the measurement you want to consider for aggregation and bucketing(not for /api/measurements Endpoint) |
 
 ## Critical Analysis/Limitations
 
 ### Joins
 
-One mayor drawback of elasticsearch is the missing possibility of server side join, the way they are known by SQL based database-system.
-This means, any kind of join operation has to be done either on a seperate server, like our api instance, or on the application side.
-This is actually something we were not really aware of for a long time.
+One mayor drawback of Elastic Search is the missing possibility of server-side join, the way they are known by SQL based database-system.
+This means, any kind of join operation must be done either on a separate server, like our API instance, or on the application side.
+This is something we were not aware of for quite a long time.
 
 ### Administration
 
-This is probably not really Elastic Search specific but should be mentioned in this chapter as well. To setup this the basic database is quite easy, but to scale it to up to petabyte needs quite a bit consideration. Our data model and the current implemented optimizations will help scale the database and everything should work without any performance drawbacks for quite a while. To archive this, lots of working though documention and local requesttesting had to be done. As said before, this is probably for every other database as well.
+This is probably not a Elastic Search specific but should be mentioned in this chapter as well. To setup this the basic database is quite easy, but to scale it to up to petabyte needs quite a bit consideration. Our data model and the current implemented optimizations will help scale the database and everything should work without any performance drawbacks for quite a while. To archive this, lots of working though documentation and local request testing had to be done. As said before, this is probably for every other database as well.
 
 ### Testing
 
-Testing is something we could just do on a very limited scale. Unfortunately, any possible short-commings in our architecture would just show much later then we could test.
+Testing is something we could just do on a very limited scale. Unfortunately, any possible short-comings in our architecture would just show much later then we could test.
 
 ## Future Development and Enhancements
 
@@ -318,12 +323,12 @@ Testing is something we could just do on a very limited scale. Unfortunately, an
 
 As mentioned in the Limitations section, joins are not possible in our system right now. One way of doing it would be to allow application based or backend based join, which will have same limitations. A better way would be to post process our data at low usage times.
 One idea would be to collect all the data for a defined area and put all information we have about that area into one dataset. The area could be for example a size of 100m x 100m.
-This would allow for very fast, very complex queries, which invole quite a few messurements.
+This would allow for very fast, very complex queries, which involves quite a few measurements.
 
 ### The API
 
 To be honest, the current implementation of the API is quite limited. This is mainly due to time limitations while implementing.
 There are the points, which should be implemented
-1. Allowinig to make post requests to make more complex queries. That would for example include the transfer of big geospatial shapes for filtering.
+1. Allowing to make post requests to make more complex queries. That would for example include the transfer of big geospatial shapes for filtering.
 2. Adding security with API tokens
 3. Adding full access to the management database
