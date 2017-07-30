@@ -81,11 +81,7 @@ Elasticsearch is an opensource Lucene based search engine. It is under active de
 
 ### Architecture
 
-Each index can be sharded and each shard can have multiple indieces.
-
-![image-title-here](images/07_database_architecture.png)
-
-To better distribute search requests, the workload is divided among all shards belonging to an index. Because that
+Each index can be sharded and each node can have multiple indieces. To better distribute search requests, the workload is divided among all shards belonging to an index. Because that
 would not scale very well and would have no partition tolerance,
 each shard has a configurable number of replicas. A new search request is send to on replica of each shard.
 
@@ -118,6 +114,10 @@ After the index is done, it might even be transfered to another Elasticsearch no
 That would be usefull, for example, when the average density of the smurf population is beeing stored.
 The index can be transferd to a less powerfull hardware with fewer CPU cores and spinning harddrives and even fewer replicas,
 because this information is probably hardly requested, except from Gargamel and maybe some surf protection groups.
+
+As a starting point we choose to configure each index as shown in the figure below. We decided to keep each index on one shard, which lowers the network traffic and because we are very flexibel regarding the size of the index thanks to our timebased partitioning, this should not become a problem later on. To allow thousands of request per second, we decided to start with three replicas, so each request is forwarded to a different  replica. This can be flexible in- or decreased later on.
+
+![OpenData Database Architecture](images/07_database_architecture.png)
 
 ### Query optimization
 
