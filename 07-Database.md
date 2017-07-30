@@ -1,14 +1,8 @@
 # Database
 
-**REFERENCES**
-
-[1]Michael McCandless. Elastic Bloc. ___Multi-dimensional points, coming in Apache Lucene 6.0___, https://www.elastic.co/blog/lucene-points-6.0, 2016
-[2]___Missing documentation in Cassandra___, http://cassandra.apache.org/doc/latest/architecture/overview.html , 2016-07-30
-[3]___Missing documentation in Cassandra 2___, http://cassandra.apache.org/doc/latest/architecture/dynamo.html , 2016-07-30
-[4] https://www.elastic.co
-
 **Authorship**<br/>
-Written by Nico Tasche
+Written by Nico Tasche<br/>
+Minor proofreading and editing by Andres
 
 ## Overview
 
@@ -334,3 +328,11 @@ The current implementation of the API is somewhat limited. This is mainly due to
 4. Adding safety checks like timeouts to make not to extensive requests
 5. Adding possibility for scrolling to request data in chunks
 6. optimizing the data handling on the API instances, which is not very efficient
+
+
+## References
+
+[1] Michael McCandless. Elastic Bloc. ___Multi-dimensional points, coming in Apache Lucene 6.0___, https://www.elastic.co/blog/lucene-points-6.0, 2016<br/>
+[2]___Missing documentation in Cassandra___, http://cassandra.apache.org/doc/latest/architecture/overview.html , 2016-07-30<br/>
+[3]___Missing documentation in Cassandra 2___, http://cassandra.apache.org/doc/latest/architecture/dynamo.html , 2016-07-30<br/>
+[4] https://www.elastic.co
