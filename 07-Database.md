@@ -4,7 +4,7 @@
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
-|  0.5 Alpha  | 2017-07-30 | Tasche, Nico | API |
+|  0.5 | 2017-07-30 | Tasche, Nico | API |
 |  0.4  | 2017-07-30 | Tasche, Nico | Overview and adjustments to the optic |
 |  0.3  | 2017-07-30 | Tasche, Nico | survey and evaluation |
 |  0.2  | 2017-07-28 | Tasche, Nico | changed to new structure |
@@ -136,7 +136,7 @@ source1 + source2 + source3 = 252 shards
 ```
 So in worst case each shard has its own node(very unlikely), the search request has to be send to 252 nodes/computers.
 
-** First optimization, Limit the time **
+**First optimization, Limit the time**
 
 With a naive approach by checking the common time part of the request 2016-2017 and limit the indieces search with the following pattern:
 ```
@@ -173,7 +173,7 @@ source1 + source2 + source3 = 81 shards
 ```
 Now we are at 68% reduction.
 
-** Second optimization, Limit to indieces which contain the right data **
+**Second optimization, Limit to indieces which contain the right data**
 
 If we store in a seperate database, which data source and therefore indiece actually holds the requested data we can do even much more:
 ```
@@ -200,8 +200,37 @@ As base technology we use nodejs, which is is easy to use JavaScript runtime bas
 
 TODO: Picture of basic architecture
 
+The API implementation consists of three parts.
+1. Route: defines all routes and parses all parameters to be used in our system
+2. Meta: connects to the management database and requests all necessary data (this part is prepared, but connection actually not implemented yet)
+3. elastic: does everything Elastic Search specific and could actually be replaced by an other database connection if the database would be replaced for example.
 
 ### REST APIs
+The REST API currently constists of three End Points:
+
+**1. GET /api/sources/**
+
+Returns all currently available resources
+
+**2. GET /api/sources/:indexName**
+
+Returns data based on the sources they came from
+
+**3. GET /api/measurements/:measurements**
+
+Returns data based on the messurements you're requesting
+
+The 2nd as well as the 3rd REST-endpoint allow a more specific search, based on extra parameters.
+
+**Parameters:**
+
+|Parameter|Example|Description|
+|-------|----|-----------|
+|  time  | 2011,2017-06-22T165:37:12:100 | start and exluding endtime which is to be considert as two comma seperated values | 
+|  location  | 52.5239,13.4573,53.5239,16.4573 | squere location to consider with lat/lon upper left and lat/lon bottum right | 
+|  bucket | 1w | defines bucketing to consider with timeframe this might be 2w for bucketing into two weeks buckets, or 1m for 1 minute buckets |
+|  agg  | sum or avg | aggregate messurement with sum or average |
+|  mess  | airtemperature | defines the messurement you want to consider for aggregation and bucketing(not for /api/measurements Endpoint) |
 
 ## Critical Analysis/Limitations
 
