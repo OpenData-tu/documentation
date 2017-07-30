@@ -54,7 +54,7 @@ The data source which is used for this importer is from [luftdaten.info](http://
 
  - Humidity
  - Temperature: Celsius (°C)
- - Pressure
+ - Pressure: Pascal
 
 **Supported formates:** CSV </br>
 
@@ -81,46 +81,16 @@ a single step for a single job in Spring Batch is contained: Read, Process, Writ
 
 this feature of 'Spring' is used in our case to make the whole data import framework as micro services.  
 
-## Data Model
+## Sensors with Measurement Values
 
-**Sample JSON Schema for Measurement of Weather Data Values:**
+| No. | Measurement | Sensor |Frequency|
+| -------- | -------- | -------- |-------|
+| 1     | Pressure     | BME280     |Daily|
+| 2     | Pressure_sealevel     | BME280     |Daily|
+| 3     | Temperature     | BME280     |Daily|
+| 4     | Humidity     | BME280     |Daily|
 
-```
-{
-  "sourceId": "luftdaten_info",
-  "device": "2036",
-  "timestamp": "2017-07-01T22:40:05.000+02:00",
-  "location": {
-    "lat": 42.657,
-    "lon": 23.349
-  },
-  "license": "find out",
-  "sensors": {
-    "pressure": {
-      "sensor": "BME280",
-      "observation_value": 94267.06
-    },
-    "altitude": {
-      "sensor": "BME280",
-      "observation_value": null
-    },
-    "pressure_sealevel": {
-      "sensor": "BME280",
-      "observation_value": null
-    },
-    "temperature": {
-      "sensor": "BME280",
-      "observation_value": 26.19
-    },
-    "humidity": {
-      "sensor": "BME280",
-      "observation_value": 49.8
-    }
-  },
-  "extra": {
-    "location": "1023"
-  }
-```
+
 
 # 2. Brandenburg Air Quality Data Importer
 
@@ -168,77 +138,25 @@ a single step for a single job in Spring Batch is contained: Read, Process, Writ
 
 this feature of 'Spring' is used in our case to make the whole data import framework as micro services.
 
-## Data Model
+## Sensors with Measurement Values
 
-**Sample JSON Schema for all Measurement Values**
+| No. | Measurement |  Sensor | Frequency|
+| -------- | -------- | -------- |-----|
+| 1     | NO2DailyAverage     | Nitrogen dioxide (NO₂)     |Daily average|
+| 2     | NO2Max1hAverage     | Nitrogen dioxide (NO₂)     |Daily maximum one hour average|
+| 3     | NODailyAverage      |  Nitric oxide (NO)         |Daily average|
+| 4     | NOMax1hAverage     | Nitric oxide (NO)          |Daily maximum one hour average|
+| 5     | CODailyAverage     | Carbon monoxide (CO)     |Daily average|
+| 6     | COMax8hAverage     | Carbon monoxide (CO)     |Daily maximum eight hour average|
+| 7     | FineDustPM10DailyAverage     | Fine dust (PM10)     |Daily average|
+| 8     | FineDustPM10Max1hAverage     | Fine dust (PM10)     |Daily maximum one hour average|
+| 9     | FineDustPM25DailyAverage     | Fine dust (PM2.5)     |Daily average|
+| 10     | FineDustPM25Max1hAverage     | Fine dust (PM2.5)     |Daily maximum one hour average|
+| 11     | SO2DailyAverage     | Sulfur dioxide (SO₂)     |Daily average|
+| 12     | SO2Max1hAverage     | Sulfur dioxide (SO₂)     |Daily maximum one hour average|
+| 13     | O3DailyAverage     | Ozone (O₃)     |Daily average|
+| 14     | O3Max8hAverage     | Ozone (O₃)     |Daily maximum eight hour average|
 
-```
-{
-  "source_id": "brandenburg_air_quality_data",
-  "device": "Elsterwerda",
-  "timestamp": "2017-07-13T22:00:00+02:00",
-  "location": {
-    "lat": 51.46273,
-    "lon": 13.52679
-  },
-  "license": "find out",
-  "sensors": {
-    "NO2DailyAverage": {
-      "sensor": "Nitrogen dioxide (NO₂)",
-      "observation_value": 6
-    },
-    "NO2Max1hAverage": {
-      "sensor": "Nitric oxide (NO)",
-      "observation_value": 2
-    },
-    "NODailyAverage": {
-      "sensor": "Nitric oxide (NO)",
-      "observation_value": 1
-    },
-    "CODailyAverage": {
-      "sensor": "Carbon monoxide (CO)",
-      "observation_value": null
-    },
-    "COMax8hAverage": {
-      "sensor": "Carbon monoxide (CO)",
-      "observation_value": null
-    },
-    "FineDustPM10DailyAverage": {
-      "sensor": "Fine dust (PM10)",
-      "observation_value": 19
-    },
-    "FineDustPM10Max1hAverage": {
-      "sensor": "Fine dust (PM10)",
-      "observation_value": 34
-    },
-    "FineDustPM25DailyAverage": {
-      "sensor": "Fine dust (PM2.5)",
-      "observation_value": 16
-    },
-    "FineDustPM25Max1hAverage": {
-      "sensor": "Fine dust (PM2.5)",
-      "observation_value": 30
-    },
-    "SO2DailyAverage": {
-      "sensor": "Sulfur dioxide (SO₂)",
-      "observation_value": null
-    },
-    "SO2Max1hAverage": {
-      "sensor": "Sulfur dioxide (SO₂)",
-      "observation_value": null
-    },
-    "O3DailyAverage": {
-      "sensor": "Ozone (O₃)",
-      "observation_value": 65
-    },
-    "O3Max8hAverage": {
-      "sensor": "Ozone (O₃)",
-      "observation_value": 91
-    }
-  }
-}
-
-```
 
 # 3. Umweltbundesamt Air Quality Data Importer
 
@@ -305,59 +223,15 @@ a single step for a single job in Spring Batch is contained: Read, Process, Writ
 
 this feature of 'Spring' is used in our case to make the whole data import framework as micro services.
 
-## Data Model
+## Sensors With Measurement Values
 
-**Sample JSON Schema for Fine Dust (PM10) Measurement Value**
-
-```
- {
-"source_id": "umweltbundesamt_de",
- "device": "Elsterwerda",
- "timestamp": "2017-07-12T22:00:00Z",
- "location": {
-   "lat": 51.462734,
-   "lon": 13.526796
- },
- "license": "find out",
- "sensors": {
-   "PM10DailyAverage": {
-     "sensor": "Particles PM10",
-     "observation_value": 11.0
-   }
- },
- "extra": {
-   "pollutant": "Feinstaub (PM10)",
-   "network": "BB",
-   "dataType": "Tagesmittel (1TMW)",
-   "stationCode": "DEBB007"
- }
-}
-```
-**Other measurements**
-```
-   "SO2DailyAverage": {
-     "sensor": "Sulfur Dioxide",
-     "observation_value": 1.0
-   }
-```
-```
-   "O3Max8hAverage": {
-     "sensor": "Ozone",
-     "observation_value": 72.0
-   }
-```
-```
-   "NO2Max1hAverage": {
-     "sensor": "Nitrogen Dioxide",
-     "observation_value": 19.0
-   }
-```
-```
-   "COMax8hAverage": {
-     "sensor": "Carbon Monoxide",
-     "observation_value": 300.0
-   }
-```
+| No. | Measurement | Sensor |Frequency|
+| -------- | -------- | -------- |-------|
+| 1     | PM10DailyAverage     | Particles PM10     |Daily average|
+| 2     | SO2DailyAverage     | Sulfur Dioxide    |Daily average|
+| 3     | O3Max8hAverage     | Ozone     |Daily maximum eight hour average|
+| 4     | NO2Max1hAverage     | Nitrogen Dioxide     |Daily maximum one hour average|
+| 5     | COMax8hAverage     | Carbon Monoxide     |Daily maximum eight hour average|
 
 # 4. Pegel Online Water Level Data Importer  
 
@@ -393,38 +267,8 @@ Write: the importer write the data into our predefined JSON schema <br>
 
 this feature of 'Spring' is used in our case to make the whole data import framework as micro services.
 
-## Data Model
+## Sensors with Measurement Values
 
-**Sample JSON Schema for Water Level Measurement Value**
-
-```
-{
-  "source_id": "pegelonline_wsw_de",
-  "device": "EITZE",
-  "timestamp": "2017-07-15T18:45:00+02:00",
-  "location": {
-    "lat": 52.90406541008721,
-    "lon": 9.27676943537587
-  },
-  "license": "find out",
-  "sensors": {
-    "waterLevel": {
-      "sensor": null,
-      "observation_value": 283
-    }
-  },
-  "extra": {
-    "measurementUnit": "cm",
-    "equidistance": 15,
-    "trend": 0,
-    "stateMnwMhw": "normal",
-    "stateNswHsw": "unknown",
-    "gaugeZero": {
-      "gaugeZeroUnit": "m. ü. NN",
-      "gaugeZeroValue": 8,
-      "gaugeZeroValidForm": "1985-03-13"
-    }
-  }
-}
-
-```
+| No. | Measurement | Sensor |Frequency|
+| -------- | -------- | -------- |------|
+| 1     | Water Level     | Unknown     | 15 mins. interval|
