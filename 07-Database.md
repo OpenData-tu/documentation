@@ -95,7 +95,7 @@ All our data sources save a few basic data point with each element stored in the
 - location: where has the datapoint been recorded
 
 Those are acutally the only information we need to store, besides the individual measurements. We do acutally store some more information,
-but regarding the common usecases for searches those two datapoints are enough for environemental data. Please refer to the full data-model in the appedix for more information.
+but regarding the common usecases for searches those two datapoints are enough for environemental data. Please refer to the full data-model in the project wiki for more information.
 
 This data-model has multiple advantages:
 - it keeps the data provenance
