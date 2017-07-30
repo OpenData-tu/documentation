@@ -1,11 +1,11 @@
 # Infrastructure
 
 **Authorship**<br/>
-Written by Andres
+Written by Andres<br/>
+Component developed by Amer
 
-## Overview/Description (if applicable Motivation)
 
-Needless to say, infrastructure plays a critical role in any cloud-based system. Despite the critical nature of the availability of infrastructure to a cloud prototyping
+Needless to say, infrastructure plays a critical role in any cloud-based system. In this section, we will discuss the requirements which were specific to the choice of cloud platform and orchestration as well as all activities surrounding deployment to the cloud.
 
 ## Requirements
 
@@ -16,7 +16,6 @@ Based on the particular factors discussed, we identified the following points as
 
 In addition, the general requirements for the system with regards to scalability, performance, etc. also apply to this component, as mentioned.
 
-## Survey of Existing Solutions (available implementations)
 
 ## Evaluation Criteria & Decision-making Process
 
@@ -26,13 +25,24 @@ The cloud-agnostic nature of our system would have allowed us to deploy prototyp
 
 ### Orchestration
 
+Originally an internal Google project, Kubernetes was opensourced via a donation to the Cloud Native Computing Foundation (CNCF). Among others, its core functionality includes support for deployment, maintenance, and scalability of applications.
 
 
 ## Implementation Details
 
 ### Orchestration
 
-Given its prominence in the cloud arena and the fact that it is open source software, we used Kubernetes for orchestration of cloud components. Having containerized data importers was a requirement from early on in order to accomplish scalability, and Kubernetes supports the creation and monitoring of containers natively. In addition, the building blocks of our architecture such as the queue and the database, which must be guaranteed to be up and running
+Given its prominence in the cloud arena and the fact that it is open source software, we used Kubernetes for orchestration of cloud components. Having containerized data importers was a requirement from early on in order to accomplish scalability, and Kubernetes supports the creation and monitoring of containers natively via its *Pod* abstraction. In addition, the building blocks of our architecture such as the queue and the database, which must be guaranteed to be up and running, were declared as Kubernetes *Services*, which provide additional self-healing, should these critical components crash.
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Kubernetes.png/600px-Kubernetes.png)
+
+Additionally, internal DNS provides ease-of-use by being able to refer to components by a friendly name as opposed to IP addresses. As mentioned in the Architecture section, scheduling was realized via simple cron job.
+
+Finally, in addition to the command-line interface provided by kops, a state-of-the-art web interface is provided out-of-the-box, making for a superior user experience.
+
+### Configuration
+
+One of the main advantages of Kubernetes is the ability to specify behavior of common abstractions via configuration alterable at run-time rather than by having to program components responsible for carrying out hard-coded logic. Configuration is provided by YAML files for registering crons, data importer job runtime configuration, and service-specific configuration necessary for inter-node communication.
 
 ### Deployment Automation
 
@@ -42,10 +52,4 @@ Difficulties notwithstanding, this meant that the automation process for deploye
 
 Spot instances also played an important role in keeping to the budget, and support for these were was integrated into the scripts, which allowed us to monitor and specify the price for spot instances.
 
-## Evolution of Component during development (Reasons for the changes)
-
-## Discussion/Analysis/Limitations
-
-
-
-## Future Development/Enhancements
+## Discussion
