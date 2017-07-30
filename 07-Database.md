@@ -4,6 +4,7 @@
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
+|  0.6 | 2017-07-30 | Tasche, Nico | Future work, more limitations and api |
 |  0.5 | 2017-07-30 | Tasche, Nico | API |
 |  0.4  | 2017-07-30 | Tasche, Nico | Overview and adjustments to the optic |
 |  0.3  | 2017-07-30 | Tasche, Nico | survey and evaluation |
@@ -240,5 +241,26 @@ One mayor drawback of elasticsearch is the missing possibility of server side jo
 This means, any kind of join operation has to be done either on a seperate server, like our api instance, or on the application side.
 This is actually something we were not really aware of for a long time.
 
+### Administration
+
+This is probably not really Elastic Search specific but should be mentioned in this chapter as well. To setup this the basic database is quite easy, but to scale it to up to petabyte needs quite a bit consideration. Our data model and the current implemented optimizations will help scale the database and everything should work without any performance drawbacks for quite a while. To archive this, lots of working though documention and local requesttesting had to be done. As said before, this is probably for every other database as well.
+
+### Testing
+
+Testing is something we could just do on a very limited scale. Unfortunately, any possible short-commings in our architecture would just show much later then we could test.
 
 ## Future Development and Enhancements
+
+### Data Postprocessing
+
+As mentioned in the Limitations section, joins are not possible in our system right now. One way of doing it would be to allow application based or backend based join, which will have same limitations. A better way would be to post process our data at low usage times.
+One idea would be to collect all the data for a defined area and put all information we have about that area into one dataset. The area could be for example a size of 100m x 100m.
+This would allow for very fast, very complex queries, which invole quite a few messurements.
+
+### The API
+
+To be honest, the current implementation of the API is quite limited. This is mainly due to time limitations while implementing.
+There are the points, which should be implemented
+1. Allowinig to make post requests to make more complex queries. That would for example include the transfer of big geospatial shapes for filtering.
+2. Adding security with API tokens
+3. Adding full access to the management database
