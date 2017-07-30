@@ -30,15 +30,15 @@ Due to the distributed nature of the project, the target was to build upon loose
 
 A pleasant side effect of the loose coupling of components is that it allowed to divide the team according to the main building blocks. Each component was the responsibility of a different group. Furthermore, the absence of string dependence and inheritance among services allowed to use several technologies and programming languages. Thus, every group was able to use the language that suited the purpose best. In addition to independent development, we were able to conduct tests independent from other components. This was necessary due to the limited budget for infrastructure and deployment. Hence, we were able to test every component stand-alone before testing the whole system.
 
-Another benefit of a microservice approach is that nearly every component is independently scalable and load-balancing can be implemented using smart routing. Furthermore, by creating stateless components, horizontal scalability was easily achievable. By replacing point-to-point communication with a distributed messaging system between the different building blocks, we were able to improve scalability even more and decouple even further. Firstly, the queue introduces a separation layer between the components, which allows to easily exchange one component without altering the other one. Furthermore, the queue can work as a buffer to protect the components from temporary peaks in the load. 
+Another benefit of a microservice approach is that nearly every component is independently scalable and load-balancing can be implemented using smart routing. Furthermore, by creating stateless components, horizontal scalability was easily achievable. By replacing point-to-point communication with a distributed messaging system between the different building blocks, we were able to improve scalability even more and decouple even further. Firstly, the queue introduces a separation layer between the components, which allows to easily exchange one component without altering the other one. Furthermore, the queue can work as a buffer to protect the components from temporary peaks in the load.
 
 Obviously, there are some challenges that have to be resolved to harness all the benefits of microservice architecture. In contrast to a monolithic solution every microservice can be deployed independently. Also, this is beneficial for our limited budget and allows to test and deploy the components separately it comes with a price. A complex system can consist of many microservices that have to be deployed one by one, thus it is crucial to automate the deployment process. If implemented correctly, a continuous-delivery-pipeline presents huge benefits not only for microservices. We adapted the continuous-delivery-pipeline introduced by Wolff[2] and customized it to fir our workflow. [ref{{figure Continuous-delivery-pipeline (Commit->local test -> system test -> performance test)}}]. It started with a commit onto GitHub and was followed by local tests. Here again the microservices approach presented its benefits, since it allowed for independent testing. Unfortunately, just towards the end of the project we were able to conduct system tests and examine the functionality in an end-to-end workflow. Nevertheless, through meticulous local testing and loose coupling of the components we were able to omit huge changes to the components when working in ensemble as a whole. Finally, we conducted performance test for the complete system to ensure high performance and prove scalability. Besides, the performance of single components was evaluated to avoid bottlenecks. More on performance tests and benchmarks can be found in chapter [ref{benchmarking chapter}].
 
-In addition to the challenges imposed by the deployment process, operating a microservice system presents its own set of challenges. Every component is monitored independently and the logs have to be gathered in a central storage. Logging is necessary to ensure availability of each service. Should a service terminate unexpectedly, the administrator has to restart the service to ensure the performance of the whole system. Though, the system should be still available during the downtime of a single service with some possible losses on functionality. Chapter [ref{{infrastructure}}] will discuss how we enabled recovery and fault-tolerance of the system. 
+In addition to the challenges imposed by the deployment process, operating a microservice system presents its own set of challenges. Every component is monitored independently and the logs have to be gathered in a central storage. Logging is necessary to ensure availability of each service. Should a service terminate unexpectedly, the administrator has to restart the service to ensure the performance of the whole system. Though, the system should be still available during the downtime of a single service with some possible losses on functionality. Chapter [ref{{infrastructure}}] will discuss how we enabled recovery and fault-tolerance of the system.
 
 The next section, will presented the specific requirements for the given problem statement and how microservice architecture presents a solution for it.
 
-## Requirements of the whole platform
+## Requirements for the whole platform
 
 To create a system that is able to resolve all the presented objectives, we identified the following architectural requirements:
 
@@ -57,10 +57,10 @@ Finally, the goal of the system is to provide an end-to-end solution for open da
 
 1. Collect and ingest data from various heterogeneous sources
 1. Process and transform the data
-1. Provide persistend storage for the data
+1. Provide persistent storage for the data
 1. Offer a uniform interface to retrieve all data contributed
 
-## Design Decision
+## Design Decisions
 
 This section will discuss the decision concerning the architectural design on a higher level. decision for specific technologies and components will be presented in the following chapters. To tackle all of the mentioned requirements, we decided upon the following architecture [image of architecture]. The final architecture is formed from five building blocks:
 
@@ -78,7 +78,7 @@ The system is supposed to handle all kinds of heterogeneous sources. At this poi
 
 ### Messaging System
 
-To decouple the components even further we introduced a queueing system to transport and buffer messages between the importers and consumers. Since this building block is crucial to ensure scalability and should protect the system from workload peaks. Following the "think big" approach, we imagined a system capable of handling millions of concurrent requests. In order to achieve such a high throughput, the system has to be designed in a distributed manner. To additionally introduce fault-tolerance we need a service that replicates data automatically to compensate for crashed nodes. Automatic partitioning would be a further benefit to assist load-balancing. In contrast to a monolithic application, by decoupling the components with a distributed messaging system, the autonomous services can be deployed independently and enable fault-tolerance for the system as a whole.
+To decouple the components even further we introduced a queuing system to transport and buffer messages between the importers and consumers. Since this building block is crucial to ensure scalability and should protect the system from workload peaks. Following the "think big" approach, we imagined a system capable of handling millions of concurrent requests. In order to achieve such a high throughput, the system has to be designed in a distributed manner. To additionally introduce fault-tolerance we need a service that replicates data automatically to compensate for crashed nodes. Automatic partitioning would be a further benefit to assist load-balancing. In contrast to a monolithic application, by decoupling the components with a distributed messaging system, the autonomous services can be deployed independently and enable fault-tolerance for the system as a whole.
 
 ### Database
 
@@ -98,7 +98,7 @@ Concluding, the choice in favor of a NoSQL solution was the right decision. NoSQ
 
 ## Evolution of the architecture
 
-As the project evolved and the understanding of the domain increased the architecture evolved as well. It is the nature of an agile project to evolve over time when the product owners add features to the system. This section will present an overview of the evolution of the architecture and the changes done over time. 
+As the project evolved and the understanding of the domain increased the architecture evolved as well. It is the nature of an agile project to evolve over time when the product owners add features to the system. This section will present an overview of the evolution of the architecture and the changes done over time.
 
 The changes in architecture are depicted in figures {{ref figure old arch and new arch side by side}}. Basically, the architecture was update at two places. First, the scheduling logic was exchanged. In the final architecture, we rely on Kubernetes and cron jobs to schedule the importing tasks. We decided for Kubernetes to administrate the underlying infrastructure thus it was feasible to use it for scheduling as well. The underlying infrastructure will be discussed in more detail in chapter {ref{{kube}}}, but since the placement and deployment of components is done with Kubernetes we decided to use it to schedule the importers.
 
@@ -110,7 +110,7 @@ Summarizing, we exchanged one building block with a better alternative and short
 
 Summarizing, we designed a fault-tolerant, highly scalable and available architecture based on the microservice design. The architecture is formed of several independent and loosely coupled services that interact through technology-agnostic interfaces. By doing so, we could use different technologies for every component and develop each building block independently.
 
-On the flip side, we created a highly complex architecture consisting of several technologies and services, which makes it hard to be understood by a single person. Furthermore, the deployment and operation of the system has to be automated otherwise an administrator might reach his limit quickly. We offer scripts to deploy the system onto AWS, but this can be applied to every other cloud provider or a private cloud with minor changes. 
+On the flip side, we created a highly complex architecture consisting of several technologies and services, which makes it hard to be understood by a single person. Furthermore, the deployment and operation of the system has to be automated otherwise an administrator might reach his limit quickly. We offer scripts to deploy the system onto AWS, but this can be applied to every other cloud provider or a private cloud with minor changes.
 
 ## Future
 
