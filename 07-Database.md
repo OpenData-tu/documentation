@@ -4,8 +4,9 @@
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
-|  0.4  | 2017-07-28 | Tasche, Nico | Overview and adjustments to the optic |
-|  0.3  | 2017-07-28 | Tasche, Nico | survey and evaluation |
+|  0.5 Alpha  | 2017-07-30 | Tasche, Nico | Overview and adjustments to the optic |
+|  0.4  | 2017-07-30 | Tasche, Nico | Overview and adjustments to the optic |
+|  0.3  | 2017-07-30 | Tasche, Nico | survey and evaluation |
 |  0.2  | 2017-07-28 | Tasche, Nico | changed to new structure |
 |  0.1  | 2017-07-24 | Tasche, Nico | first working draft |
 
@@ -69,7 +70,7 @@ Considering we had no real database expert in our team, the fact that group memb
 After a few tests and an overview of the documentation, it was clear that cassandra had two shortcommings reagarding our project.
 1. The documentation seams to have quite a few gabs. (see http://cassandra.apache.org/doc/latest/architecture/overview.html and http://cassandra.apache.org/doc/latest/architecture/dynamo.html)
 2. there is no native support for spatial geo data
-## Implementation Details
+## Implementation Details Database
 
 ### Intro to Elasticsearch
 
@@ -190,6 +191,17 @@ By using those two optimitzations, we were able to reduce the number of requeset
 This was just a naive example. In reality the reduction should even be much higher, with a growing number of data sources.
 Let's say we have allready 100 data sources and we can limit a request to just two of those for example because the requested messuremnt it
 provided just by those two, the saving of network traffic and workload would be immense.
+## Implementation Details API
+### Overview
+As for the API it was important for us to provide a solution which is easy to scale via a loadbalancing, for example with an nginx instace as an entry point for the user of our system. That means, those instances need to be stateless. For that and because it is basicly a standard we use a REST interface to provide access to our data-collection.
+
+### Architecture and Technology
+As base technology we use nodejs, which is is easy to use JavaScript runtime based on Chrome's V8 JavaScript engine. It allows a fast interation pace and needs just minimal preparation to develop server instances with.
+
+TODO: Picture of basic architecture
+
+
+### REST APIs
 
 ## Critical Analysis/Limitations
 
@@ -198,5 +210,6 @@ provided just by those two, the saving of network traffic and workload would be 
 One mayor drawback of elasticsearch is the missing possibility of server side join, the way they are known by SQL based database-system.
 This means, any kind of join operation has to be done either on a seperate server, like our api instance, or on the application side.
 This is actually something we were not really aware of for a long time.
+
 
 ## Future Development and Enhancements
