@@ -85,10 +85,10 @@ this feature of 'Spring' is used in our case to make the whole data import frame
 
 | No. | Measurement | Sensor |Frequency|
 | -------- | -------- | -------- |-------|
-| 1     | Pressure     | BME280     |Daily|
-| 2     | Pressure_sealevel     | BME280     |Daily|
-| 3     | Temperature     | BME280     |Daily|
-| 4     | Humidity     | BME280     |Daily|
+| 1     | pressure     | BME280     |Daily|
+| 2     | pressureSeaLevel     | BME280     |Daily|
+| 3     | temperature     | BME280     |Daily|
+| 4     | humidity     | BME280     |Daily|
 
 
 
