@@ -4,7 +4,7 @@
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
-|  0.5 Alpha  | 2017-07-30 | Tasche, Nico | Overview and adjustments to the optic |
+|  0.5 Alpha  | 2017-07-30 | Tasche, Nico | API |
 |  0.4  | 2017-07-30 | Tasche, Nico | Overview and adjustments to the optic |
 |  0.3  | 2017-07-30 | Tasche, Nico | survey and evaluation |
 |  0.2  | 2017-07-28 | Tasche, Nico | changed to new structure |
