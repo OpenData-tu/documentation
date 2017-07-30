@@ -54,9 +54,9 @@ With this we aim to create a tool that generates economic and social value throu
 `//TODO` there is very little background to talk about specific stuff in the req's (like units & measurements if those concepts haven't been introduced. Move the decomposition & req's further down & pull up the open-data & other introductory text about our domain here)
 
 
-### Decomposition
+### Building Blocks
 
-The problem domain can be decomposed into the following components:
+The problem domain can be decomposed into the following architectural building blocks:
 
 1. Data Import Framework
 1. Database
