@@ -125,6 +125,7 @@ A big advantage of our approach is, that we kind of crowd-source the implementat
 * Localization within our database can easily be done, as all measurements of a unit category have the same unit and converters are written the moment someone has to convert his source data to our preferred unit.
 * By crowd-sourcing the implementation of converters they are also open sourced for reuse by other users. Having our own converters only in the system to convert measurements after they are in the database would not guarantee the reusability as importers and our database frontend depend on totally different things.
 
-# Future Improvements
+
+## Future Improvements
 
 //TODO
