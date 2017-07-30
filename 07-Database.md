@@ -8,20 +8,7 @@
 [4] https://www.elastic.co
 
 **Authoriship**
-
-|Version|Date|Modified by|Summary of changes|
-|-------|----|-----------|------------------|
-|  1.0 | 2017-07-30 | Tasche, Nico | final touches/orthography and references |
-|  0.9 | 2017-07-30 | Tasche, Nico | more architecture and mapping |
-|  0.8 | 2017-07-30 | Tasche, Nico | elasticsearch architecture update |
-|  0.7 | 2017-07-30 | Tasche, Nico | Data model and partitioning |
-|  0.6 | 2017-07-30 | Tasche, Nico | Future work, more limitations and api |
-|  0.5 | 2017-07-30 | Tasche, Nico | API |
-|  0.4  | 2017-07-30 | Tasche, Nico | Overview and adjustments to the optic |
-|  0.3  | 2017-07-30 | Tasche, Nico | survey and evaluation |
-|  0.2  | 2017-07-28 | Tasche, Nico | changed to new structure |
-|  0.1  | 2017-07-24 | Tasche, Nico | first working draft |
-
+Written by Nico Tasche
 
 ## Overview
 
