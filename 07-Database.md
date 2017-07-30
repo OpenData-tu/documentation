@@ -1,9 +1,17 @@
 # Database
 
+**REFERENCES**
+
+[1]Michael McCandless. Elastic Bloc. ___Multi-dimensional points, coming in Apache Lucene 6.0___, https://www.elastic.co/blog/lucene-points-6.0, 2016
+[2]___Missing documentation in Cassandra___, http://cassandra.apache.org/doc/latest/architecture/overview.html , 2016-07-30
+[3]___Missing documentation in Cassandra 2___, http://cassandra.apache.org/doc/latest/architecture/dynamo.html , 2016-07-30
+[4] https://www.elastic.co
+
 **Authoriship**
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
+|  1.0 | 2017-07-30 | Tasche, Nico | final touches/orthography and references |
 |  0.9 | 2017-07-30 | Tasche, Nico | more architecture and mapping |
 |  0.8 | 2017-07-30 | Tasche, Nico | elasticsearch architecture update |
 |  0.7 | 2017-07-30 | Tasche, Nico | Data model and partitioning |
@@ -63,7 +71,7 @@ Besides the previously mentioned requirements we had some soft-requirements as w
 ### Why Elastic Search
 
 Checking our requirements Elastic Search fulfilled all of them. The reasons why we decided to use Elastic Search even before we went to deep into other databases were as follows:
-- native support for geo spatial searches (see https://www.elastic.co/blog/lucene-points-6.0)
+- native support for geo spatial searches **[1]**
 - group members already knew Elastic Search, unlike all other NoSQL databases
 - extremely well documented
 - very high development pace from the company who develops it
@@ -73,14 +81,14 @@ Considering we had no real database expert in our team, the fact that group memb
 ### Special look at Cassandra
 
 After a few tests and an overview of the documentation, it was clear that Cassandra had two shortcomings regarding our project.
-1. The documentation seems to have quite a few gabs. (see http://cassandra.apache.org/doc/latest/architecture/overview.html and http://cassandra.apache.org/doc/latest/architecture/dynamo.html)
+1. The documentation seems to have quite a few gabs. **[2, 3]**
 2. there is no native support for spatial geo data
 
 ## Implementation Details Database
 
 ### Intro to Elasticsearch
 
-Elasticsearch is an opensource Lucene based search engine. It is under active development, with an extensive documentation.
+Elasticsearch **[4]** is an opensource Lucene based search engine. It is under active development, with an extensive documentation.
 
 ### Architecture
 
