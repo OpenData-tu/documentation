@@ -9,9 +9,11 @@
 | 0.2.0 | 2017-07-22 | Oliver, Andres | Motivation rewrite & flesh out Requirements section |
 | 0.2.1 | 2017-07-29 | Oliver, Andres | Fixes for Markdown-> LaTeX conversion |
 | 0.2.2 | 2017-07-29 | Oliver | Removing content about Organization (moved to new document) |
+| 0.3.0 | 2017-07-30 | Oliver, Andres | Cleanup before hand-in |
 
 
 ## Summary/Overview/Abstract
+
 
 
 ## What is Open Data
@@ -50,8 +52,6 @@ Also, as the price of devices declines, more and more enthusiasts are willing to
 * and a flexible querying interface for accessing the data.
 
 With this we aim to create a tool that generates economic and social value through new and creative "layering" of data.
-
-`//TODO` there is very little background to talk about specific stuff in the req's (like units & measurements if those concepts haven't been introduced. Move the decomposition & req's further down & pull up the open-data & other introductory text about our domain here)
 
 
 ### Building Blocks
@@ -93,8 +93,6 @@ The above objectives translate into the following requirements:
 
 
 ### Public API
-
-`TODO` prob just the Scalability & fault tolerance concerns already mentioned under General, so not sure what reqs we had for the API individually (if any)...
 
 1. RESTful
     * Stateless
