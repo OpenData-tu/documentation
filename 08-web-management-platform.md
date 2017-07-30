@@ -1,12 +1,10 @@
 # Data Source Metadata Management System
 
-**Authoriship**
+**Authoriship**<br/>
 Written by Paul Wille<br/>
 *Proofread & edited by Andres*
 
-We decided to have a separate component to manage the metadata about data sources which are imported to the system. This component shall fulfill several tasks that are important for organizing the ETL process. Furthermore, it provides important information to several other system components.
-
-In this chapter we will discuss why we decided to include such a component, what it was built for, and how it was realized and implemented.
+In this chapter we will discuss the component responsible for managing metadata about the data sources which are imported to the system. We will cover what it is and does, some thoughts around why we decided to include such a component, and how it was realized and implemented.
 
 
 ## Purpose
