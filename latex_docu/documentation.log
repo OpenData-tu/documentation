@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.5.14)  30 JUL 2017 22:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.5.14)  30 JUL 2017 22:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -406,11 +406,17 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Missing character: There is no Ã in font cmr9!
-Missing character: There is no Ÿ in font cmr9!
-Missing character: There is no Ã in font cmr9!
-Missing character: There is no Ÿ in font cmr9!
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
+ [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./documentation.toc)
+\tf@toc=\write3
+\openout3 = `documentation.toc'.
+
+ [2
+
+]
 (./01/doc.tex
 Overfull \hbox (2.50684pt too wide) in paragraph at lines 20--22
 []|\OT1/cmr/m/n/10 2017- 
@@ -442,9 +448,9 @@ Overfull \hbox (2.50684pt too wide) in paragraph at lines 56--58
 []|\OT1/cmr/m/n/10 2017- 
  []
 
-[1
+[3
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]) (./02/doc.tex
+] [4] [5]) (./02/doc.tex
 Overfull \hbox (135.87225pt too wide) in paragraph at lines 19--19
 []\OT1/cmtt/m/n/10 //TODO diagram illustrating the pipeline to better describe 
 where each company is positioned[] 
@@ -456,19 +462,16 @@ Overfull \hbox (1.01476pt too wide) in paragraph at lines 28--30
  are a startup
  []
 
-[4] [5]) (./03/doc.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [6]
-[7]
+[6] [7]) (./03/doc.tex [8]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 107.
 
- (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 107.
- [8] [9] [10]
+ [9] [10] [11]
 Overfull \hbox (20.51624pt too wide) in paragraph at lines 291--293
 []\OT1/cmr/m/n/10 https://github.com/awslabs?utf8=%E2%9C%93&q=refarch&type=&lan
 guage= 
@@ -480,7 +483,7 @@ Overfull \hbox (28.69383pt too wide) in paragraph at lines 299--301
 []ra[]batch[]03.pdf 
  []
 
-[11]) (./05/doc.tex
+[12] [13]) (./05/doc.tex
 Overfull \hbox (2.50684pt too wide) in paragraph at lines 21--23
 []|\OT1/cmr/m/n/10 2017- 
  []
@@ -510,8 +513,11 @@ Overfull \hbox (2.50684pt too wide) in paragraph at lines 66--68
 []|\OT1/cmr/m/n/10 2017- 
  []
 
-[12] [13] [14]
-<images/components_diagram.png, id=58, 1121.18875pt x 301.125pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [14]
+[15] <images/components_diagram.png, id=61, 1121.18875pt x 301.125pt>
 File: images/components_diagram.png Graphic file (type png)
 
 <use images/components_diagram.png>
@@ -522,7 +528,7 @@ Overfull \hbox (774.06248pt too wide) in paragraph at lines 256--257
  [][] 
  []
 
-
+[16] [17 <./images/components_diagram.png>]
 Overfull \hbox (14.94044pt too wide) in paragraph at lines 291--304
 \OT1/cmr/m/n/10 some gen-er-ally used meth-ods to bring fa-cil-ity for im-port-
 ing. - \OT1/cmr/bx/n/10 JsonItemWriter:
@@ -534,8 +540,7 @@ Overfull \hbox (4.40271pt too wide) in paragraph at lines 291--304
 ite in-di-vid-ual JSON ob-jects to Kafka queue.
  []
 
-[15] [16 <./images/components_diagram.png>]
-<images/domain_model.png, id=67, 925.4575pt x 846.16125pt>
+<images/domain_model.png, id=70, 925.4575pt x 846.16125pt>
 File: images/domain_model.png Graphic file (type png)
 
 <use images/domain_model.png>
@@ -549,17 +554,17 @@ Overfull \hbox (593.33171pt too wide) in paragraph at lines 306--309
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [17]
+ [18]
 Overfull \vbox (321.02092pt too high) has occurred while \output is active []
 
 
-[18 <./images/domain_model.png>] [19]) (./05a/doc.tex [20] [21] [22]
+[19 <./images/domain_model.png>] [20]) (./05a/doc.tex [21] [22] [23]
 Overfull \hbox (9.87335pt too wide) in paragraph at lines 192--192
 []\OT1/cmtt/m/n/10 public class CelsiusToFarenheitUnitConverter extends UnitCon
 verter {[] 
  []
 
-[23]) (./06/doc.tex [24] [25] [26]) (./07/doc.tex
+[24]) (./06/doc.tex [25] [26] [27]) (./07/doc.tex
 Overfull \hbox (148.94005pt too wide) in paragraph at lines 5--13
 \OT1/cmr/m/n/10 [2]\OT1/cmr/bx/it/10 Missing doc-u-men-ta-tion in Cas-san-dra\O
 T1/cmr/m/n/10 , http://cassandra.apache.org/doc/latest/architecture/overview.ht
@@ -573,25 +578,25 @@ Cas-san-dra 2\OT1/cmr/m/n/10 , http://cassandra.apache.org/doc/latest/architect
 ure/dynamo.html
  []
 
-[27]
+[28]
 Overfull \hbox (2.43253pt too wide) in paragraph at lines 91--93
 []\OT1/cmr/m/n/10 Besides the pre-vi-ously men-tioned re-quire-ments we had som
 e soft-requirements
  []
 
-[28]
-<images/07_database_architecture_elastic.png, id=107, 329.23pt x 221.82875pt>
+[29]
+<images/07_database_architecture_elastic.png, id=110, 329.23pt x 221.82875pt>
 File: images/07_database_architecture_elastic.png Graphic file (type png)
 
 <use images/07_database_architecture_elastic.png>
 Package pdftex.def Info: images/07_database_architecture_elastic.png used on in
 put line 162.
 (pdftex.def)             Requested size: 329.22919pt x 221.82819pt.
- [29]
+ [30]
 Underfull \vbox (badness 5908) has occurred while \output is active []
 
- [30 <./images/07_database_architecture_elastic.png>] [31]
-<images/07_database_architecture.png, id=119, 382.42876pt x 262.9825pt>
+ [31 <./images/07_database_architecture_elastic.png>] [32]
+<images/07_database_architecture.png, id=122, 382.42876pt x 262.9825pt>
 File: images/07_database_architecture.png Graphic file (type png)
 
 <use images/07_database_architecture.png>
@@ -615,8 +620,8 @@ Overfull \hbox (15.21046pt too wide) in paragraph at lines 292--296
 0, source3(uv-
  []
 
-[32 <./images/07_database_architecture.png>] [33]
-<images/07_API_Architecture.png, id=127, 543.02875pt x 347.2975pt>
+[33 <./images/07_database_architecture.png>] [34]
+<images/07_API_Architecture.png, id=130, 543.02875pt x 347.2975pt>
 File: images/07_API_Architecture.png Graphic file (type png)
 
 <use images/07_API_Architecture.png>
@@ -628,7 +633,7 @@ Overfull \hbox (195.90387pt too wide) in paragraph at lines 423--424
  [][] 
  []
 
-[34] [35 <./images/07_API_Architecture.png>]
+[35] [36 <./images/07_API_Architecture.png>]
 Overfull \hbox (10.75784pt too wide) in paragraph at lines 467--469
 []|\OT1/cmr/m/n/10 Parameter|  
  []
@@ -784,8 +789,8 @@ Overfull \hbox (73.53474pt too wide) in paragraph at lines 486--488
 erature`|  
  []
 
-[36] [37]) (./08/doc.tex [38]
-<images/relational_schema.png, id=145, 738.76pt x 416.55624pt>
+[37] [38]) (./08/doc.tex [39]
+<images/relational_schema.png, id=148, 738.76pt x 416.55624pt>
 File: images/relational_schema.png Graphic file (type png)
 
 <use images/relational_schema.png>
@@ -796,8 +801,8 @@ Overfull \hbox (469.3564pt too wide) in paragraph at lines 71--73
  \OT1/cmr/bx/n/10 Do-main Model[] []
  []
 
-[39] [40 <./images/relational_schema.png>]
-<images/new_datasource.png, id=153, 837.1275pt x 760.8425pt>
+[40] [41 <./images/relational_schema.png>]
+<images/new_datasource.png, id=156, 837.1275pt x 760.8425pt>
 File: images/new_datasource.png Graphic file (type png)
 
 <use images/new_datasource.png>
@@ -811,23 +816,23 @@ Overfull \hbox (505.00192pt too wide) in paragraph at lines 124--126
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [41]
+ [42]
 Overfull \vbox (235.70236pt too high) has occurred while \output is active []
 
 
-[42 <./images/new_datasource.png>]
+[43 <./images/new_datasource.png>]
 Overfull \hbox (120.12239pt too wide) in paragraph at lines 213--213
 []  \OT1/cmtt/m/n/10 "description": "A Data Source for Open Sensor Data from th
 e CP project at TU Berlin. ",[] 
  []
 
-[43]
+[44]
 Overfull \hbox (36.12312pt too wide) in paragraph at lines 213--213
 []  \OT1/cmtt/m/n/10 "required": ["source_id", "timestamp","sensors", "location
 ", "license"][] 
  []
 
-[44]
+[45]
 Overfull \hbox (78.12276pt too wide) in paragraph at lines 252--252
 []    \OT1/cmtt/m/n/10 {"id":1,"name":"Air Temperature","desc":"","unit_categor
 y_id":"temperature"},[] 
@@ -839,7 +844,7 @@ Overfull \hbox (251.37125pt too wide) in paragraph at lines 252--252
 por present in the air","unit_category_id":"humidity"}[] 
  []
 
-[45] <images/unit_frontend.png, id=171, 1188.44pt x 407.5225pt>
+[46] <images/unit_frontend.png, id=174, 1188.44pt x 407.5225pt>
 File: images/unit_frontend.png Graphic file (type png)
 
 <use images/unit_frontend.png>
@@ -853,8 +858,8 @@ Overfull \hbox (856.31358pt too wide) in paragraph at lines 342--345
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [46]
-[47 <./images/unit_frontend.png>]
+ [47]
+[48 <./images/unit_frontend.png>]
 Missing character: There is no Â in font cmtt10!
 Missing character: There is no ° in font cmtt10!
 Missing character: There is no Â in font cmtt10!
@@ -879,11 +884,11 @@ Overfull \hbox (267.12111pt too wide) in paragraph at lines 386--386
 bol":"K","unit_category_id":"temperature","notation":""}}[] 
  []
 
-[48]) (./12/doc.tex [49] [50])
+[49]) (./12/doc.tex [50] [51])
 
-LaTeX Warning: Empty `thebibliography' environment on input line 59.
+LaTeX Warning: Empty `thebibliography' environment on input line 68.
 
-[51] (./documentation.aux)
+[52] (./documentation.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -892,9 +897,9 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4055 strings out of 494945
- 56702 string characters out of 6181032
- 129439 words of memory out of 5000000
+ 4058 strings out of 494945
+ 56738 string characters out of 6181032
+ 128430 words of memory out of 5000000
  7267 multiletter control sequences out of 15000+600000
  7259 words of font info for 27 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -910,10 +915,10 @@ ts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1
 c/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmtt9.pfb>
-Output written on documentation.pdf (51 pages, 479675 bytes).
+Output written on documentation.pdf (52 pages, 481762 bytes).
 PDF statistics:
- 231 PDF objects out of 1000 (max. 8388607)
- 149 compressed objects within 2 object streams
+ 234 PDF objects out of 1000 (max. 8388607)
+ 151 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
