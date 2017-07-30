@@ -5,7 +5,7 @@
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
 |  0.1  | 2017-06-03 | Andres Ardila | Working draft |
-|  0.2  | 2017-07-07 | Andres Ardila | Added secion on Talend |
+|  0.2  | 2017-07-07 | Andres Ardila | Added section on Talend |
 
 
 ```
