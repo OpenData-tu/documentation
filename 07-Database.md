@@ -4,6 +4,7 @@
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
+|  0.3  | 2017-07-28 | Tasche, Nico | survey and evaluation |
 |  0.2  | 2017-07-28 | Tasche, Nico | changed to new structure |
 |  0.1  | 2017-07-24 | Tasche, Nico | first working draft |
 
@@ -11,7 +12,7 @@
 ## Overview
 
 ## Requirements
-### Requirements
+### Primary Requirements
 - scale-able in the range of petabyte in size
 - hundred of thousands of requests per minute
 - high availablility
@@ -21,21 +22,42 @@
 - immediate consistency is NOT necessary
 
 As seen in the requirements, a hugh focus was on scalability. We had some secondary reqirements as well, which were mainly regarding our possibilities to handle the project.
-### Requirements
+### Secondary Requirements
 - Open source or at the very least an open license is required.
 - must be well documented
-- must be managable regarding administration and learning afford
+- must be manageable regarding administration and learning afford
 
 
 ## Survey of Existing Solutions
+Based on our knowlage, any relational database as main datastorage has been quickly disreagarded. Fairly bad scaling behavior with the amount of data we have to handly and the fixed dataschema architecture were not a good fit for our usecase. That does not mean, that a relational database might be used for some special requirements.
+
+Based on the knowlage in the group we had a closer look at Elastic Search and checked it against our requirements. This first look was very promising, but more on that in the next chapter.
+
+Other sollutions in the realm of NoSQL databases were mainly web research. That included what is out there and what is the strength and weeknesses of each solution. That included mainly the big known ones like Cassandra, MangoDB, ...
+
+The survey of other existing NoSQL database solutions was not very extensive, regarding real tests and in deep research. Because of the feedback, which suggested we use the wrong database, we decided in the middle of the project, to have an extra look at Apache Cassandra. 
 
 ## Evaluation Criteria & Decision-making Process
 The process of deciding what database architecture to use we started with our requirements.
 
-Espacialy the last point of our secondary requiremnts had to be taken into account, because we had no real database expert in our team, so we first considert database-system we allready knew.
-Our approach was to check whether those databases fulfill our requirements first.
+Besides the previously mentioned requirements we had some soft-requirements as well:
+1. spread of database system
+2. liveliness regarding
+3. what was already known in the group
 
-Any relational database as main datastorage has been quickly disreagarded, cause of the bad fairly scaling behavir with the amount of data we have to handly.
+### Why Elastic Search
+Checking our requirements Elastic Search fulfilled all of them. The reasons why we decided to use Elastic Search even before we went to deep into other databases were as follows:
+- native support for geo spatial searches (see https://www.elastic.co/blog/lucene-points-6.0)
+- group members allready knew Elastic Search, unlike all other NoSQL databases
+- extremely well documented
+- very high development pace from the company who develops it
+
+Considering we had no real database expert in our team, the fact that group members already had practical experience with Slastic Search was a very important point for us.
+
+### Special look at Cassandra
+After a few tests and an overview of the documentation, it was clear that cassandra had two shortcommings reagarding our project.
+1. The documentation seams to have quite a few gabs. (see http://cassandra.apache.org/doc/latest/architecture/overview.html and http://cassandra.apache.org/doc/latest/architecture/dynamo.html)
+2. there is no native support for spatial geo data
 ## Implementation Details
 ### Intro to Elasticsearch
 Elasticsearch is an opensource Lucene based search engine. It is under active development, with an extensive documentation.
