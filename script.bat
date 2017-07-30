@@ -15,7 +15,7 @@ mkdir .\latex_docu\12
 
 REM generate latex file for each section
 pandoc .\01-Introduction.md -o .\latex_docu\01\doc.tex
-pandoc .\02-Competitor-Analysis.md -o .\latex_docu\02\doc.tex
+pandoc .\02-Survey-of-Current-Landscape.md -o .\latex_docu\02\doc.tex
 pandoc .\03-Architecture.md -o .\latex_docu\03\doc.tex
 pandoc .\05-Data-Import-Framework.md -o .\latex_docu\05\doc.tex
 pandoc .\05a-Units.md -o .\latex_docu\05a\doc.tex
