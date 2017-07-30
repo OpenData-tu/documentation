@@ -327,3 +327,6 @@ There are the points, which should be implemented
 1. Allowing to make post requests to make more complex queries. That would for example include the transfer of big geospatial shapes for filtering.
 2. Adding security with API tokens
 3. Adding full access to the management database
+4. Adding safety checks like timeouts to make not to extensive requests
+5. Adding possibility for scrolling to request data in chunks
+6. optimizing the data handling on the API instances, which is not very efficient
