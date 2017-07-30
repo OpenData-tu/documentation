@@ -26,9 +26,9 @@ If you need a quick start guide of Spring Batch you can find it [here:](https://
 
 ## How to Proceed
 
-1. Download or copy the template that fits your needs.
+1. Download or copy the template that fits your needs. <br>
 
-#### Template Modules
+**Template Modules** <br>
 
 The template is a multi module application which includes two modules:
 
@@ -69,6 +69,7 @@ These modules are defined inside `pom.xml` file.
 
 
 ### Things to know about the template:
+
 - Inside the `pom.xml` in the 'application' module the following dependency is used to include the 'library' module:
 
 ```dependency
