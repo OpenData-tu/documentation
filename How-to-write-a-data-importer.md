@@ -13,7 +13,7 @@ This chapter guides you through building your own importer on top of an already 
 
 Instead of wrting a long manual on how to write an importer we provide you with starter apps (templates) that you can start to customize right away.
 
-## Pre-requisite
+## Pre-requisites
 
 We assume that you are:
 
@@ -80,5 +80,6 @@ These modules are defined inside `pom.xml` file.
 
 - Registered beans inside the library module could be autowired by importing the 'ServiceConfiguration' class from package 'de.tu_berlin.ise.open_data.library'. You can see how it is imported in main class:
 
-![](https://i.imgur.com/hYPFwL1.png)
+![img](images/template.png) <br>
+
 You can now start to edit the template.
