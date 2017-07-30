@@ -276,11 +276,11 @@ application. We will look at each component individually.
   - \textbf{Reader:} Defines how to read items from the source. -
   \textbf{Processor:} Processes every item - an item is basically an
   object that represents an record - individually and creates a JSON
-  string for that according to our defined schema\\
+  string for that according to our defined schema.\\
   - \textbf{Writer:} Simply writes to Kafka queue.
 \item
   \texttt{@SpringBootApplication}: Annotation to make the application a
-  Spring Boot Application
+  Spring Boot Application.
 \item
   \texttt{@EnableBatchProcessing}: Annotation to add the functionality
   of processing batch jobs.
@@ -291,12 +291,16 @@ application. We will look at each component individually.
   \textbf{ServiceConfiguration:} Is the component where the services are
   registered as Java Beans for re-usability. It is included in module
   `library' where re-usable classes across all importers are defined.
-  The following main components are included in the `library' module. -
-  \textbf{ServiceConfiguration} - \textbf{ApplicationService:} Includes
-  some generally used methods to bring facility to importing. -
-  \textbf{JsonItemWriter:} Asks \texttt{KafkaRecordProducer} to write
-  individual JSON objects to Kafka queue - \textbf{KafkaRecordProducer:}
-  Is the class where the items are written to Kafka queue
+  The following other components are included in the `library' module. -
+  \textbf{ApplicationService:} Includes some generally used methods to
+  bring facility for importing. - \textbf{JsonItemWriter:} Asks
+  \texttt{KafkaRecordProducer} to write individual JSON objects to Kafka
+  queue. - \textbf{KafkaRecordProducer:} Is the class where the items
+  are written to Kafka queue. - \textbf{Schema:} Each importer should
+  have at least one model class which has all the necessary fields for
+  reading records from a source; all these classes are extended from
+  Schema. - \textbf{JsonStringBuilder}: The class which contains
+  functions for creating a json string according to our defined schema.
 \end{itemize}
 
 \includegraphics{images/domain_model.png} \textbf{Figure 2.} shows a

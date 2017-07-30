@@ -4,17 +4,12 @@ System}\label{data-source-metadata-management-system}
 \textbf{Authoriship} Written by Paul Wille \emph{Proofread \& edited by
 Andres}
 
-We decided to have a separate component to manage the metadata about
-data sources which are imported to the system. This component shall
-fulfill several tasks that are important for organizing the ETL process.
-Furthermore, it provides important information to several other system
-components.
+In this chapter we will discuss the component responsible for managing
+metadata about the data sources which are imported to the system. We
+will cover what it is and does, some thoughts around why we decided to
+include such a component, and how it was realized and implemented.
 
-In this chapter we will discuss why we decided to include such a
-component, what it was built for, and how it was realized and
-implemented.
-
-\subsection{Purpose}\label{purpose}
+\subsection{Requirements}\label{requirements}
 
 The main purpose of the component is to:
 
@@ -30,6 +25,51 @@ The main purpose of the component is to:
   enable users who want to use the data to see the resources our system
   contains
 \end{itemize}
+
+In contrast to nearly every other component we had to implement, the
+management platform did not have to meet as many criteria as a
+distributed cloud system in general. The data it contains is quite
+static and the number of requests that we expect is also quite low.
+However, the following general cloud-specific architectural style
+requirements were taken into consideration:
+
+\begin{itemize}
+\tightlist
+\item
+  Availability to other system components, that require the held
+  information
+\item
+  Quick response time (for query optimization within the public search
+  API)
+\item
+  Ability to run asynchronous background tasks (for scheduling)
+\end{itemize}
+
+\subsection{Implementation}\label{implementation}
+
+The system was built using \emph{Ruby on Rails} with \emph{PostgreSQL}
+as a database. The reasons why we chose to use Rails are:
+
+\begin{itemize}
+\tightlist
+\item
+  Relatively fast development of an MVC web application
+\item
+  Well established (over a decade), has therefore lots of resources ---
+  also for all kinds of extensions
+\item
+  Extensive community support
+\item
+  Very good integrated ORM adapters that could easily be exchanged for
+  ODM adapters for document databases
+\item
+  Offers the dynamic of Ruby as programming language
+\end{itemize}
+
+\subsubsection{Domain Model}\label{domain-model}
+
+\includegraphics{images/relational_schema.png} //TODO Figure: UML Class
+Diagram of the Relational Management System
 
 \subsubsection{Data Sources Registry}\label{data-sources-registry}
 
@@ -81,16 +121,10 @@ useful for our system:
   data.
 \end{itemize}
 
-\begin{figure}
-\centering
-\includegraphics{images/new_datasource.png}
-\caption{Registering a data source within the Web management platform}
-\end{figure}
+\includegraphics{images/new_datasource.png} //TODO Figure: Registering a
+data source within the Web management platform
 
-\subsubsection{Provide information to other system
-components}\label{provide-information-to-other-system-components}
-
-\paragraph{Validation Schema}\label{validation-schema}
+\subsubsection{Validation Schema}\label{validation-schema}
 
 As described in the chapter about validation and insertion into
 Elasticsearch, we have a separate, distinct component that is
@@ -104,7 +138,7 @@ that this would be a bad idea for the following reasons:
 \begin{itemize}
 \tightlist
 \item
-  Sanity-checks: in addition to schema-only validation, the schema
+  Sanity checks: in addition to schema-only validation, the schema
   provided by this component can validate data-source-specific values
   (such as importer IDs, etc.), which could not be validated with a
   generic validator.
@@ -178,7 +212,7 @@ The response looks like as follows (note that the const
 }
 \end{verbatim}
 
-\paragraph{Provide Information to the Elasticsearch API for query
+\subsubsection{Provide Information to the Elasticsearch API for query
 optimization}\label{provide-information-to-the-elasticsearch-api-for-query-optimization}
 
 As described in the data model section, our model is data-source-based
@@ -232,225 +266,34 @@ GET /measurements/1/data_sources
 ]
 \end{verbatim}
 
-\paragraph{Provide configuration information to the deployment
+\subsubsection{Provide configuration information to the deployment
 component}\label{provide-configuration-information-to-the-deployment-component}
 
 Since the importer registration the only step in which the implementer
 has to provide information to our system, it should cover all
 configuration information needed to get an importer running.
 
-\subsection{Requirements}\label{requirements}
+\subsubsection{Units}\label{units}
 
-In contrast to nearly every other component we had to implement, the
-management platform did not have to meet as many criteria as a
-distributed cloud system in general. The data it contains is quite
-static and the number of requests that we expect is also quite low.
-
-\begin{itemize}
-\tightlist
-\item
-  Availability to other system components, that require the held
-  information
-\item
-  Quick response time (for query-optimization within the public search
-  API)
-\item
-  Ability to run asynchronous background tasks (for scheduling)
-\end{itemize}
-
-\subsection{Architectural Details}\label{architectural-details}
-
-The system was built using \emph{Ruby on Rails} with \emph{PostgreSQL}
-as a database. The reasons why we chose to use Rails are:
-
-\begin{itemize}
-\tightlist
-\item
-  Relatively fast development of an MVC web application
-\item
-  Well established (over a decade), has therefore lots of resources ---
-  also for all kinds of extensions
-\item
-  Extensive community support
-\item
-  Very good integrated ORM adapters that could easily be exchanged for
-  ODM adapters for document databases
-\item
-  Offers the dynamic of Ruby as programming language
-\end{itemize}
-
-As mentioned before, the planning of the extent of the functionality
-offered by this system, was very vague. Besides managing metadata and
-providing an API for other components, further features were at least
-considered to be part of this system, like for example a scheduler that
-triggers the component that handles the deployment of importers.
-Therefore we chose to build this system on top of an infrastructure that
-can be easily extended in many directions and has nice-to-use database
-adapters instead of a more lightweight system.
-
-While initially we also wanted to model a data source with its sensors
-grouped in sensor stations, this approach would bring immense overhead
-for configuring data sources in our system upfront, as a user would have
-to very exactly model a data source with all its sensors and sensor
-stations first. For big services like e.g.~the German Weather Service
-this would be an enormous amount of work. Gathering this information
-would better be done by scraping the information present in
-Elasticsearch and translating them to geolocated information for all
-sensors/sensor-stations/datasources. In \{//TODO ref figure\} you can
-see the modeling for this approach greyed out.
-
-The main metainformation about the data sources (besides metadata about
-the source itself) that we still needed within our system (the location
-of the sensor and the grouping of sensor stations is not essential for
-our system to work) and had to offer to the user registering a source
-were then:
-
-\begin{itemize}
-\tightlist
-\item
-  Information about the measurands offered by the data source
-\item
-  Information about the main unit used for a measurand (see section Unit
-  system // TODO ref section)
-\end{itemize}
-
-\begin{figure}
-\centering
-\includegraphics{images/relational_schema.png}
-\caption{UML Class-Diagram of the Relational Management System.}
-\end{figure}
-
-\subsubsection{Future Improvements}\label{future-improvements}
-
-\paragraph{Caching}\label{caching}
-
-There is currently no caching solution implemented since the workloads
-during development phase were quite manageable. Also including a
-distributed caching system in our production pipeline seemed to be too
-high of an effort and would take up significant resources that would
-actually not be needed during development. We wanted, therefore, to use
-the limited and expensive resources we had for actual importing.
-
-As the number of data importers grows in production, however, requests
-to the relational database would increase accordingly. Whereas scaling
-the database would allow us to avoid the bottleneck, adding a cache in
-front of the database to serve read requests would be sufficient to
-ensure performance without incurring the cost and added complexity of
-scaling. An important consideration, of course, is the frequency with
-which data is updated (in our case low to none), thus making it a
-perfect candidate for caching. As a distributed caching system where
-read requests are very fast and possible on all nodes, Redis would be a
-good fit for this use case. Writing is quite expensive due to the
-replication method used by Redis, but because of the infrequent updates
-to our data, we are willing to accept the trade-off in exchange for very
-fast reads.
-
-\paragraph{Exchange Scheduling
-information}\label{exchange-scheduling-information}
-
-Due to not quite being able to reach every goal of our initial plan as
-to how the architecture should look like, the scheduler had to move to
-the deployment component (i.e.~the deployment to the Kubernetes
-cluster). While this component should be responsible for deploying data
-importers, the information about the schedule should actually be
-provided to the web management system by the user. This is currently not
-happening. There would be several ways how to manage scheduling and/or
-deliver the scheduling information from this system to the component
-handling the scheduling.
-
-\begin{itemize}
-\tightlist
-\item
-  Having a background-processing component that acts as a scheduler
-  within the web management platform. This would require an API to
-  trigger the deploy on the component responsible for that, which we
-  were not able to achieve.
-\item
-  Having a microservice-like component that is only responsible for
-  scheduling and triggering importers to be deployed. This would as well
-  require an API on the deployment component.
-\item
-  Leave the scheduling within the deployment component. This would also
-  require an API, but just for receiving the general schedule, not for
-  offering a hook to trigger an import.
-\end{itemize}
-
-The second option seems more granular and conforms better to our general
-microservice approach but would also require the most configuration and
-deployment effort. Including a scheduler in the web management platform
-would somehow violate this approach but still make sense, as this
-component could easily be integrated within Ruby on Rails and would be a
-standalone component within it.
-
-\subsection{Unit System}\label{unit-system}
-
-When it comes to gather and manage sensor data one topic that directly
-comes to mind is that of units. Uncountable units exist and while there
-are international systems like the \emph{International System of Units
-(SI)} or the \emph{metric system} it is hard to find one system, that
-fits all possible measurements in our case. Some of the reasons for that
-are:
-
-\begin{itemize}
-\tightlist
-\item
-  Not for all measurements there exists an standardized unit in unit
-  systems (e.g.~parts per million)
-\item
-  While standardized systems have the advantage of offering \emph{one}
-  standard unit for a category, those do not have to be intuitive
-  (e.g.~using Kelvin for outside temperature probably will not be
-  intuitive for many people)
-\end{itemize}
-
-Because of that we had to think of an own way, how units would be
-chosen, managed and how users would get information about them.
-
-\subsubsection{Further requirements}\label{further-requirements}
-
-Deciding on a strategy to model units, was a quite long process and not
-all requirements could be fullfilled. In this section we will discuss
-the most important requirements to later on explain for what approach we
+With the requirements in mind, we modeled units like so:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Allow convertibility and ability to localize
-\item
-  It has to be understandable, in what unit a measurement is expressed
-  and in which it was measured It is absolutely avoidable that
-  measurements exist in the database, with a not understandable unit or
-  even worse with a unit that differs from what the system supposes the
-  measurement is expressed in. It is therefore advisable to enforce the
-  user to handle units carefully
-\item
-  Each unit should only exist once. Typos, different expressions etc.
-  shall not lead to confusion
-\end{enumerate}
-
-\subsubsection{Implementation}\label{implementation}
-
-With the requirements in mind we decided to organize units like so:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  We introduced \textbf{Unit Categories}. Units themselves always belong
-  to a unit category. The unit-category describes an entity for which
-  measurements exist, which express their observations with one of the
-  units of that category (See figure for Class Diagram // TODO ref
-  figure).
+  \textbf{Unit Categories}: Units themselves belong to a unit category.
+  The unit category describes an entity for which measurements exist,
+  which express their observations with one of the units of that
+  category (See figure for Class Diagram // TODO ref figure).
 \item
   Each unit has a \textbf{main unit} that we decide on. By calling the
   API or visiting the management platform a user can see, which the main
-  unit is. Within our datastore we only use the main unit of a
-  unit-category for expressing measurements.
+  unit is. Within our datastore we only use the main unit of a unit
+  category for expressing measurements.
 \item
   Units are managed by admins receptively users with permit to do so.
 \item
-  We therefore have a curated list of the unit-categories and units
+  We therefore have a curated list of the unit categories and units
 \item
   If there are units, measurements or even categories missing, each user
   can propose new ones. This proposals are also managed by the group of
@@ -490,19 +333,15 @@ pressure:
   name: Pressure
 \end{verbatim}
 
-The unit categories are pretty straight forward. For a unit there are
+The unit categories are pretty straightforward. For a unit there are
 some more possibilities. Besides declaring the unit symbol, the category
 it belongs to, its name you are allowed to use MathML to express what
 the meaning of a unit is. This is especially helpful with units that can
 be directly converted to each other. // TODO ref picture
 
-\begin{figure}
-\centering
-\includegraphics{images/unit_frontend.png}
-\caption{Screenshot of the units of a unit category on the web
-management platform. You can see the main unit and have a notation on
-what the units express.}
-\end{figure}
+\includegraphics{images/unit_frontend.png} //TODO Figure: Screenshot of
+the units of a unit category on the web management platform. You can see
+the main unit and have a notation on what the units express.
 
 The API of the web management system also provides calls to a) receive
 the main unit of a unit category and to b) get a list of all units there
@@ -546,51 +385,100 @@ GET /unit_categories/temperature/units
 ]
 \end{verbatim}
 
-\subsubsection{Discussion}\label{discussion}
+\section{Discussion}\label{discussion}
 
-This implementation has some advantages but also some disadvantages. In
-this section we want to take a closer look to both sides.
+As mentioned before, the planning of the extent of the functionality
+offered by this system, was very vague. Besides managing metadata and
+providing an API for other components, further features were at least
+considered to be part of this system, like for example a scheduler that
+triggers the component that handles the deployment of importers.
+Therefore we chose to build this system on top of an infrastructure that
+can be easily extended in many directions and has nice-to-use database
+adapters instead of a more lightweight system.
 
-As we force the user to use our main unit, we can be sure, that all data
-in the database is of the same unit for a measurement type. Of course we
-cannot enforce that the user does convert measurements correctly or at
-all, but this would be considered as a faulty import, which in the end
-is the responsibility of the user. Of course an assessment of the
-correctness of data would be nice, but this is also hard to achieve and
-not within the scope of our project.
+While initially we also wanted to model a data source with its sensors
+grouped in sensor stations, this approach would bring immense overhead
+for configuring data sources in our system upfront, as a user would have
+to very exactly model a data source with all its sensors and sensor
+stations first. For big services like e.g.~the German Weather Service
+this would be an enormous amount of work. Gathering this information
+would better be done by scraping the information present in
+Elasticsearch and translating them to geolocated information for all
+sensors/sensor-stations/datasources. In \{//TODO ref figure\} you can
+see the modeling for this approach greyed out.
 
-Our approach of having a curated list means some management overhead and
-possible longer implementation effort for the user if a unit conversion
-he or she needs is not yet available. Given the vast number of units in
-general and the lack of standardization in the way sensors report their
-data, giving a lot of latitude to the user to specify the units and the
-necessary conversions seems like the only reasonable way in which to
-approach the issue.
-
-As the unit categories should be present after a short testing phase of
-a system, and a main unit exists with with, as the curators decide on
-one, the user should most of the time be able to register a source, when
-he wants to, as he only needs to know the main unit.
-
-A big advantage of our approach is, that we kind of crowd-source the
-implementation of converters by this, as it happens during the ETL phase
-while importing (See //TODO ref chapter unit conversion) a source. This
-gives us a chance to achieve the following:
+The main metainformation about the data sources (besides metadata about
+the source itself) that we still needed within our system (the location
+of the sensor and the grouping of sensor stations is not essential for
+our system to work) and had to offer to the user registering a source
+were then:
 
 \begin{itemize}
 \tightlist
 \item
-  Conversions can be reverted, as the converter used is stored with the
-  data.
+  Information about the measurands offered by the data source
 \item
-  Localization within our database can easily be done, as all
-  measurements of a unit category have the same unit and converters are
-  written the moment someone has to convert his source data to our
-  preferred unit.
-\item
-  By crowd-sourcing the implementation of converters they are also open
-  sourced for reuse by other users. Having our own converters only in
-  the system to convert measurements after they are in the database
-  would not guarantee the reusability as importers and our database
-  frontend depend on totally different things.
+  Information about the main unit used for a measurand (see section Unit
+  system // TODO ref section)
 \end{itemize}
+
+\subsubsection{Future Improvements}\label{future-improvements}
+
+\textbf{Caching}
+
+There is currently no caching solution implemented since the workloads
+during development phase were quite manageable. Also including a
+distributed caching system in our production pipeline seemed to be too
+high of an effort and would take up significant resources that would
+actually not be needed during development. We wanted, therefore, to use
+the limited and expensive resources we had for actual importing.
+
+As the number of data importers grows in production, however, requests
+to the relational database would increase accordingly. Whereas scaling
+the database would allow us to avoid the bottleneck, adding a cache in
+front of the database to serve read requests would be sufficient to
+ensure performance without incurring the cost and added complexity of
+scaling. An important consideration, of course, is the frequency with
+which data is updated (in our case low to none), thus making it a
+perfect candidate for caching. As a distributed caching system where
+read requests are very fast and possible on all nodes, Redis would be a
+good fit for this use case. Writing is quite expensive due to the
+replication method used by Redis, but because of the infrequent updates
+to our data, we are willing to accept the trade-off in exchange for very
+fast reads.
+
+\textbf{Exchange Scheduling information}
+
+Due to not quite being able to reach every goal of our initial plan as
+to how the architecture should look like, the scheduler had to move to
+the deployment component (i.e.~the deployment to the Kubernetes
+cluster). While this component should be responsible for deploying data
+importers, the information about the schedule should actually be
+provided to the web management system by the user. This is currently not
+happening. There would be several ways how to manage scheduling and/or
+deliver the scheduling information from this system to the component
+handling the scheduling.
+
+\begin{itemize}
+\tightlist
+\item
+  Having a background processing component that acts as a scheduler
+  within the web management platform. This would require an API to
+  trigger the deploy on the component responsible for that, which we
+  were not able to achieve.
+\item
+  Having a microservice-like component that is only responsible for
+  scheduling and triggering importers to be deployed. This would as well
+  require an API on the deployment component.
+\item
+  Leave the scheduling within the deployment component. This would also
+  require an API, but just for receiving the general schedule, not for
+  offering a hook to trigger an import.
+\end{itemize}
+
+The second option seems more granular and conforms better to our general
+microservice approach but would also require the most configuration and
+deployment effort. Including a scheduler in the web management platform
+would somehow violate this approach but still make sense, as this
+component could easily be integrated within Ruby on Rails and would be a
+standalone component within it.
