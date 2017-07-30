@@ -4,6 +4,7 @@
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|
+|  0.7 | 2017-07-30 | Tasche, Nico | Data model and partitioning |
 |  0.6 | 2017-07-30 | Tasche, Nico | Future work, more limitations and api |
 |  0.5 | 2017-07-30 | Tasche, Nico | API |
 |  0.4  | 2017-07-30 | Tasche, Nico | Overview and adjustments to the optic |
@@ -95,10 +96,16 @@ All our data sources save a few basic data point with each element stored in the
 - location: where has the datapoint been recorded
 
 Those are acutally the only information we need to store, besides the individual measurements. We do acutally store some more information,
-but regarding the common usecases for searches those two datapoints are enough for environemental data. Please refer to the full data-model in the project wiki for more information.
+but regarding the common usecases for searches those two datapoints are enough for environemental data. For each data entry then, there are one ore many messurement in that datapoint. Each measurement than has a quality indicator, a observed value and an sensor name. Please refer to the full data-model in the project wiki for more information.
 
-This data-model has multiple advantages:
-- it keeps the data provenance
+There were mainly two reasons to use this data model. For one it keeps the data provenance, which we quite like to keep. The second reason is that it is nice to handle in terms of partitioning.
+
+### Partitioning
+
+As for the question how does the used data model scale and how to best partition the imported data we decided for an 2-dimensional approach. One dimension is already covert by the data-source centric data model, which allows us, to partitioning by by source. The second dimens is the time. Each data source is partitioned based on the time a messurement has been taken and the granularity can be adjusted as well.
+
+This gives us multiple advantages:
+
 - it allows us to adjust the server infrastructe based on the data source
 - it scales indefinitely
 - index size is deterministic, cause of time based partitioning
@@ -108,7 +115,7 @@ it is also limited to the time, e.g. 2016. That means, when 2016 is finished wit
 After the index is done, it might even be transfered to another Elasticsearch node with different hardware.
 That would be usefull, for example, when the average density of the smurf population is beeing stored.
 The index can be transferd to a less powerfull hardware with fewer CPU cores and spinning harddrives and even fewer replicas,
-because this information is probably hardly requested.
+because this information is probably hardly requested, except from Gargamel and maybe some surf protection groups.
 
 ### Query optimization
 
@@ -192,11 +199,15 @@ By using those two optimitzations, we were able to reduce the number of requeset
 This was just a naive example. In reality the reduction should even be much higher, with a growing number of data sources.
 Let's say we have allready 100 data sources and we can limit a request to just two of those for example because the requested messuremnt it
 provided just by those two, the saving of network traffic and workload would be immense.
+
 ## Implementation Details API
+
 ### Overview
+
 As for the API it was important for us to provide a solution which is easy to scale via a loadbalancing, for example with an nginx instace as an entry point for the user of our system. That means, those instances need to be stateless. For that and because it is basicly a standard we use a REST interface to provide access to our data-collection.
 
 ### Architecture and Technology
+
 As base technology we use nodejs, which is is easy to use JavaScript runtime based on Chrome's V8 JavaScript engine. It allows a fast interation pace and needs just minimal preparation to develop server instances with.
 
 ![image-title-here](images/07_API_Architecture.png)
@@ -207,6 +218,7 @@ The API implementation consists of three parts.
 3. elastic: does everything Elastic Search specific and could actually be replaced by an other database connection if the database would be replaced for example.
 
 ### REST APIs
+
 The REST API currently constists of three End Points:
 
 **1. GET /api/sources/**
