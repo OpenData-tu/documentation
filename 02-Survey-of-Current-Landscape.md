@@ -1,4 +1,4 @@
-# Competitor Analysis
+# Survey of Current Open Data Landscape
 
 **Authorship**
 
