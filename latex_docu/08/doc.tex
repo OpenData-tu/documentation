@@ -176,7 +176,8 @@ The response looks like as follows (note that the const
 {
   "\$schema": "http://json-schema.org/schema#",
   "title": "Data Source",
-  "description": "A Data Source for Open Sensor Data from the CP project at TU Berlin. ",
+  "description": "A Data Source for Open Sensor Data from the CP project \\
+									at TU Berlin. ",
   "type": "object",
   "properties": {
     "source_id": {"const": "source_slug"},
@@ -252,9 +253,19 @@ Example:
 \begin{verbatim}
 GET /data_sources/blume_messnetz/measurands
 
-[
-    {"id":1,"name":"Air Temperature","desc":"","unit_category_id":"temperature"},
-    {"id":3,"name":"Air Humidity","desc":"amount of water vapor present in the air","unit_category_id":"humidity"}
+[  
+   {  
+      "id":1,
+      "name":"Air Temperature",
+      "desc":"",
+      "unit_category_id":"temperature"
+   },
+   {  
+      "id":3,
+      "name":"Air Humidity",
+      "desc":"amount of water vapor present in the air",
+      "unit_category_id":"humidity"
+   }
 ]
 \end{verbatim}
 
@@ -346,16 +357,16 @@ it belongs to, its name you are allowed to use MathML to express what
 the meaning of a unit is. This is especially helpful with units that can
 be directly converted to each other.
 
-\begin{figure}
-	\includegraphics[width=1.00\textwidth]{images/unit_frontend.png}
-	\caption{Screenshot of the units of a unit category on the web management platform. You can see the main unit and have a notation on what the units express.}
-	\label{fig:screen-units}
-\end{figure}
-
 The API of the web management system also provides calls to a) receive
 the main unit of a unit category and to b) get a list of all units there
 are for a unit category. Both of these information are of course aswell
 accessible from the frontend of the system.
+
+\begin{figure}[b]
+	\includegraphics[width=1.00\textwidth]{images/unit_frontend.png}
+	\caption{Screenshot of the units of a unit category on the web management platform. You can see the main unit and have a notation on what the units express.}
+	\label{fig:screen-units}
+\end{figure}
 
 \begin{verbatim}
 GET /unit_categories/:id/getMainUnit
@@ -383,14 +394,35 @@ Example request:
 \begin{verbatim}
 GET /unit_categories/temperature/units
 
-[
-    {"attributes"
-        {"id":"temperature_celsius","name":"celsius","unit_symbol":"°C","unit_category_id":"temperature","notation":""}},
-    {"attributes":
-        {"id":"temperature_fahrenheit","name":"fahrenheit","unit_symbol":"°F","unit_category_id":"temperature","notation":""}},
-    {"attributes":
-        {"id":"temperature_kelvin","name":"kelvin","unit_symbol":"K","unit_category_id":"temperature","notation":""}}
-    [...]
+[  
+   {  
+      "attributes":{  
+         "id":"temperature_celsius",
+         "name":"celsius",
+         "unit_symbol":"°C",
+         "unit_category_id":"temperature",
+         "notation":""
+      }
+   },
+   {  
+      "attributes":{  
+         "id":"temperature_fahrenheit",
+         "name":"fahrenheit",
+         "unit_symbol":"°F",
+         "unit_category_id":"temperature",
+         "notation":""
+      }
+   },
+   {  
+      "attributes":{  
+         "id":"temperature_kelvin",
+         "name":"kelvin",
+         "unit_symbol":"K",
+         "unit_category_id":"temperature",
+         "notation":""
+      }
+   },
+	\ldots{}
 ]
 \end{verbatim}
 
