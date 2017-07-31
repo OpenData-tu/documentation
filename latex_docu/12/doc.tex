@@ -1,99 +1,39 @@
-\section{Conclusions}\label{conclusions}
+\section{Conclusions}\label{sec:conclusions}
 
 \textbf{Authoriship}
 
-\begin{longtable}[]{@{}llll@{}}
+\begin{longtable}{@{}llll@{}}
 \toprule
 Version & Date & Modified by & Summary of changes\tabularnewline
 \midrule
 \endhead
 0.1 & 2017-07-19 & Oliver, Andres & Working draft\tabularnewline
+0.5 & 2017-07-30 & Oliver & From bullets to text\tabularnewline
 \bottomrule
 \end{longtable}
 
 \subsection{Is Open Data really open?}\label{is-open-data-really-open}
 
-\begin{itemize}
-\tightlist
-\item
-  What sources did we ``unlock''
-\item
-  Data source types (ftp, http, REST)
-\item
-  Different data formats (CSV, XLS, HTML)
-\item
-  Different measurands (Temperature, air pollution, etc)
-\end{itemize}
+The main feature of Open Data is to be easily available and accessable to everyone. During our research for sources to include and collect data, we had a hard time in finding non-static Open Data. Myriad data sources present their data to the user through a GUI or website, but do not provide the underlying data. Some providers even prohibit the usage and storage of the data for commercial and even private usage outside their platform. Furthermore, the overwhelming amount of disparate protocols to access data in different formats (CSV, XLS, HTML) in which the data is presented and offered makes it hard for the user to benefit from the data. This very reason is the motivation behind creating our system.
+
+Still, we were able to identify a multitude of available sources and used our system as proof-of-concept to include and provide six of them (see Appendix \ref{} for a list). The "`unlocked"' sources offer different measurands like temperature and river water level.
+
+Though, concluding one must say that nonetheless, a lot of work is to be done when it comes to make Open Data really \textbf{open}.
 
 \subsection{Lessons learned}\label{lessons-learned}
 
-\begin{itemize}
-\tightlist
-\item
-  Maslow's hammer: ``when you have a hammer, everything looks like a
-  nail''
-\item
-  Database choice: Start with use cases \& (types of) queries
-\item
-  Test your ideas on real infrastructure rather conjecturing
-\item
-  Balance using existing knowledge vs.~investing time in learning new
-  technologies
-\item
-  Never underestimate overhead of cloud resource procurement,
-  configuration \& deployment
-\item
-  Availability of ``open'' data is virtually inexistent for automated
-  agents
-\item
-  Most provide a GUI, but not the data
-\end{itemize}
+The best way to improve is to learn from mistakes, should they be your own or someone elses. But first you must be aware of challenges and setbacks along the road. To do so, this section will recapitulate the history of the project and discuss the lessons learned.
 
-\subsubsection{Team \& Process}\label{team-process}
+Project teams will always consist of heterogenous people with different skills and understanding of the problem. To get everyone on the same page is a tough challenge and with such strict time restrictions it got even more challenging. Cultural and difference in language profficiency detained us from reaching agreements fast and function as a unit. Furthermore, team members tended to work separately. This in itself is not generally a problem, but in our case, due to lack of communication and synchronization with the rest of the team, led to end-products which sometimes did not work together well, or required significant efforts to integrate and harmonize. Bugs or issues in the individual components were not discovered until late in the process, more specifically until deployment of the whole system. Further, because the infrastructure deployment basically rested on the shoulders of a single member, this created a bottleneck and excessive load on this person. Besides, said challenges the tools established to improve team work and productivity got partially abandoned. Specifically, somewhere around the midpoint of the project timeline most stopped using Trello to keep track of global progess and open todos. Obviously this led to lack of visibility as to what was to be done, and contributed to the general displacement of team members into silos.
 
-\begin{itemize}
-\tightlist
-\item
-  Because English was not the native language of the majority of the
-  team members, this led to difficulties with preciseness when having
-  discussions and reaching consensus/conclusions
-\item
-  Cultural differences (indirect speech, etc.) also contributed to
-  protracted discussions and difficulties reaching agreement, in
-  general.
-\item
-  Team members tended to work separately. This in itself is not
-  generally a problem, but in our case, due to lack of communication \&
-  synchronization with the rest of the team, led to end-products which
-  sometimes did not work together well, or required significant efforts
-  to integrate and harmonize. bugs or issues in the individual
-  components were not discovered until quite late in the process (until
-  deployment). Further, because the infrastructure deployment rested on
-  the shoulders of a single member, this created a bottleneck and
-  excessive load on this person.
-\item
-  Development tools were established from the get-go, but somewhere
-  around the midpoint of the project timeline most stopped using Trello
-  to keep track of tasks and TODOs. Obviously this led to lack of
-  visibility as to what was to be done, and contributed to the general
-  displacement of team members into silos.
-\end{itemize}
+\begin{quotation}
+Maslow's hammer: "`when you have a hammer, everything looks like a nail!"'
+\end{quotation}
+
+Moreover, we experienced Maslow's hammer first hand. In our case this means that we tried to adjust the problem to our technology rather than vice versa. Concluding, a hug lesson that we learned is to start with a use case and then try to find the perfect solution. For example, when choosing a database technology start with the queries you want to optimize and for which you want to ensure the perfect performance. No system can be the best solution for every given challenge thus, formulate your problem statement specifically and based on this, choose the best fit. Moreover, when the decision for a technology or solution was made, test and benchmark it under real-world conditions rather than conjcture. Though, said approach is hard to implement given the limited time and budget we were given. A different trade-off that has to be made is the time invested in learning new technologies against exploiting existing knowledge and understanding. Typically, in a real-world case a project team is formed of domain experts so that existing knowledge can be harnessed most of the time. In our very unique case, a team formed of diverse university students, the available knowledge and experience with existing solutions might not suffice. Hence, we were presented with problem domains to which we did not have the right solution and expert. This forced us to spend a significant amout of time to research available technologies and services.
+
+Finally, never underestimate the overhead of cloud resource procurement and the administration of the infrastructure. Obviously, without available infrastructure testing and benchmarking is not possible thus, decide early in the project where and how to test. It might not be the optimal solution but as the product grows everything can improve.
 
 \subsection{Future improvements}\label{future-improvements}
 
--- What are the problems with the architecture as it is today -- What
-was \emph{not} implemented and WHY
-
-\begin{itemize}
-\tightlist
-\item
-  Postprocessing of indices/data into measurand-based hierarchy
-\item
-  Optimize queries with metadata from relational database
-\item
-  Ability to recover importer from failure via checkpointing
-\item
-  User-defined time schedule for importers
-\item
-  Auto-scaling of importers based on resource requirements
-\end{itemize}
+Delete???
