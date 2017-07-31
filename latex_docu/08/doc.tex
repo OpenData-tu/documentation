@@ -71,7 +71,7 @@ as a database. The reasons why we chose to use Rails are:
 
 \begin{figure}
 	\includegraphics[width=1.00\textwidth]{images/relational_schema.png}
-	\caption{UML Model}
+	\caption{UML Class Diagram of the Metadata Management System}
 	\label{fig:uml-model}
 \end{figure}
 
@@ -233,13 +233,13 @@ be stored and managed, and how it would be provided, the easiest place
 to start with in our opinion was with the implementer of an importer,
 since he or she must provide information to us when registering the data
 source. The user therefore has to mark what measurements a data source
-contains upfront.
+contains upfront (see Figure \ref{fig:register-source}).
 
 In order to optimize querying, this information is provided to the API
 that wraps the search interface of Elasticsearch via an API itself. The
 information is stored in an indexed join table that holds the mapping
-between data source and the measurands it contains. As you can see in
-the class diagram of the relational system, queries
+between data source and the measurands it contains. As can be seen in
+the class diagram \ref{fig:uml-model} of the relational system, queries
 in both directions are provided: getting all measurands for a data
 source, and getting all data sources that contain a given measurand. The
 corresponding routes look like this:
@@ -302,7 +302,7 @@ With the requirements in mind, we modeled units like so:
   \textbf{Unit Categories}: Units themselves belong to a unit category.
   The unit category describes an entity for which measurements exist,
   which express their observations with one of the units of that
-  category (See figure for Class Diagram).
+  category (see Figure \ref{fig:uml-model}).
 \item
   Each unit has a \textbf{main unit} that we decide on. By calling the
   API or visiting the management platform a user can see, which the main
@@ -355,7 +355,7 @@ The unit categories are pretty straightforward. For a unit there are
 some more possibilities. Besides declaring the unit symbol, the category
 it belongs to, its name you are allowed to use MathML to express what
 the meaning of a unit is. This is especially helpful with units that can
-be directly converted to each other.
+be directly converted to each other (Figure \ref{fig:screen-units}).
 
 The API of the web management system also provides calls to a) receive
 the main unit of a unit category and to b) get a list of all units there
