@@ -2,19 +2,19 @@
 
 \begin{longtable}{lllll}
 \toprule
- No. & Name  & Measurand & Data Format & URL \tabularnewline
+ No. & Name  & Measurand(s) & Data Format & URL \tabularnewline
 \midrule
 \endhead
- 1 & Weather Data Stuttgart & Humidity, Temperature, & csv & luftdaten.info \tabularnewline
+ 1 & Weather Data Stuttgart & Humidity, Temperature, & CSV & luftdaten.info \tabularnewline
    & & Pressure & & \\
- 2 & Luftdaten Brandenburg & O\textsubscript{3}, NO, NO\textsubscript{2}, PM10, & xls & luftdaten.brandenburg.de \tabularnewline
+ 2 & Luftdaten Brandenburg & O\textsubscript{3}, NO, NO\textsubscript{2}, PM10, & XLS & luftdaten.brandenburg.de \tabularnewline
 	 & & PM2.5, SO\textsubscript{2}, CO & & \tabularnewline
- 3 & Umweltbundesamt & PM10, SO\textsubscript{2}, O\textsubscript{3}, NO\textsubscript{2}, CO & csv &  umweltbundesamt.de \tabularnewline
+ 3 & Umweltbundesamt & PM10, SO\textsubscript{2}, O\textsubscript{3}, NO\textsubscript{2}, CO & CSV &  umweltbundesamt.de \tabularnewline
  4 & Pegel Online & Water Level & REST, & pegelonline.wsv.de \tabularnewline
-   & Water Level & & SOAP, HTTP & \tabularnewline
+   & Water Level & & SOAP & \tabularnewline
  5 & BLUME & N\textsubscript{2}O, SO\textsubscript{2}, PM10, & HTML & https://www.berlin.de \tabularnewline
 	 & & C\textsubscript{6}H\textsubscript{6}, CO, O\textsubscript{3} & & \tabularnewline
- 6 & BFS UV-Index & UV-Index & HTML & http://www.bfs.de\tabularnewline
+ 6 & BFS UV Index & UV Index & HTML & http://www.bfs.de\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -53,12 +53,12 @@ We assume that you are:
 \item
   already familiar working with Spring Batch
 \item
-  having knowledge of working with multi module applications using maven
+  having knowledge of working with multi module applications using Maven
   and Spring Boot.
 \end{itemize}
 
-If you need a quick start guide of Spring Batch you can find it
-\href{https://projects.spring.io/spring-batch/}{here:}
+If you need a quick start guide of Spring Batch, you can find one at
+\url{https://projects.spring.io/spring-batch/}.
 
 \subsection{How to Proceed}
 
@@ -84,10 +84,10 @@ The template is a multi module application which includes two modules:
 These modules are defined inside \texttt{pom.xml} file.
 
 \begin{verbatim}
-<modules>
+    <modules>
         <module>library</module>
         <module>application</module>
-</modules>
+    </modules>
 \end{verbatim}
 
 \begin{enumerate}
@@ -101,10 +101,11 @@ These modules are defined inside \texttt{pom.xml} file.
 \end{enumerate}
 
 \begin{verbatim}
-<groupId>de.tu_berlin.ise.open_data</groupId>
-    <artifactId>your-importer-name-here</artifactId>
-    <version>0.1.0</version>
-    <packaging>pom</packaging>
+    <groupId>de.tu_berlin.ise.open_data</groupId>
+      <artifactId>your-importer-name-here</artifactId>
+      <version>0.1.0</version>
+      <packaging>pom</packaging>
+      ...
 \end{verbatim}
 
 \begin{enumerate}
@@ -122,7 +123,10 @@ These modules are defined inside \texttt{pom.xml} file.
 
   Inside the root directory of the importer run these commands:
 
-  \$ cd application \$ mvn spring-boot:run
+\begin{verbatim}
+  $ cd application
+  $ mvn spring-boot:run
+\end{verbatim}
 \item
   You can now see inside the console how a simple job runs.
 \end{enumerate}
@@ -138,19 +142,19 @@ template:}\label{things-to-know-about-the-template}
 \end{itemize}
 
 \begin{verbatim}
-<dependency>
-    <groupId>de.tu_berlin.ise.open_data.library</groupId>
-    <artifactId>library</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-</dependency>
+    <dependency>
+      <groupId>de.tu_berlin.ise.open_data.library</groupId>
+      <artifactId>library</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
 \end{verbatim}
 
 \begin{itemize}
 \tightlist
 \item
   Registered beans inside the library module could be autowired by
-  importing the `ServiceConfiguration' class from package
-  `de.tu\_berlin.ise.open\_data.library'. You can see how it is imported
+  importing the \texttt{ServiceConfiguration} class from package
+  \texttt{de.tu\_berlin.ise.open\_data.library}. You can see how it is imported
   in main class:
 \end{itemize}
 
