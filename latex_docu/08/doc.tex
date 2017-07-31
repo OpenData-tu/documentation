@@ -253,14 +253,14 @@ Example:
 \begin{verbatim}
 GET /data_sources/blume_messnetz/measurands
 
-[  
-   {  
+[
+   {
       "id":1,
       "name":"Air Temperature",
       "desc":"",
       "unit_category_id":"temperature"
    },
-   {  
+   {
       "id":3,
       "name":"Air Humidity",
       "desc":"amount of water vapor present in the air",
@@ -279,8 +279,8 @@ An example request would look like following
 GET /measurements/1/data_sources
 
 [
-    {"id":1,"slug":"blume_messnetz","license":""},
-    {"id":5,"slug":"german_weather_service","license":""}
+    { "id":1, "slug":"blume_messnetz", "license":"" },
+    { "id":5, "slug":"german_weather_service", "license":"" }
 ]
 \end{verbatim}
 
@@ -394,9 +394,9 @@ Example request:
 \begin{verbatim}
 GET /unit_categories/temperature/units
 
-[  
-   {  
-      "attributes":{  
+[
+   {
+      "attributes":{
          "id":"temperature_celsius",
          "name":"celsius",
          "unit_symbol":"°C",
@@ -404,8 +404,8 @@ GET /unit_categories/temperature/units
          "notation":""
       }
    },
-   {  
-      "attributes":{  
+   {
+      "attributes":{
          "id":"temperature_fahrenheit",
          "name":"fahrenheit",
          "unit_symbol":"°F",
@@ -413,8 +413,8 @@ GET /unit_categories/temperature/units
          "notation":""
       }
    },
-   {  
-      "attributes":{  
+   {
+      "attributes":{
          "id":"temperature_kelvin",
          "name":"kelvin",
          "unit_symbol":"K",
@@ -422,7 +422,7 @@ GET /unit_categories/temperature/units
          "notation":""
       }
    },
-	\ldots{}
+   ...
 ]
 \end{verbatim}
 
