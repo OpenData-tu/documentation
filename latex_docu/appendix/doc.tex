@@ -1,19 +1,22 @@
 \section{Imported Data Sources}
 
-\begin{table}[]
-\centering
-\caption{Data Sources}
-\label{data_sources}
-\begin{tabular}{llllll}
- No. & Name  & Description & Measurand & Supported Data Format & URL \\
- 1 & Weather Data Stuttgart & The source is part of the \textbf{OK Lab Stuttgart} project which includes 300 fine dust sensors. & Humidity, Temperature, Pressure &csv & luftdaten.info \\
- 2 & Luftdaten Brandenburg & Air quality data from 28 data measuring stations in Brandenburg, Germany. & O₃, NO, NO₂, PM10, PM2.5, SO₂, CO & xls & luftdaten.brandenburg.de \\
- 3 & Umweltbundesamt & Current air quality data from about 500 data measuring stations for 16 states and cities of Germany. & PM10, SO₂, O₃, NO₂, CO & csv &  umweltbundesamt.de \\
- 4 & Pegel Online Water Level & Raw values of \textbf{Water Level} for internal and coastal levels of waterways of the Germany up to a maximum of 30 days & Water Level & REST, SOAP, HTTP & pegelonline.wsv.de \\
- 5 & BLUME &  & Stickoxide, Schwefeldioxid, Schwebstaub (PM10), Benzol, Kohlenmonoxid und Ozon & HTML & https://www.berlin.de/senuvk/umwelt/luftqualitaet/de/messnetz/aktuelle\_werte.shtml \\
- 6 & BFS UV-Index &  & UV-Index & HTML & http://www.bfs.de/DE/themen/opt/uv/uv-index/aktuell/aktuell\_node.html
-\end{tabular}
-\end{table}
+\begin{longtable}{lllll}
+\toprule
+ No. & Name  & Measurand & Data Format & URL \tabularnewline
+\midrule
+\endhead
+ 1 & Weather Data Stuttgart & Humidity, Temperature, & csv & luftdaten.info \tabularnewline
+   & & Pressure & & \\ 
+ 2 & Luftdaten Brandenburg & O\textsubscript{3}, NO, NO\textsubscript{2}, PM10, & xls & luftdaten.brandenburg.de \tabularnewline
+	 & & PM2.5, SO\textsubscript{2}, CO & & \tabularnewline
+ 3 & Umweltbundesamt & PM10, SO\textsubscript{2}, O\textsubscript{3}, NO\textsubscript{2}, CO & csv &  umweltbundesamt.de \tabularnewline
+ 4 & Pegel Online & Water Level & REST, & pegelonline.wsv.de \tabularnewline
+   & Water Level & & SOAP, HTTP & \tabularnewline
+ 5 & BLUME & N\textsubscript{2}O, SO\textsubscript{2}, PM10, & HTML & https://www.berlin.de \tabularnewline
+	 & & C\textsubscript{6}H\textsubscript{6}, CO, O\textsubscript{3} & & \tabularnewline
+ 6 & BFS UV-Index & UV-Index & HTML & http://www.bfs.de\tabularnewline
+\bottomrule
+\end{longtable}
 
 \section{How to Write a Data
 Importer}\label{how-to-write-a-data-importer}
@@ -28,6 +31,8 @@ Version & Date & Modified by & Summary of changes\tabularnewline
 0.1 & 2017-07-29 & Jawid, Rohullah & Initial version\tabularnewline
 \bottomrule
 \end{longtable}
+
+\vspace*{4mm}
 
 This chapter guides you through building your own importer on top of an
 already existing template.
