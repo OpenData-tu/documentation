@@ -260,22 +260,34 @@ to scale across several nodes.
 
 \subsection{Existing solutions}\label{existing-solutions}
 
+It is always advisable to research existing solutions and contributions to the given problem. By doing so, first, one avoids doing the same work again and emphasize that the proposed work provides added value. Furthermore, one can learn from existing solutions and approaches to solve the given problem. In this section we will discuss the existing architectures to resolve the challenge of collection huge amounts of data and, process and store it persistently.
+
+Our problem statement is to collect open sensor data, process it in batches, store it persistently and provide it to the user through a unified interface. The Amazon Web Services (AWS) Lab offers an extensive collection of reference architectures for their cloud platform. Nevertheless, it is build on top of the AWS cloud service, most of the offerings by AWS can be replaced by open source solutions with similar functionality in order to run on different infrastructure. We identified three proposed reference architecture that fit our problem statement. Figure \ref{fig:aws-refarch} shows the IoT Reference Architecture and the Stream Processing Reference Architecture on AWS. Even though the shown reference architecture do not mirror our whole pipeline, they overlapp in some aspects, which makes it interessting to investigate them further. The third reference architecture, Batch Processing with ECS, suggests more of an approach to employ containers with AWS' container services. Since we wanted to create a provider independent platform, we did not pursue it any further. Though, we adapted a container approach using docker to abstract away from the underlying infrastructure.
+
+Our use case is comparable to a IoT service. The main difference is that we do not ingest data via stream into our system but rather in batches at scheduled times. Nevertheless, the data arrives in myriad different formats and in addition, depending on the success and popularity of the system, at some point in time the batches will be so frequent that it might resemble a stream. The workflow is similar to the one we wanted to build. The data enters the system, gets processed by a small and simple component and then is stored for querying.
+
+The stream processing architecture is a little simpler. Though, here as well the pipeline is comparable to the workflow that we employ. Besides the low-latency storage in DynamoDB a archival storage in S3 is created. We believe that retrieving histroical data together with new recent data is one aspect that adds value to the retrieved data thus, we serve the data independent of the arrival time in our main storage solution. Nevertheless, it presents a possible solution on how to store data that is not frequently queried when the stored amount is hard to be processed by a single engine.
+
+\begin{figure}%
+	\centering
+	\subfigure[AWS IoT Reference]{\includegraphics[width=0.45\textwidth]{images/lambda-refarch-iotbackend.png}}
+	\subfigure[AWS Stream Processing Reference]{\includegraphics[width=0.45\textwidth]{images/lambda-refarch-streamprocessing.png}}
+	\caption{Researched AWS Reference Architecture}%
+	\label{fig:aws-refarch}%
+\end{figure}
+
+All presented and more reference architectures can be found at https://github.com/awslabs. The following list includes the links to the discussed architectures:
+
 \begin{itemize}
 \tightlist
 \item
-  AWS reference architectures
-\item
-  https://github.com/awslabs?utf8=\%E2\%9C\%93\&q=refarch\&type=\&language=
+  https://github.com/awslabs
 \item
   https://github.com/awslabs/lambda-refarch-iotbackend
 \item
   https://github.com/awslabs/lambda-refarch-streamprocessing
 \item
   https://github.com/awslabs/ecs-refarch-batch-processing
-\item
-  http://media.amazonwebservices.com/architecturecenter/AWS\_ac\_ra\_batch\_03.pdf
-\item
-  https://aws.amazon.com/de/architecture/
 \end{itemize}
 
 \subsection{Evolution of the architecture}\label{evolution-of-the-architecture}
