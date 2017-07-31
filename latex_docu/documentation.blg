@@ -1,5 +1,10 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: documention.aux
-I found no \citation commands---while reading file documention.aux
-I found no \bibdata command---while reading file documention.aux
-I found no \bibstyle command---while reading file documention.aux
-(There were 3 error messages)
+This is BibTeX, Version 0.99dThe top-level auxiliary file: documentation.aux
+The style file: plain.bst
+Database file #1: references.bib
+Warning--to sort, need author or key in cassandra
+Warning--to sort, need author or key in cassandra2
+Warning--to sort, need author or key in eastic
+Warning--empty journal in Bass&Clements&Kazmann.2012
+Warning--empty journal in Chatzakis.2016
+Warning--empty journal in Garlan&Shaw.1994
+(There were 6 warnings)

@@ -1,8 +1,9 @@
-\section{Data Source Metadata Management
-System}\label{data-source-metadata-management-system}
+\section{Data Source Metadata Management System}\label{sec:metadata}
 
-\textbf{Authoriship} Written by Paul Wille \emph{Proofread \& edited by
-Andres}
+\textbf{Authoriship: } Written by Paul Wille\\
+\emph{Proofread \& edited by Andres} \\
+
+\vspace*{4mm}
 
 In this chapter we will discuss the component responsible for managing
 metadata about the data sources which are imported to the system. We
@@ -66,11 +67,12 @@ as a database. The reasons why we chose to use Rails are:
   Offers the dynamic of Ruby as programming language
 \end{itemize}
 
-\subsubsection{Domain Model}\label{domain-model}
+\subsection{Domain Model}\label{domain-model}
 
 \begin{figure}
-\includegraphics[width=1.00\textwidth]{images/relational_schema.png}
-\caption{UML Class}
+	\includegraphics[width=1.00\textwidth]{images/relational_schema.png}
+	\caption{UML Model}
+	\label{fig:uml-model}
 \end{figure}
 
 \subsubsection{Data Sources Registry}\label{data-sources-registry}
@@ -124,8 +126,9 @@ useful for our system:
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=1.00\textwidth]{images/new_datasource.png}
-\caption{Registering a data source within the Web management platform}
+	\includegraphics[width=1.00\textwidth]{images/new_datasource.png}
+	\caption{Registering a data source within the Web management platform}
+	\label{fig:register-source}
 \end{figure}
 
 \subsubsection{Validation Schema}\label{validation-schema}
@@ -171,7 +174,7 @@ The response looks like as follows (note that the const
 
 \begin{verbatim}
 {
-  "$schema": "http://json-schema.org/schema#",
+  "\$schema": "http://json-schema.org/schema#",
   "title": "Data Source",
   "description": "A Data Source for Open Sensor Data from the CP project at TU Berlin. ",
   "type": "object",
@@ -344,9 +347,9 @@ the meaning of a unit is. This is especially helpful with units that can
 be directly converted to each other.
 
 \begin{figure}
-\includegraphics[width=1.00\textwidth]{images/unit_frontend.png}
-\caption{Screenshot of the units of a unit category on the web management platform. You can see
-the main unit and have a notation on what the units express.}
+	\includegraphics[width=1.00\textwidth]{images/unit_frontend.png}
+	\caption{Screenshot of the units of a unit category on the web management platform. You can see the main unit and have a notation on what the units express.}
+	\label{fig:screen-units}
 \end{figure}
 
 The API of the web management system also provides calls to a) receive
@@ -391,7 +394,7 @@ GET /unit_categories/temperature/units
 ]
 \end{verbatim}
 
-\section{Discussion}\label{discussion}
+\subsection{Discussion}\label{discussion}
 
 As mentioned before, the planning of the extent of the functionality
 offered by this system, was very vague. Besides managing metadata and
@@ -430,7 +433,7 @@ were then:
 
 \subsubsection{Future Improvements}\label{future-improvements}
 
-\textbf{Caching}
+\paragraph{Caching}
 
 There is currently no caching solution implemented since the workloads
 during development phase were quite manageable. Also including a
@@ -453,7 +456,7 @@ replication method used by Redis, but because of the infrequent updates
 to our data, we are willing to accept the trade-off in exchange for very
 fast reads.
 
-\textbf{Exchange Scheduling information}
+\paragraph{Exchange Scheduling information}
 
 Due to not quite being able to reach every goal of our initial plan as
 to how the architecture should look like, the scheduler had to move to

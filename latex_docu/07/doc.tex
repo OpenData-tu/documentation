@@ -1,7 +1,9 @@
-\section{Database}\label{database}
+\section{Database}\label{sec:database}
 
-\textbf{Authorship} Written by Nico Tasche Minor proofreading and
-editing by Andres
+\textbf{Authoriship: } Written by Nico Tasche\\
+\emph{Minor proofreading \& edited by Andres Ardila} \\
+
+\vspace*{4mm}
 
 \subsection{Overview}\label{overview}
 
@@ -97,7 +99,7 @@ soft-requirements as well:
 Checking our requirements Elasticsearch fulfilled all of them. The
 reasons why we decided to use Elasticsearch even before we went to deep
 into other databases were as follows: - native support for geo spatial
-searches \textbf{{[}1{]}} - group members already knew Elasticsearch,
+searches \cite{McCandless.2016} - group members already knew Elasticsearch,
 unlike all other NoSQL databases - extremely well documented - very high
 development pace from the company who develops it
 
@@ -105,19 +107,17 @@ Considering we had no real database expert in our team, the fact that
 group members already had practical experience with Elasticsearch was a
 very important point for us.
 
-\subsubsection{Special look at
-Cassandra}\label{special-look-at-cassandra}
+\subsubsection{Special look at Cassandra}\label{special-look-at-cassandra}
 
 After a few tests and an overview of the documentation, it was clear
-that Cassandra had two shortcomings regarding our project. 1. The
-documentation seems to have quite a few gabs. \textbf{{[}2, 3{]}} 2.
-there is no native support for spatial geo data
+that Cassandra had two shortcomings regarding our project. First, the
+documentation seems to have quite a few gaps \cite{cassandra, cassandra2}. Second, there is no native support for spatial geo data.
 
 \subsection{Implementation Details}\label{implementation-details}
 
 \subsubsection{Intro to Elasticsearch}\label{intro-to-elasticsearch}
 
-Elasticsearch \textbf{{[}4{]}} is an open source Lucene based search
+Elasticsearch \cite{eastic} is an open source Lucene based search
 engine. It is under active development, with an extensive documentation.
 
 \subsubsection{Architecture}\label{architecture}
@@ -148,9 +148,10 @@ figure, which assumes that the cluster holds three indices, on three
 nodes, with two replicas per index.
 
 \begin{figure}[htbp]
-\centering
-\includegraphics[width=1.00\textwidth]{images/07_database_architecture_elastic.png}
-\caption{OpenData Database Architecture}
+	\centering
+	\includegraphics[width=1.00\textwidth]{images/07_database_architecture_elastic.png}
+	\caption{OpenData Database Architecture}
+	\label{fig:elastic-architecture}
 \end{figure}
 
 The index configuration in our architecture follows a template, which is
@@ -265,9 +266,10 @@ decided to start with three replicas, so each request is forwarded to a
 different replica. This can be flexible in- or decreased later on.
 
 \begin{figure}[htbp]
-\centering
-\includegraphics[width=1.00\textwidth]{images/07_database_architecture.png}
-\caption{OpenData Database Architecture}
+	\centering
+	\includegraphics[width=1.00\textwidth]{images/07_database_architecture.png}
+	\caption{OpenData Database Architecture}
+	\label{fig:db-architecture}
 \end{figure}
 
 \subsubsection{Query Optimization}\label{query-optimization}
@@ -411,7 +413,8 @@ instances with.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1.00\textwidth]{images/07_API_Architecture.png}
-\caption{image-title-here}
+\caption{Public API Abstraction}
+\label{fig:public-api}
 \end{figure}
 
 The API implementation consists of three parts.
@@ -523,14 +526,3 @@ which should be implemented:
   optimizing the data handling on the API instances, which is not very
   efficient
 \end{enumerate}
-
-\subsection{References}\label{references}
-
-{[}1{]} Michael McCandless. Elastic Bloc.
-\textbf{\emph{Multi-dimensional points, coming in Apache Lucene 6.0}},
-https://www.elastic.co/blog/lucene-points-6.0, 2016
-{[}2{]}\textbf{\emph{Missing documentation in Cassandra}},
-http://cassandra.apache.org/doc/latest/architecture/overview.html ,
-2016-07-30 {[}3{]}\textbf{\emph{Missing documentation in Cassandra 2}},
-http://cassandra.apache.org/doc/latest/architecture/dynamo.html ,
-2016-07-30 {[}4{]} https://www.elastic.co

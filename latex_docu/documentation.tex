@@ -1,46 +1,92 @@
-% This is based on the LLNCS.DEM the demonstration file of
-% the LaTeX macro package from Springer-Verlag
-% for Lecture Notes in Computer Science,
-% version 2.4 for LaTeX2e as of 16. April 2010
-%
-% See http://www.springer.com/computer/lncs/lncs+authors?SGWID=0-40209-0-0-0
-% for the full guidelines.
-%
+\documentclass{article}
 
-\documentclass{llncs}
 \usepackage{listings}
 \usepackage{amsmath}
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{subfigure}
 
+\usepackage{caption}
+\usepackage[toc,page]{appendix}
+\usepackage[left=40mm,right=40mm,top=35mm,bottom=35mm]{geometry}
+
+\providecommand{\keywords}[1]{\textbf{\textit{keywords ---}} #1}
+
+%% PANDOC specific list %%%
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
+%% Change style for list label	
+\renewcommand{\labelitemi}{-}
+\renewcommand{\labelitemii}{-}
+\renewcommand{\labelitemiii}{$\bullet$}
+
+
 \begin{document}
 
-\title{Project Documentation for Open Environmental Data Cloud Prototyping Project}
-%
-\titlerunning{Open Data}  % abbreviated title (for running head)
-%                                     also used for the TOC unless
-%                                     \toctitle is used
-%
-\author{Andres Ardila, Rohullah Ayobi, Oliver Bruski, Ahmad Jawid Jami, Amer Jazaerli, Nico Tasche, Paul Wille}
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Titlepage %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
 
-\institute{Technische Universit\"at Berlin, Stra\ss{}e des 17. Juni 135, 10623 Berlin, Germany,\\
-\email{firstname.lastname@campus.tu-berlin.de}}
+\thispagestyle{empty}
+\begin{flushleft}
+\LARGE{\bfseries Project Documentation}\\
+\end{flushleft}
+\rule{\textwidth}{1pt}
+\vspace{2pt}
+\begin{flushleft}
+\Huge{Open Environmental Data} \\
+\huge{Cloud Prototyping Project} \\
+\end{flushleft}
+\rule{\textwidth}{1pt}
 
-\maketitle              % typeset the title of the contribution
+
+\newpage
+\thispagestyle{empty}
+\clearpage
+
+\begin{center}
+\Large{Written and submitted by:}\\
+\vspace*{2mm}
+\normalsize
+Andres Ardila, Rohullah Ayobi, Oliver Bruski, Ahmad Jawid Jami, Amer Jazaerli, Nico Tasche, Paul Wille\\
+\vspace*{7mm}
+Technische Universit\"at Berlin, Stra\ss{}e des 17. Juni 135, 10623 Berlin, Germany\\
+firstname.lastname@campus.tu-berlin.de
+\end{center}
+
+\vspace*{8mm}
+\begin{center}
+	\Large{Reviewed and published by:}\\
+	\vspace*{2mm}
+	\normalsize
+	Andres Ardila \& Oliver Bruski
+\end{center}
+
+\keywords{Open Data, Environemental Data, Big Data}
+
+\vspace*{1mm}
+\rule{\textwidth}{1pt}
+\vspace*{1mm}
 
 \begin{abstract}
-\keywords{Open Data, Environemental Data, Big Data}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
+
+Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero.
 \end{abstract}
+\newpage
 
-\pagebreak
 
-\tableofcontents
+%%%%%%%%%%%%%%%%%%
+%%% TOC %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%% Ein kleiner Abstand zu den Kapiteln im Inhaltsverzeichnis (toc)
+\addtocontents{toc}{\protect\vspace*{\baselineskip}}
 
+\tableofcontents %Table of Content
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%
@@ -61,171 +107,15 @@
 %\input{11/doc.tex}
 \input{12/doc.tex}
 
-\begin{thebibliography}{}  % (do not forget {}) and Put your bib.txt in here
+\newpage
 
-%\input{01_introduction/bib.tex}
-%\input{07_database/bib.tex}
+\bibliography{references}
+\bibliographystyle{plain}
 
-
-\end{thebibliography}
-
+\clearpage
+\newpage
 \appendix
 
-\section{Imported Data Sources}
-
-\begin{table}[]
-\centering
-\caption{Data Sources}
-\label{data_sources}
-\begin{tabular}{llllll}
- No. & Name  & Description & Measurand & Supported Data Format & URL \\
- 1 & Weather Data Stuttgart & The source is part of the \textbf{OK Lab Stuttgart} project which includes 300 fine dust sensors. & Humidity, Temperature, Pressure &csv & luftdaten.info \\
- 2 & Luftdaten Brandenburg & Air quality data from 28 data measuring stations in Brandenburg, Germany. & O₃, NO, NO₂, PM10, PM2.5, SO₂, CO & xls & luftdaten.brandenburg.de \\
- 3 & Umweltbundesamt & Current air quality data from about 500 data measuring stations for 16 states and cities of Germany. & PM10, SO₂, O₃, NO₂, CO & csv &  umweltbundesamt.de \\
- 4 & Pegel Online Water Level & Raw values of \textbf{Water Level} for internal and coastal levels of waterways of the Germany up to a maximum of 30 days & Water Level & REST, SOAP, HTTP & pegelonline.wsv.de \\
- 5 & BLUME &  & Stickoxide, Schwefeldioxid, Schwebstaub (PM10), Benzol, Kohlenmonoxid und Ozon & HTML & https://www.berlin.de/senuvk/umwelt/luftqualitaet/de/messnetz/aktuelle\_werte.shtml \\
- 6 & BFS UV-Index &  & UV-Index & HTML & http://www.bfs.de/DE/themen/opt/uv/uv-index/aktuell/aktuell\_node.html
-\end{tabular}
-\end{table}
-
-\section{How to Write a Data
-Importer}\label{how-to-write-a-data-importer}
-
-\textbf{Authoriship}
-
-\begin{longtable}[]{@{}llll@{}}
-\toprule
-Version & Date & Modified by & Summary of changes\tabularnewline
-\midrule
-\endhead
-0.1 & 2017-07-29 & Jawid, Rohullah & Initial version\tabularnewline
-\bottomrule
-\end{longtable}
-
-This chapter guides you through building your own importer on top of an
-already existing template.
-
-\subsection{Template}\label{template}
-
-Instead of wrting a long manual on how to write an importer we provide
-you with starter apps (templates) that you can start to customize right
-away.
-
-\subsection{Pre-requisites}
-
-We assume that you are:
-
-\begin{itemize}
-\tightlist
-\item
-  comfortable working with Java and Spring Boot
-\item
-  already familiar working with Spring Batch
-\item
-  having knowledge of working with multi module applications using maven
-  and Spring Boot.
-\end{itemize}
-
-If you need a quick start guide of Spring Batch you can find it
-\href{https://projects.spring.io/spring-batch/}{here:}
-
-\subsection{How to Proceed}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Download or copy the template that fits your needs.
-\end{enumerate}
-
-\textbf{Template Modules}
-
-The template is a multi module application which includes two modules:
-
-\begin{itemize}
-\tightlist
-\item
-  application
-\item
-  library
-\end{itemize}
-
-These modules are defined inside \texttt{pom.xml} file.
-
-\begin{verbatim}
-<modules>
-        <module>library</module>
-        <module>application</module>
-</modules>
-\end{verbatim}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  Start by changing the importer name inside pom.xml in the root
-  directory of the project. You don't need to change anything else
-  inside pom.xml.
-\end{enumerate}
-
-\begin{verbatim}
-<groupId>de.tu_berlin.ise.open_data</groupId>
-    <artifactId>your-importer-name-here</artifactId>
-    <version>0.1.0</version>
-    <packaging>pom</packaging>
-\end{verbatim}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{2}
-\item
-  Once you finished editing \texttt{pom.xml} you can open it as a
-  project using your IDE. Now you can start to customize it.
-\item
-  Before changing anything else you can see how the importer works by
-  running a kafka server locally and starting the importer's main class
-  using your IDE.
-
-  OR
-
-  Inside the root directory of the importer run these commands:
-
-  \$ cd application \$ mvn spring-boot:run
-\item
-  You can now see inside the console how a simple job runs.
-\end{enumerate}
-
-\subsubsection{Things to know about the
-template:}\label{things-to-know-about-the-template}
-
-\begin{itemize}
-\tightlist
-\item
-  Inside the \texttt{pom.xml} in the `application' module the following
-  dependency is used to include the `library' module:
-\end{itemize}
-
-\begin{verbatim}
-<dependency>
-    <groupId>de.tu_berlin.ise.open_data.library</groupId>
-    <artifactId>library</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-</dependency>
-\end{verbatim}
-
-\begin{itemize}
-\tightlist
-\item
-  Registered beans inside the library module could be autowired by
-  importing the `ServiceConfiguration' class from package
-  `de.tu\_berlin.ise.open\_data.library'. You can see how it is imported
-  in main class:
-\end{itemize}
-
-\includegraphics[width=1.00\textwidth]{images/template.png}
-
-You can now start to edit the template.
-
+\input{appendix/doc.tex}
 
 \end{document}

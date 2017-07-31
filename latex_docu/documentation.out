@@ -1,1 +1,129 @@
-\BOOKMARK [0][-]{chapter.1}{Project Documentation for Open Environmental Data Cloud Prototyping Project}{}% 1
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{What is Open Data}{section.1}% 2
+\BOOKMARK [3][-]{subsubsection.1.1.1}{Time series data \046 non-static sensor environmental data}{subsection.1.1}% 3
+\BOOKMARK [2][-]{subsection.1.2}{Motivation}{section.1}% 4
+\BOOKMARK [3][-]{subsubsection.1.2.1}{Building Blocks}{subsection.1.2}% 5
+\BOOKMARK [2][-]{subsection.1.3}{Requirements}{section.1}% 6
+\BOOKMARK [3][-]{subsubsection.1.3.1}{General}{subsection.1.3}% 7
+\BOOKMARK [3][-]{subsubsection.1.3.2}{Data Import Framework}{subsection.1.3}% 8
+\BOOKMARK [3][-]{subsubsection.1.3.3}{Database}{subsection.1.3}% 9
+\BOOKMARK [3][-]{subsubsection.1.3.4}{Public API}{subsection.1.3}% 10
+\BOOKMARK [1][-]{section.2}{Survey of Current Landscape}{}% 11
+\BOOKMARK [2][-]{subsection.2.1}{OpenSensors.io}{section.2}% 12
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Features}{subsection.2.1}% 13
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Segments}{subsection.2.1}% 14
+\BOOKMARK [3][-]{subsubsection.2.1.3}{Customers}{subsection.2.1}% 15
+\BOOKMARK [3][-]{subsubsection.2.1.4}{Analysis}{subsection.2.1}% 16
+\BOOKMARK [2][-]{subsection.2.2}{PubNub}{section.2}% 17
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Features}{subsection.2.2}% 18
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Segments}{subsection.2.2}% 19
+\BOOKMARK [3][-]{subsubsection.2.2.3}{Customers}{subsection.2.2}% 20
+\BOOKMARK [3][-]{subsubsection.2.2.4}{Analysis}{subsection.2.2}% 21
+\BOOKMARK [2][-]{subsection.2.3}{Talend}{section.2}% 22
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Features}{subsection.2.3}% 23
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Segments}{subsection.2.3}% 24
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Customers}{subsection.2.3}% 25
+\BOOKMARK [3][-]{subsubsection.2.3.4}{Analysis}{subsection.2.3}% 26
+\BOOKMARK [1][-]{section.3}{Architecture}{}% 27
+\BOOKMARK [2][-]{subsection.3.1}{Motivation}{section.3}% 28
+\BOOKMARK [2][-]{subsection.3.2}{Requirements for the System}{section.3}% 29
+\BOOKMARK [2][-]{subsection.3.3}{Design Decision}{section.3}% 30
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Importers}{subsection.3.3}% 31
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Messaging System}{subsection.3.3}% 32
+\BOOKMARK [3][-]{subsubsection.3.3.3}{Database}{subsection.3.3}% 33
+\BOOKMARK [2][-]{subsection.3.4}{Existing solutions}{section.3}% 34
+\BOOKMARK [2][-]{subsection.3.5}{Evolution of the architecture}{section.3}% 35
+\BOOKMARK [2][-]{subsection.3.6}{Discussion}{section.3}% 36
+\BOOKMARK [2][-]{subsection.3.7}{Future}{section.3}% 37
+\BOOKMARK [1][-]{section.4}{Infrastructure}{}% 38
+\BOOKMARK [2][-]{subsection.4.1}{Requirements}{section.4}% 39
+\BOOKMARK [2][-]{subsection.4.2}{Evaluation Criteria \046 Decision-making Process}{section.4}% 40
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Cloud Platform}{subsection.4.2}% 41
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Orchestration}{subsection.4.2}% 42
+\BOOKMARK [2][-]{subsection.4.3}{Implementation Details}{section.4}% 43
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Orchestration}{subsection.4.3}% 44
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Configuration}{subsection.4.3}% 45
+\BOOKMARK [3][-]{subsubsection.4.3.3}{Deployment Automation}{subsection.4.3}% 46
+\BOOKMARK [2][-]{subsection.4.4}{Discussion}{section.4}% 47
+\BOOKMARK [1][-]{section.5}{Extensible Data Import Framework}{}% 48
+\BOOKMARK [2][-]{subsection.5.1}{Framework Requirements}{section.5}% 49
+\BOOKMARK [2][-]{subsection.5.2}{Evaluation of different data import frameworks}{section.5}% 50
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Evaluated Existing Frameworks}{subsection.5.2}% 51
+\BOOKMARK [2][-]{subsection.5.3}{Design Decisions}{section.5}% 52
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Why Spring Batch}{subsection.5.3}% 53
+\BOOKMARK [3][-]{subsubsection.5.3.2}{Spring Batch Features}{subsection.5.3}% 54
+\BOOKMARK [2][-]{subsection.5.4}{Framework Structure}{section.5}% 55
+\BOOKMARK [2][-]{subsection.5.5}{Framework Features}{section.5}% 56
+\BOOKMARK [2][-]{subsection.5.6}{Framework Strengths}{section.5}% 57
+\BOOKMARK [2][-]{subsection.5.7}{Supported Data Formats}{section.5}% 58
+\BOOKMARK [2][-]{subsection.5.8}{Possible Further Improvements}{section.5}% 59
+\BOOKMARK [2][-]{subsection.5.9}{The Values of the Framework}{section.5}% 60
+\BOOKMARK [1][-]{section.6}{Units of Measurement}{}% 61
+\BOOKMARK [2][-]{subsection.6.1}{Requirements}{section.6}% 62
+\BOOKMARK [2][-]{subsection.6.2}{Survey of Previous Work}{section.6}% 63
+\BOOKMARK [3][-]{subsubsection.6.2.1}{Standards}{subsection.6.2}% 64
+\BOOKMARK [3][-]{subsubsection.6.2.2}{Applications}{subsection.6.2}% 65
+\BOOKMARK [3][-]{subsubsection.6.2.3}{Conclusions of Survey}{subsection.6.2}% 66
+\BOOKMARK [2][-]{subsection.6.3}{Implementation}{section.6}% 67
+\BOOKMARK [3][-]{subsubsection.6.3.1}{Converters}{subsection.6.3}% 68
+\BOOKMARK [2][-]{subsection.6.4}{Discussion}{section.6}% 69
+\BOOKMARK [1][-]{section.7}{Inserting into Elasticsearch}{}% 70
+\BOOKMARK [2][-]{subsection.7.1}{Requirements}{section.7}% 71
+\BOOKMARK [2][-]{subsection.7.2}{Validation}{section.7}% 72
+\BOOKMARK [3][-]{subsubsection.7.2.1}{Ability to scale and adjust the configuration according to Kafka's configuration}{subsection.7.2}% 73
+\BOOKMARK [3][-]{subsubsection.7.2.2}{Allow parallelism for reading from Kafka}{subsection.7.2}% 74
+\BOOKMARK [3][-]{subsubsection.7.2.3}{Achieve high performance to not slow down the importing pipeline}{subsection.7.2}% 75
+\BOOKMARK [3][-]{subsubsection.7.2.4}{Allow concurency for processing data read from Kafka}{subsection.7.2}% 76
+\BOOKMARK [2][-]{subsection.7.3}{Implementation of the Requirements}{section.7}% 77
+\BOOKMARK [3][-]{subsubsection.7.3.1}{Bulk insertion}{subsection.7.3}% 78
+\BOOKMARK [3][-]{subsubsection.7.3.2}{Achieve high performance and allow validating}{subsection.7.3}% 79
+\BOOKMARK [3][-]{subsubsection.7.3.3}{Allow concurrency for processing data read from Kafka}{subsection.7.3}% 80
+\BOOKMARK [3][-]{subsubsection.7.3.4}{Allow parallelism, scaling, and configuration}{subsection.7.3}% 81
+\BOOKMARK [1][-]{section.8}{Database}{}% 82
+\BOOKMARK [2][-]{subsection.8.1}{Overview}{section.8}% 83
+\BOOKMARK [2][-]{subsection.8.2}{Requirements}{section.8}% 84
+\BOOKMARK [3][-]{subsubsection.8.2.1}{Primary Requirements}{subsection.8.2}% 85
+\BOOKMARK [3][-]{subsubsection.8.2.2}{Secondary Requirements}{subsection.8.2}% 86
+\BOOKMARK [2][-]{subsection.8.3}{Survey of Existing Solutions}{section.8}% 87
+\BOOKMARK [2][-]{subsection.8.4}{Evaluation Criteria \046 Decision-making Process}{section.8}% 88
+\BOOKMARK [3][-]{subsubsection.8.4.1}{Why Elasticsearch}{subsection.8.4}% 89
+\BOOKMARK [3][-]{subsubsection.8.4.2}{Special look at Cassandra}{subsection.8.4}% 90
+\BOOKMARK [2][-]{subsection.8.5}{Implementation Details}{section.8}% 91
+\BOOKMARK [3][-]{subsubsection.8.5.1}{Intro to Elasticsearch}{subsection.8.5}% 92
+\BOOKMARK [3][-]{subsubsection.8.5.2}{Architecture}{subsection.8.5}% 93
+\BOOKMARK [3][-]{subsubsection.8.5.3}{Data Model}{subsection.8.5}% 94
+\BOOKMARK [3][-]{subsubsection.8.5.4}{Partitioning}{subsection.8.5}% 95
+\BOOKMARK [3][-]{subsubsection.8.5.5}{Query Optimization}{subsection.8.5}% 96
+\BOOKMARK [2][-]{subsection.8.6}{API Implementation Details}{section.8}% 97
+\BOOKMARK [3][-]{subsubsection.8.6.1}{Overview}{subsection.8.6}% 98
+\BOOKMARK [3][-]{subsubsection.8.6.2}{Architecture and Technology}{subsection.8.6}% 99
+\BOOKMARK [3][-]{subsubsection.8.6.3}{REST APIs}{subsection.8.6}% 100
+\BOOKMARK [2][-]{subsection.8.7}{Discussion}{section.8}% 101
+\BOOKMARK [3][-]{subsubsection.8.7.1}{Joins}{subsection.8.7}% 102
+\BOOKMARK [3][-]{subsubsection.8.7.2}{Administration}{subsection.8.7}% 103
+\BOOKMARK [3][-]{subsubsection.8.7.3}{Testing}{subsection.8.7}% 104
+\BOOKMARK [2][-]{subsection.8.8}{Future Development and Enhancements}{section.8}% 105
+\BOOKMARK [3][-]{subsubsection.8.8.1}{Data Postprocessing}{subsection.8.8}% 106
+\BOOKMARK [3][-]{subsubsection.8.8.2}{The API}{subsection.8.8}% 107
+\BOOKMARK [1][-]{section.9}{Data Source Metadata Management System}{}% 108
+\BOOKMARK [2][-]{subsection.9.1}{Requirements}{section.9}% 109
+\BOOKMARK [2][-]{subsection.9.2}{Implementation}{section.9}% 110
+\BOOKMARK [2][-]{subsection.9.3}{Domain Model}{section.9}% 111
+\BOOKMARK [3][-]{subsubsection.9.3.1}{Data Sources Registry}{subsection.9.3}% 112
+\BOOKMARK [3][-]{subsubsection.9.3.2}{Validation Schema}{subsection.9.3}% 113
+\BOOKMARK [3][-]{subsubsection.9.3.3}{Provide Information to the Elasticsearch API for query optimization}{subsection.9.3}% 114
+\BOOKMARK [3][-]{subsubsection.9.3.4}{Provide configuration information to the deployment component}{subsection.9.3}% 115
+\BOOKMARK [3][-]{subsubsection.9.3.5}{Units}{subsection.9.3}% 116
+\BOOKMARK [2][-]{subsection.9.4}{Discussion}{section.9}% 117
+\BOOKMARK [3][-]{subsubsection.9.4.1}{Future Improvements}{subsection.9.4}% 118
+\BOOKMARK [1][-]{section.10}{Conclusions}{}% 119
+\BOOKMARK [2][-]{subsection.10.1}{Is Open Data really open?}{section.10}% 120
+\BOOKMARK [2][-]{subsection.10.2}{Lessons learned}{section.10}% 121
+\BOOKMARK [3][-]{subsubsection.10.2.1}{Team \046 Process}{subsection.10.2}% 122
+\BOOKMARK [2][-]{subsection.10.3}{Future improvements}{section.10}% 123
+\BOOKMARK [1][-]{appendix.A}{Imported Data Sources}{}% 124
+\BOOKMARK [1][-]{appendix.B}{How to Write a Data Importer}{}% 125
+\BOOKMARK [2][-]{subsection.B.1}{Template}{appendix.B}% 126
+\BOOKMARK [2][-]{subsection.B.2}{Pre-requisites}{appendix.B}% 127
+\BOOKMARK [2][-]{subsection.B.3}{How to Proceed}{appendix.B}% 128
+\BOOKMARK [3][-]{subsubsection.B.3.1}{Things to know about the template:}{subsection.B.3}% 129

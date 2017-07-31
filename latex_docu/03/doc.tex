@@ -1,54 +1,28 @@
-\section{Architecture}\label{architecture}
+\section{Architecture}\label{sec:architecture}
 
-\textbf{REFERENCES}
+\textbf{Authoriship: } Written by Oliver Bruski\\
 
-{[}1{]}Chatzakis, Andreas. Amazon Web Services.
-\textbf{\emph{Architecting for the Cloud: AWS Best Practices}}, 2016
-{[}2{]}Wolff, Eberhard. \textbf{\emph{Microservices: Grundlagen
-flexibler Softwarearchitekturen}}. Dpunkt. verlag, 2015. {[}3{]}Garlan,
-David, and Shaw Mary. \textbf{\emph{An introduction to software
-architecture(Final Report)}}. 1994. {[}4{]}
-http://www.sei.cmu.edu/architecture/ {[}5{]}Bass,Len; Clements, Paul C.;
-Kazman, Rick. \textbf{\emph{Software Architecture in Practice}}.
-Addison-Wesley Professional, 2012 {[}6{]}FOX, Armando; BREWER, Eric A.
-Harvest, yield, and scalable tolerant systems. In: Hot Topics in
-Operating Systems, 1999. Proceedings of the Seventh Workshop on. IEEE,
-1999. S. 174-178.
+\vspace*{4mm}
 
-\textbf{Authoriship}
-
-\begin{longtable}[]{@{}llll@{}}
-\toprule
-Version & Date & Modified by & Summary of changes\tabularnewline
-\midrule
-\endhead
-0.1 & 2017-07-19 & Oliver, Amer & Working draft\tabularnewline
-0.2 & 2017-07-28 & Oliver & Tidy up \ldots{} + bullet
-points\tabularnewline
-0.3 & 2017-07-29 & Oliver & Write actual text from bullet
-points\tabularnewline
-\bottomrule
-\end{longtable}
 
 The challenge of software architecture is to create a structured
 solution that meets all given requirements and constraints for a domain
 problem. It presents an abstract structure on the system and includes
 the building blocks of the solution with their interaction without
 focusing on the low-level implementation details like interface design
-\textbf{{[}3{]}}. Moreover, the system architecture presents a blueprint
+\cite{Garlan&Shaw.1994}. Moreover, the system architecture presents a blueprint
 not only for the system but for the project as well. The architecture
 can be utilized to divide the development team into groups. The process
 of producing a system architecture starts with a high-level view of the
 whole project and is incrementally broken down into smaller subsystems
-\textbf{{[}4, 5{]}}.
+\cite{Bass&Clements&Kazmann.2012}.
 
 In order to design a reasonable architecture, it is necessary to know
 the domain of the problem. Think of the domain as the problem area and
 the domain model driven design as the solution for this specific
 problem. The domain model represents an organized and structured view on
 the problem. Consequently, the domain should be defined in the beginning
-of a project to avoid misunderstandings and put everyone
-\textbf{\emph{on the same page}}. The Domain driven design focuses on
+of a project to avoid misunderstandings and put everyone non the same page. The Domain driven design focuses on
 understanding and interpreting the specific aspects of the given
 problem.
 
@@ -69,7 +43,7 @@ Microservices interact through specified interfaces in contrast to a
 monolithic system were the different modules depend on each other due to
 inheritance of classes for example. By communicating just through
 specified interfaces no unintended dependency will be formed. Every
-interaction between services has to be implemented explicitly {[}2{]}.
+interaction between services has to be implemented explicitly \cite{Wolff.2016}.
 
 A pleasant side effect of the loose coupling of components is that it
 allowed to divide the team according to the main building blocks. Each
@@ -103,9 +77,8 @@ can consist of many microservices that have to be deployed one by one,
 thus it is crucial to automate the deployment process. If implemented
 correctly, a continuous-delivery-pipeline presents huge benefits not
 only for microservices. We adapted the continuous-delivery-pipeline
-introduced by Wolff{[}2{]} and customized it to fit our workflow.
-(Commit-\textgreater{}local test -\textgreater{} system test
--\textgreater{} performance test)\}\}{]}. It started with a commit onto
+introduced by Wolff and customized it to fit our workflow.
+(Commit -- local test -- system test -- performance test) \cite{Wolff.2016}. It started with a commit onto
 GitHub and was followed by local tests. Here again the microservices
 approach presented its benefits, since it allowed for independent
 testing. Unfortunately, just towards the end of the project we were able
@@ -125,15 +98,14 @@ availability of each service. Should a service terminate unexpectedly,
 the administrator has to restart the service to ensure the performance
 of the whole system. Though, the system should be still available during
 the downtime of a single service with some possible losses on
-functionality. Chapter {[}ref\{\{infrastructure\}\}{]} will discuss how
+functionality. Chapter \ref{sec:infrstructure} will discuss how
 we enabled recovery and fault-tolerance of the system.
 
 The next section, will presented the specific requirements for the given
 problem statement and how microservice architecture presents a solution
 for it.
 
-\subsection{Requirements of the whole
-platform}\label{requirements-of-the-whole-platform}
+\subsection{Requirements for the System}\label{requirements-of-the-whole-platform}
 
 To create a system that is able to resolve all the presented objectives,
 we identified the following architectural requirements:
@@ -156,7 +128,7 @@ benefit from economies of scale. Besides, following the microservice
 architecture components should include as little functionality as
 necessary and in addition, not share any state to avoid synchronization.
 Finally, single-points-of-failure must be avoided to ensure availability
-even if a single component fails{[}1{]}.
+even if a single component fails \cite{Chatzakis.2016}.
 
 Next, hoping that the created system will provide value to the open data
 community and more and more people will use it, it is necessary to
@@ -195,15 +167,16 @@ smart combination. This requirement decomposes into four steps:
 This section will discuss the decision concerning the architectural
 design on a higher level. decision for specific technologies and
 components will be presented in the following chapters. To tackle all of
-the mentioned requirements, we decided upon the following architecture
+the mentioned requirements, we decided upon the architecture depicted in figure \ref{fig:architecture_4}.
+
 \begin{figure}
 	\centering
 		\includegraphics[width=1.00\textwidth]{images/170713_architecture4.png}
 	\caption{Final Architecture}
-	\label{fig:170713_architecture4}
+	\label{fig:architecture_4}
 \end{figure}
-. The final architecture is formed from five
-building blocks:
+
+The final architecture is formed from five building blocks:
 
 \begin{itemize}
 \tightlist
@@ -270,14 +243,14 @@ When it comes to the choice of a database in addition to the
 requirements that applied for the other building blocks the schema of
 the data is what is of major concern. The data model and the specific
 choice of a database technology will be discussed in more detail in
-chapter \{\{ref DB\}\}. At this point the decision for relational or
+chapter \ref{sec:database}. At this point the decision for relational or
 NoSQL databases has to be made. The designed system is supposed to
 interact with many heterogeneous source and data models. Thus, making it
 hard to fit into a relational model. Additionally, the emphasis for our
 system is availability rather than consistency, which is why we can
 spare transactions in order to achieve higher availability and
 performance. Most NoSQL databases are designed to partition and shard
-the data to increase performance and sacrifice consistency {[}1{]}.
+the data to increase performance and sacrifice consistency \cite{Chatzakis.2016}.
 Moreover, asynchronous replication is good enough in terms of
 consistency, when the availability of the system is increased.
 
@@ -305,8 +278,7 @@ to scale across several nodes.
   https://aws.amazon.com/de/architecture/
 \end{itemize}
 
-\subsection{Evolution of the
-architecture}\label{evolution-of-the-architecture}
+\subsection{Evolution of the architecture}\label{evolution-of-the-architecture}
 
 As the project evolved and the understanding of the domain increased the
 architecture evolved as well. It is the nature of an agile project to
@@ -314,20 +286,22 @@ evolve over time when the product owners add features to the system.
 This section will present an overview of the evolution of the
 architecture and the changes done over time.
 
-The changes in architecture are depicted in figure 
+The changes in architecture are depicted in figure \ref{fig:architecture_1}.
+
 \begin{figure}
-	\centering
-		\includegraphics[width=1.00\textwidth]{images/170713_architecture_1.png}
-	\caption{Initial Architecture}
-	\label{fig:170713_architecture_1}
+		\subfigure[Initial Architecture]{\includegraphics[width=0.45\textwidth]{images/170713_architecture_1.png}} 
+		\subfigure[Final Architecture]{\includegraphics[width=0.45\textwidth]{images/170713_architecture4.png}}
+	\caption{Evolution of Architecture}
+	\label{fig:evol_architecture}
 \end{figure}
-. Basically, the architecture was
+
+Basically, the architecture was
 update at two places. First, the scheduling logic was exchanged. In the
 final architecture, we rely on Kubernetes and cron jobs to schedule the
 importing tasks. We decided for Kubernetes to administrate the
 underlying infrastructure thus it was feasible to use it for scheduling
 as well. The underlying infrastructure will be discussed in more detail
-in chapter \{ref\{\{kube\}\}\}, but since the placement and deployment
+in chapter \ref{sec:infrastructure}, but since the placement and deployment
 of components is done with Kubernetes we decided to use it to schedule
 the importers.
 

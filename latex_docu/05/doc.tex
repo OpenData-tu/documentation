@@ -1,77 +1,23 @@
-\section{Extensible Data Import
-Framework}\label{extensible-data-import-framework}
+\section{Extensible Data Import Framework}\label{sec:import-framework}
 
 \textbf{Authoriship}
+\vspace*{4mm}
 
-\begin{longtable}[]{@{}llll@{}}
+\begin{longtable}{@{}llll@{}}
 \toprule
-\begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
-Version\strut
-\end{minipage} & \begin{minipage}[b]{0.06\columnwidth}\raggedright\strut
-Date\strut
-\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
-Modified by\strut
-\end{minipage} & \begin{minipage}[b]{0.23\columnwidth}\raggedright\strut
-Summary of changes\strut
-\end{minipage}\tabularnewline
+Version & Date & Modified by & Summary of changes \\
 \midrule
 \endhead
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-0.1\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
-2017-07-20\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-Rohullah, Jawid\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-initial version\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-0.1a\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
-2017-07-21\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-Rohullah, Jawid\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-framework description\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-0.1b\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
-2017-07-22\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-Rohullah, Jawid\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-evaluations, features, improvements, values parts\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-0.2\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
-2017-07-26\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-Andres\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-Proofread: spelling, readability, etc.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-0.2a\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
-2017-07-28\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-Andres\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-Further refinement of text\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-0.3\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
-2017-07-28\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-Rohullah, Jawid\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-framework structure explanations + diagrams\strut
-\end{minipage}\tabularnewline
+0.1 & 2017-07-20 & Rohullah, Jawid & Initial version \\
+0.1a & 2017-07-21 & Rohullah, Jawid & framework description \\
+0.1b & 2017-07-22 & Rohullah, Jawid & evaluations, features, improvements, values parts \\
+0.2 & 2017-07-26 & Andres & Proofread: spelling, readability, etc. \\
+0.2a & 2017-07-28 & Andres & Further refinement of text \\
+0.3 & 2017-07-28 & Rohullah, Jawid & framework structure explanations + diagrams \\
 \bottomrule
 \end{longtable}
+
+\vspace*{4mm}
 
 The Open Data Platform which we have built for extracting, transforming
 and loading open sensor data is made up several significant components
@@ -245,16 +191,16 @@ functionality it offers.
   executions.
 \end{enumerate}
 
-\subsection{Framework Structure/
-Architecture}\label{framework-structure-architecture}
+\subsection{Framework Structure}\label{framework-structure}
 
-\textbf{Figure 1.} shows an abstract overview of a simple importer
+Figure \ref{fig:importer-app} shows an abstract overview of a simple importer
 application. We will look at each component individually.
 
-\begin{figure}[htbp]
+\begin{figure}
 \centering
-\includegraphics[width=1.00\textwidth]{images/components_diagram.png}
-\caption{image-title-here}
+	\includegraphics[width=1.00\textwidth]{images/components_diagram.png}
+	\caption{Importer Application Overview}
+	\label{fig:importer-app}
 \end{figure}
 
 \begin{itemize}
@@ -270,14 +216,19 @@ application. We will look at each component individually.
   \textbf{Listeners:} Are defined for tracking jobs and steps and
   logging the process of importing to the console.
 \item
-  \textbf{Jobs:} Generally there is one batch job for each importer. A
-  batch job may have one or more steps for importing a single source. -
-  \textbf{Steps:} Each step includes a reader, processor, and a writer.
-  - \textbf{Reader:} Defines how to read items from the source. -
-  \textbf{Processor:} Processes every item - an item is basically an
-  object that represents an record - individually and creates a JSON
-  string for that according to our defined schema.\\
-  - \textbf{Writer:} Simply writes to Kafka queue.
+  \textbf{Jobs:} Generally there is one batch job for each importer. A batch job may have one or more steps for importing a single source.
+	
+	\begin{itemize}
+		\item \textbf{Steps:} Each step includes a reader, processor, and a writer.
+		
+		\begin{itemize}
+			\item \textbf{Reader:} Defines how to read items from the source.
+			\item \textbf{Processor:} Processes every item - an item is basically an object that represents an record - individually and creates a JSON string for that according to our defined schema.
+			\item \textbf{Writer:} Simply writes to Kafka queue.
+		\end{itemize}
+		
+	\end{itemize}
+	
 \item
   \texttt{@SpringBootApplication}: Annotation to make the application a
   Spring Boot Application.
@@ -291,21 +242,26 @@ application. We will look at each component individually.
   \textbf{ServiceConfiguration:} Is the component where the services are
   registered as Java Beans for re-usability. It is included in module
   `library' where re-usable classes across all importers are defined.
-  The following other components are included in the `library' module. -
-  \textbf{ApplicationService:} Includes some generally used methods to
-  bring facility for importing. - \textbf{JsonItemWriter:} Asks
-  \texttt{KafkaRecordProducer} to write individual JSON objects to Kafka
-  queue. - \textbf{KafkaRecordProducer:} Is the class where the items
-  are written to Kafka queue. - \textbf{Schema:} Each importer should
-  have at least one model class which has all the necessary fields for
-  reading records from a source; all these classes are extended from
-  Schema. - \textbf{JsonStringBuilder}: The class which contains
-  functions for creating a json string according to our defined schema.
+  The following other components are included in the `library' module. 
+	
+	\begin{itemize}
+		\item \textbf{ApplicationService:} Includes some generally used methods to bring facility for importing.
+		\item \textbf{JsonItemWriter:} Asks \texttt{KafkaRecordProducer} to write individual JSON objects to Kafka queue.
+		\item \textbf{KafkaRecordProducer:} Is the class where the items are written to Kafka queue.
+		\item \textbf{Schema:} Each importer should have at least one model class which has all the necessary fields for reading records from a source; all these classes are extended from Schema.
+		\item \textbf{JsonStringBuilder:} The class which contains functions for creating a json string according to our defined schema.
+	\end{itemize}	
+	
 \end{itemize}
 
-\includegraphics[width=1.00\textwidth]{images/domain_model.png} \textbf{Figure 2.} shows a
-more detailed view of classes inside a simple flat file importer and how
-they are related together.
+\begin{figure}%
+	\includegraphics[width=1.00\textwidth]{images/domain_model.png}
+	\caption{Relation of classes of a Simple Flat File Importer}%
+	\label{fig:importer-classes-relations}%
+\end{figure}
+
+
+Figure \ref{fig:importer-classes-relations} shows a more detailed view of classes inside a simple flat file importer and how they are related together.
 
 \subsection{Framework Features}\label{framework-features}
 
