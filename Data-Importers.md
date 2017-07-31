@@ -1,6 +1,6 @@
 # Data Importers
 
-**Authoriship**
+**Authorship**
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|

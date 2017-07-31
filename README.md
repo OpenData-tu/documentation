@@ -14,7 +14,7 @@ Every document must begin with a version summary, which states **who** added **w
 
 The following template is proposed:
 
-**Authoriship**
+**Authorship**
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|

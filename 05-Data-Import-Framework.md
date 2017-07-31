@@ -1,6 +1,6 @@
 # Extensible Data Import Framework
 
-**Authoriship**
+**Authorship**
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|

@@ -10,7 +10,7 @@
 [6]FOX, Armando; BREWER, Eric A. Harvest, yield, and scalable tolerant systems. In: Hot Topics in Operating Systems, 1999. Proceedings of the Seventh Workshop on. IEEE, 1999. S. 174-178.
 
 
-**Authoriship**
+**Authorship**
 
 |Version|Date|Modified by|Summary of changes|
 |-------|----|-----------|------------------|

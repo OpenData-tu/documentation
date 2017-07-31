@@ -113,7 +113,7 @@ The converters would be made available to the community and open for contributio
 
 ## Discussion
 
-**Authoriship:** Written by Paul
+**Authorship:** Written by Paul
 
 This implementation has some advantages but also some disadvantages. In this section we want to take a closer look to both sides.
 

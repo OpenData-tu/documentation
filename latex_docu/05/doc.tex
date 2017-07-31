@@ -1,6 +1,6 @@
 \section{Extensible Data Import Framework}\label{sec:import-framework}
 
-\textbf{Authoriship}
+\textbf{Authorship}
 \vspace*{4mm}
 
 \begin{longtable}{@{}llll@{}}
@@ -217,18 +217,18 @@ application. We will look at each component individually.
   logging the process of importing to the console.
 \item
   \textbf{Jobs:} Generally there is one batch job for each importer. A batch job may have one or more steps for importing a single source.
-	
+
 	\begin{itemize}
 		\item \textbf{Steps:} Each step includes a reader, processor, and a writer.
-		
+
 		\begin{itemize}
 			\item \textbf{Reader:} Defines how to read items from the source.
 			\item \textbf{Processor:} Processes every item - an item is basically an object that represents an record - individually and creates a JSON string for that according to our defined schema.
 			\item \textbf{Writer:} Simply writes to Kafka queue.
 		\end{itemize}
-		
+
 	\end{itemize}
-	
+
 \item
   \texttt{@SpringBootApplication}: Annotation to make the application a
   Spring Boot Application.
@@ -242,16 +242,16 @@ application. We will look at each component individually.
   \textbf{ServiceConfiguration:} Is the component where the services are
   registered as Java Beans for re-usability. It is included in module
   `library' where re-usable classes across all importers are defined.
-  The following other components are included in the `library' module. 
-	
+  The following other components are included in the `library' module.
+
 	\begin{itemize}
 		\item \textbf{ApplicationService:} Includes some generally used methods to bring facility for importing.
 		\item \textbf{JsonItemWriter:} Asks \texttt{KafkaRecordProducer} to write individual JSON objects to Kafka queue.
 		\item \textbf{KafkaRecordProducer:} Is the class where the items are written to Kafka queue.
 		\item \textbf{Schema:} Each importer should have at least one model class which has all the necessary fields for reading records from a source; all these classes are extended from Schema.
 		\item \textbf{JsonStringBuilder:} The class which contains functions for creating a json string according to our defined schema.
-	\end{itemize}	
-	
+	\end{itemize}
+
 \end{itemize}
 
 \begin{figure}%
