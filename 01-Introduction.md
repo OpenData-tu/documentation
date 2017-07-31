@@ -18,9 +18,9 @@
 
 ## What is Open Data
 
-So what do we mean when we talk about "open data"?
+So what do we mean when we talk about *open data*?
 
-> Open means anyone can freely access, use, modify, and share for any purpose (subject, at most, to requirements that preserve provenance and openness).
+> "Open means anyone can freely access, use, modify, and share for any purpose (subject, at most, to requirements that preserve provenance and openness)."
 http://opendefinition.org/
 
 Further, the definition encompasses the following aspects:
