@@ -1,6 +1,8 @@
 \section{Survey of Current Landscape}\label{survey-of-current-landscape}
 
-\textbf{Authorship:} Written by Andres
+\vspace{8 pt}
+\textbf{Authorship:} Written by Andres Ardila
+\vspace{10 pt}
 
 \subsection{OpenSensors.io}\label{opensensors.io}
 
@@ -50,31 +52,56 @@ includes hardware providers and manufacturing firms.
   needs.''
 \item
   \textbf{Environment sensing}: Open Data communities to contribute and
-  use data from environmental sensors around you. You can get air
-  quality data and traffic data for free.
+  use data from environmental sensors around you. Air quality and traffic data
+  available ``free''.
 \end{itemize}
 
 \subsubsection{Customers}\label{customers}
 
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Partners} are hardware manufacturers and design firms (OEMs)
-  looking to deliver client projects
-\end{itemize}
+\textbf{Partners} are hardware manufacturers and design firms (OEMs)
+looking to deliver client projects.
 
 \subsubsection{Analysis}\label{analysis}
 
+Not really ``open''. There is no sign-up with which one can get access to
+the allegedly ``open'' data. As a result, one can conclude that their
+focus is the OEM sector as opposed to ``data scientists looking to
+create interesting mash-ups of data.''
+
+
+\subsection{Plenario}\label{plenario}
+
+http://plenar.io/
+
+\subsubsection{Features}\label{plenario-features}
+
+\begin{quotation}
+``Plenario is a centralized hub for open datasets from around the world,
+ready to search and download.''
+\end{quotation}
+
 \begin{itemize}
 \tightlist
 \item
-  Not really open. There is no sign-up with which one can get access to
-  the allegedly ``open'' data. As a result, one can conclude that their
-  focus is the OEM sector as opposed to ``data scientists looking to
-  create interesting mash-ups of data.''
+  Open platform on which to add open datasets in CSV or ESRI shapefiles
 \item
-  \ldots{}
+  Only requires data to have time and location information in the datapoints
+\item
+  Modern open source data visualization for timeseries geolocated data (heatmap, line charts)
 \end{itemize}
+
+\subsubsection{Customers}
+\textbf{Cities} who already generate and publish open data and wish to provide a rich
+interface to users to visualize data from various datasets.
+
+\subsection{Analysis}
+Plenario is precisely the next step forward from static data platforms like CKAN.
+By requiring that data must contain time and location information, an elegant,
+unified, and intuitive visualization is immediately made possible. Unfortunately
+it offers no rich querying model, other than filtering by date ranges, but
+the concept of `layering' is already present, by allowing the user to visualize
+data from more than one data source for analysis on the user interface.
+This is definitely a step in the right direction and most importantly, it's open source.
 
 \subsection{PubNub}\label{pubnub}
 
@@ -82,32 +109,70 @@ https://www.pubnub.com/
 
 \subsubsection{Features}\label{features-1}
 
-\paragraph{Scalability}\label{scalability}
+\begin{quotation}
+``The Programmable Data Stream Network
+Low-latency messaging. Massive scale. Ready for the real world.''
+\end{quotation}
 
-15 globally replicated points of presence transacting over 1.5 trillion
+As an IoT end-to-end publish-subscribe messaging and streaming platform,
+we are concerned only with their `Storage \& Playback' product.
+
+\begin{itemize}
+\tightlist
+\item
+  Scalability: 15 globally replicated points of presence transacting over 1.5 trillion
 messages for 300 million unique devices per month.
+\item
+  Unlimited storage
+\item
+  Configurable retention period
+\item
+  Message-level granularity
+\end{itemize}
 
-\paragraph{Storage}\label{storage}
+%\subsubsection{Segments}\label{segments-1}
 
-15 globally replicated points of presence transacting over 1.5 trillion
-messages for 300 million unique devices per month.
-
-\subsubsection{Segments}\label{segments-1}
-
-\subsubsection{Customers}\label{customers-1}
+%\subsubsection{Customers}\label{customers-1}
 
 \subsubsection{Analysis}\label{analysis-1}
+
+PubNub provides robust messaging infrastructure, which coupled with their storage
+solution could be seen as providing (at least at a very low level) the piping
+for the import part of our system. The programmer is given an lambda-like
+programming model in which each event can be processed. For live streaming
+sensor data this could be a viable solution, as the lambda could be seen as
+performing the data integration task of schema conversion between the sensor
+data model and our internal schema to be then be stored. For historical
+importers, however, this would not be an ideal model. Unfortunately, since
+it is not open source, there are no details available as to the storage engine
+or internal architecture, which could be of value for our development as inspiration.
 
 \subsection{Talend}\label{talend}
 
 https://www.talend.com/resource/sensor-data/
 
-Talend is //TODO
-
 \subsubsection{Features}\label{features-2}
 
-\subsubsection{Segments}\label{segments-2}
+Talend is primarily a data integration solution. Their offering for sensor data
+revolves around providing a ``an easy-to-use graphical environment, [where] developers
+can visually map sensor data sources and targets, and quickly perform complex
+transformations and analyses to produce actionable intelligence and drive
+performance improvement.''
 
-\subsubsection{Customers}\label{customers-2}
+Talend also provides pre-built connectors for Hadoop database solutions like
+Cassandra, CouchDB, Couchbase, HBase, MongoDB, Neo4J and Riak .
 
 \subsubsection{Analysis}\label{analysis-2}
+
+Talend's offering concerns the data integration aspect of our system, so
+it is not comparable when considering the system as a whole. Talend is
+positioned in the Spark + Hadoop `Big Data` space and as such targets the
+leveraging of data to generate analytics. While their data connectors are
+an attractive feature in general, our users most likely won't be providing
+data through a database connection, but rather through files, so it's
+unfortunately not a particularly good fit. Their data integration IDE would
+certainly be a nice feature for those users who are not necessarily programmers
+but rather simply enthusiasts; a graphical interface to perform a simple
+schema transformation would be sufficient for them. Further, storage is provided
+as a subscription product as opposed to being an open source solution which
+we could peer into for inspiration.
