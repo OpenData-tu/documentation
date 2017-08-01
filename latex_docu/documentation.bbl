@@ -24,6 +24,11 @@ David Garlan and Mary Shaw.
 \newblock An introduction to software architecture.
 \newblock 1994.
 
+\bibitem{WikiCommons:KubernetesArchitecture}
+{Khtan66 (Own work) [CC BY-SA 4.0], via Wikimedia Commons}.
+\newblock Kubernetes, 2016.
+\newblock [Online; accessed July 28, 2017].
+
 \bibitem{McCandless.2016}
 Michael McCandless.
 \newblock Multi-dimensional points, coming in apache lucene 6.0, 2016.

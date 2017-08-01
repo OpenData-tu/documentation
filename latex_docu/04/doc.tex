@@ -1,8 +1,11 @@
 \section{Infrastructure}\label{sec:infrastructure}
 
-\textbf{Authorship} Written by Andres Component developed by Amer
+\vspace{8 pt}
+\textbf{Authorship:}\\ Written by Andres\\*
+Component developed by Amer
+\vspace{12 pt}
 
-Needless to say, infrastructure plays a critical role in any cloud-based
+Infrastructure undoubtedly plays a critical role in any cloud-based
 system. In this section, we will discuss the requirements which were
 specific to the choice of cloud platform and orchestration as well as
 all activities surrounding deployment to the cloud.
@@ -15,14 +18,18 @@ points as being important requirements as part of our infrastructure:
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
-\item
-  \textbf{Platform agnostic components}: Our infrastructure must be
-  deployable to both public and private clouds. Therefore, making use of
-  provider-specific features was not possible.
-\item
-  \textbf{Budget}: The choice of cloud provider should allow us to
-  prototype and test in a shoestring budget (US\$100 for the whole
-  semester).
+  \item
+    \textbf{Platform agnostic components}: Our infrastructure must be
+    deployable to both public and private clouds. Therefore, making use of
+    provider-specific features was not possible.
+  \item
+    \textbf{Budget}: The choice of cloud provider should allow us to
+    prototype and test in a shoestring budget (US\$100 for the whole
+    semester).
+  \item
+    \textbf{Scalability}: The ability to have scalable infrastructure is a 
+    critical requirement. This applies to all architectural building blocks.
+    Our infrastructure, therefore, must support scalability out-of-the-box.
 \end{enumerate}
 
 In addition, the general requirements for the system with regards to
@@ -50,6 +57,13 @@ donation to the Cloud Native Computing Foundation (CNCF). Among others,
 its core functionality includes support for deployment, maintenance, and
 scalability of applications.
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[scale=0.45]{images/Kubernetes.png}
+  \caption{Kubernetes architecture diagram \cite{WikiCommons:KubernetesArchitecture}}
+\end{figure}
+
+
 \subsection{Implementation Details}\label{implementation-details}
 
 \subsubsection{Orchestration}\label{orchestration-1}
@@ -59,21 +73,25 @@ source software, we used Kubernetes for orchestration of cloud
 components. Having containerized data importers was a requirement from
 early on in order to accomplish scalability, and Kubernetes supports the
 creation and monitoring of containers natively via its \emph{Pod}
-abstraction. In addition, the building blocks of our architecture such
+abstraction. Support for Docker containers out-of-the-box was important 
+feature for us, as it encapsulated the run-time needs of
+our data importers. Since they needed to be scalable, we envisioned from
+the beginning that these data importers should be wrapped in some
+abstraction which could be launched by some controller or 
+orchestrator in our cloud. Docker also gives us the freedom to develop
+in any language or technology, so far as the container is well documented
+it can be started and called when it is needed. Kuberenetes \emph{Replication Controllers}
+then define how many pods or containers need to be running.
+
+In addition, the building blocks of our architecture such
 as the queue and the database, which must be guaranteed to be up and
 running, were declared as Kubernetes \emph{Services}, which provide
 additional self-healing, should these critical components crash.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/Kubernetes.png}
-  \caption{Kubernetes architecture diagram \cite{WikiCommons:KubernetesArchitecture}}
-\end{figure}
-
 Additionally, internal DNS provides ease-of-use by being able to refer
 to components by a friendly name as opposed to IP addresses. As
 mentioned in the Architecture section, scheduling was realized via
-simple cron job.
+simple cron job (see Figure \ref{Kuberenetes-topo}).
 
 Finally, in addition to the command-line interface provided by kops, a
 state-of-the-art web interface is provided out-of-the-box, making for a
@@ -87,6 +105,16 @@ rather than by having to program components responsible for carrying out
 hard-coded logic. Configuration is provided by YAML files for
 registering crons, data importer job runtime configuration, and
 service-specific configuration necessary for inter-node communication.
+
+
+\begin{figure}[htbp]
+  \centering
+  \hspace*{-0.825 in}
+  \includegraphics[scale=0.4]{images/Infrastructure_topology.png}
+  \caption{Kubernetes Topology}
+  \label{Kuberenetes-topo}
+\end{figure}
+
 
 \subsubsection{Deployment Automation}\label{deployment-automation}
 
@@ -103,5 +131,3 @@ into an even smoother deployment experience.
 Spot instances also played an important role in keeping to the budget,
 and support for these were was integrated into the scripts, which
 allowed us to monitor and specify the price for spot instances.
-
-\subsection{Discussion}\label{discussion}

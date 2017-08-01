@@ -1,7 +1,6 @@
 \section{Extensible Data Import Framework}\label{sec:import-framework}
 
 \textbf{Authorship}
-\vspace*{4mm}
 
 \begin{longtable}{@{}llll@{}}
 \toprule
@@ -17,25 +16,23 @@ Version & Date & Modified by & Summary of changes \\
 \bottomrule
 \end{longtable}
 
-\vspace*{4mm}
+\subsection{Overview}\label{overview}
 
 The Open Data Platform which we have built for extracting, transforming
-and loading open sensor data is made up several significant components
-to efficiently process the large quantity of incoming data.
+and loading open sensor data is made up several components to efficiently
+process the large quantity of incoming data.
 
 The first part of the system requires a powerful tool to do the job of
 importing very large amounts of different kinds of data with various
-formats and types from several data sources in a performant manner.
-
-The job of the importers, in addition to fetching data from its source,
+formats and types from several data sources in a performant manner. The
+job of the importers, in addition to fetching data from its source,
 is mainly to apply a series of rules and transformations to the source
 data in order to fit the our schema and be stored in the system.
 
 For this purpose, a framework that supports the entire processes of
-extracting and transforming data is desirable.
-
-In addition to the main import functionality, additional requirements
-and criteria were considered regarding the framework.
+extracting and transforming data is desirable. In addition to the
+main import functionality, additional requirements and criteria were
+considered regarding the framework.
 
 This chapter describes the requirements, selection criteria, design
 decisions, evaluations, technical implementation details, further
@@ -288,7 +285,7 @@ Figure \ref{fig:importer-classes-relations} shows a more detailed view of classe
 \begin{itemize}
 \tightlist
 \item
-  Usability
+  \textbf{Usability}
 
   \begin{itemize}
   \tightlist
@@ -296,7 +293,7 @@ Figure \ref{fig:importer-classes-relations} shows a more detailed view of classe
     Reusable, ready-to-use functionalities
   \end{itemize}
 \item
-  Extensibility
+  \textbf{Extensibility}
 
   \begin{itemize}
   \tightlist
@@ -306,7 +303,7 @@ Figure \ref{fig:importer-classes-relations} shows a more detailed view of classe
     Easy to add new jobs
   \end{itemize}
 \item
-  Portability
+  \textbf{Portability}
 
   \begin{itemize}
   \tightlist
@@ -322,9 +319,9 @@ Figure \ref{fig:importer-classes-relations} shows a more detailed view of classe
 
 The sources which we used have come in various types and formats.
 Therefore different data formats and types have been implemented for
-importing through our framework such as: - REST Interface, HTTP and FTP
-data source types - Delimiter-separated value (DSV) - CSV - TSV - HTML -
-XLS - XLXS
+importing through our framework such as: REST, HTTP and FTP
+data source types, Delimiter-separated value (DSV): CSV, TSV; HTML;
+XLS; XLXS, etc.
 
 \subsection{Possible Further
 Improvements}\label{possible-further-improvements}
