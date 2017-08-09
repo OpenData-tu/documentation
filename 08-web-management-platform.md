@@ -1,6 +1,6 @@
 # Data Source Metadata Management System
 
-**Authoriship**<br/>
+**Authorship**<br/>
 Written by Paul Wille<br/>
 *Proofread & edited by Andres*
 

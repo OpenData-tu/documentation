@@ -18,9 +18,9 @@
 
 ## What is Open Data
 
-So what do we mean when we talk about "open data"?
+So what do we mean when we talk about *open data*?
 
-> Open means anyone can freely access, use, modify, and share for any purpose (subject, at most, to requirements that preserve provenance and openness).
+> "Open means anyone can freely access, use, modify, and share for any purpose (subject, at most, to requirements that preserve provenance and openness)."
 http://opendefinition.org/
 
 Further, the definition encompasses the following aspects:
@@ -35,7 +35,7 @@ http://opendatahandbook.org/guide/en/what-is-open-data/
 
 So how does this "open data" differ from the data we're interested in? The simple answer is the lack of the time dimension in existing data. The large majority of open data out there today is static. Environmental data are usually represented on discrete "datasets", but there is no connection between data of the same source or type which was collected at different times. For example, one might find a dataset about a particular environmental measurement such as average and maximum water pollution on a given set of geographical areas or points. However, the same data for the following month or year are published separately, with no connection to the first, and at times having different formats or semantics.
 
-We therefore distinguish between static data of the type described above (of which there is an abundance) to the data which are in scope for the project, namely time series data of environmental measurements coming from a device (i.e. a sensor or sensor network) with some form of geo-information. For example, an array of air pollution sensors in a given city may collect data every at 15-minute intervals; this would be represented as individual records containing the timestamp, the sensor's geolocation and the air pollution measurement.
+We therefore distinguish between static data of the type described above (of which there is an abundance) to the data which are in scope for the project, namely time series data of environmental measurements coming from a device (i.e. a sensor or sensor network) with some form of geo-information. For example, an array of air pollution sensors in a given city may collect data at 15-minute intervals; this would be represented as individual records containing the timestamp, the sensor's geolocation and the air pollution measurement.
 
 
 ## Motivation

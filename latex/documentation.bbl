@@ -1,0 +1,41 @@
+\begin{thebibliography}{1}
+
+\bibitem{eastic}
+Elasticsearch homepage.
+
+\bibitem{cassandra}
+Missing documentation in cassandra.
+
+\bibitem{cassandra2}
+Missing documentation in cassandra 2.
+
+\bibitem{Bass&Clements&Kazmann.2012}
+Len Bass, Paul~C. Clements, and Rick Kazmann.
+\newblock Software architecture in practice.
+\newblock 2012.
+
+\bibitem{Chatzakis.2016}
+Andreas Chatzakis.
+\newblock Architecting for the cloud: Aws best practices.
+\newblock 2016.
+
+\bibitem{Garlan&Shaw.1994}
+David Garlan and Mary Shaw.
+\newblock An introduction to software architecture.
+\newblock 1994.
+
+\bibitem{WikiCommons:KubernetesArchitecture}
+{Khtan66 (Own work) [CC BY-SA 4.0], via Wikimedia Commons}.
+\newblock Kubernetes, 2016.
+\newblock [Online; accessed July 28, 2017].
+
+\bibitem{McCandless.2016}
+Michael McCandless.
+\newblock Multi-dimensional points, coming in apache lucene 6.0, 2016.
+
+\bibitem{Wolff.2016}
+Eberhard Wolff.
+\newblock {\em Microservices: Grundlagen flexibler Softwarearchitekturen}.
+\newblock dpunkt.verlag, Heidelberg, 1., korrigierter nachdruck edition, 2016.
+
+\end{thebibliography}

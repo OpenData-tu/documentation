@@ -1,0 +1,17 @@
+\contentsline {figure}{\numberline {1}{\ignorespaces Final Architecture\relax }}{17}{figure.caption.4}
+\contentsline {figure}{\numberline {2}{\ignorespaces Researched AWS Reference Architecture\relax }}{19}{figure.caption.5}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {AWS IoT Reference}}}{19}{figure.caption.5}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {AWS Stream Processing Reference}}}{19}{figure.caption.5}
+\contentsline {figure}{\numberline {3}{\ignorespaces Evolution of Architecture\relax }}{20}{figure.caption.6}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Initial Architecture}}}{20}{figure.caption.6}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Final Architecture}}}{20}{figure.caption.6}
+\contentsline {figure}{\numberline {4}{\ignorespaces Kubernetes architecture diagram \cite {WikiCommons:KubernetesArchitecture}\relax }}{23}{figure.caption.7}
+\contentsline {figure}{\numberline {5}{\ignorespaces Kubernetes Topology\relax }}{24}{figure.caption.8}
+\contentsline {figure}{\numberline {6}{\ignorespaces Importer Application Overview\relax }}{27}{figure.caption.9}
+\contentsline {figure}{\numberline {7}{\ignorespaces Relation of classes of a Simple Flat File Importer\relax }}{28}{figure.caption.10}
+\contentsline {figure}{\numberline {8}{\ignorespaces OpenData Database Architecture\relax }}{40}{figure.caption.18}
+\contentsline {figure}{\numberline {9}{\ignorespaces OpenData Database Architecture\relax }}{42}{figure.caption.19}
+\contentsline {figure}{\numberline {10}{\ignorespaces Public API Abstraction\relax }}{44}{figure.caption.20}
+\contentsline {figure}{\numberline {11}{\ignorespaces UML Class Diagram of the Metadata Management System\relax }}{48}{figure.caption.22}
+\contentsline {figure}{\numberline {12}{\ignorespaces Registering a data source within the Web management platform\relax }}{49}{figure.caption.23}
+\contentsline {figure}{\numberline {13}{\ignorespaces Screenshot of the units of a unit category on the web management platform. You can see the main unit and have a notation on what the units express.\relax }}{53}{figure.caption.24}

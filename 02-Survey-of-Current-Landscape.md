@@ -1,11 +1,6 @@
 # Survey of Current Landscape
 
-**Authorship**
-
-|Version|Date|Modified by|Summary of changes|
-|-------|----|-----------|------------------|
-|  0.1  | 2017-06-03 | Andres Ardila | Working draft |
-|  0.2  | 2017-07-07 | Andres Ardila | Added section on Talend |
+**Authorship:** Written by Andres
 
 
 
@@ -15,7 +10,7 @@ https://www.opensensors.io
 
 ### Features
 
-> Securely manage your private IoT network [...] whether you are a startup or an enterprise
+> "Securely manage your private IoT network [...] whether you are a startup or an enterprise"
 
 * IoT device management
 * Real-time and historical APIs
